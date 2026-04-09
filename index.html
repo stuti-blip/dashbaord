@@ -252,15 +252,28 @@ async function fetchData() {
 }
 
 function parseRows(rows) {
-  const dataRows = rows.filter((r, i) => i >= 6 && r[0] && r[1]);
+  let headerIdx = 6;
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i].map(c => String(c||'').trim().toLowerCase());
+    if (r.includes('date') && r.includes('sales')) { headerIdx = i; break; }
+  }
+  const headers = rows[headerIdx].map(c => String(c||'').trim().toLowerCase());
+  const allOf = (name) => headers.reduce((acc,h,i) => { if(h===name) acc.push(i); return acc; }, []);
+  const salesCols  = allOf('sales');
+  const spendsCols = allOf('spends');
+  const roasCols   = allOf('roas');
+  const unitsCols  = allOf('units sold');
+  const col = (arr, idx, fallback) => arr[idx] !== undefined ? arr[idx] : fallback;
+  const dateCol = headers.indexOf('date');
+  const dataRows = rows.slice(headerIdx + 1).filter(r => r[dateCol] && String(r[dateCol]).trim() !== '' && String(r[dateCol]).toLowerCase() !== 'date');
   return dataRows.map(r => ({
-    date: r[0],
-    day:  r[1],
-    zepto:     { sales: +r[2]||0, spends: +r[3]||0, roas: +r[4]||0, units: +r[5]||0 },
-    blinkit:   { sales: +r[7]||0, spends: +r[8]||0, roas: +r[9]||0, units: +r[10]||0 },
-    instamart: { sales: +r[13]||0, spends: +r[14]||0, roas: +r[15]||0, units: +r[16]||0 },
-    bigbasket: { sales: +r[19]||0, spends: +r[20]||0, roas: +r[21]||0, units: +r[22]||0 },
-  })).filter(r => r.zepto.sales || r.blinkit.sales || r.instamart.sales);
+    date: r[dateCol],
+    day:  r[dateCol + 1],
+    zepto:     { sales: +r[col(salesCols,0,2)]||0,  spends: +r[col(spendsCols,0,3)]||0,  roas: +r[col(roasCols,0,4)]||0,  units: +r[col(unitsCols,0,5)]||0  },
+    blinkit:   { sales: +r[col(salesCols,1,10)]||0, spends: +r[col(spendsCols,1,11)]||0, roas: +r[col(roasCols,1,12)]||0, units: +r[col(unitsCols,1,13)]||0 },
+    instamart: { sales: +r[col(salesCols,2,17)]||0, spends: +r[col(spendsCols,2,18)]||0, roas: +r[col(roasCols,2,19)]||0, units: +r[col(unitsCols,2,20)]||0 },
+    bigbasket: { sales: +r[col(salesCols,3,24)]||0, spends: +r[col(spendsCols,3,25)]||0, roas: +r[col(roasCols,3,26)]||0, units: +r[col(unitsCols,3,27)]||0 },
+  })).filter(r => r.zepto.sales || r.blinkit.sales || r.instamart.sales || r.bigbasket.sales);
 }
 
 function renderMetrics(rows) {
