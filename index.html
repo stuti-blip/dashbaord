@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>OMS Tracker — FY26-27</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --bg: #0d0d0d;
+    --surface: #161616;
+    --surface2: #1e1e1e;
+    --border: rgba(255,255,255,0.08);
+    --text: #f0ede8;
+    --muted: #888;
+    --zepto: #4f9cf9;
+    --blinkit: #f5a623;
+    --instamart: #2ecc71;
+    --bigbasket: #e74c3c;
+    --accent: #f5a623;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+
+  .topbar {
+    border-bottom: 1px solid var(--border);
+    padding: 18px 32px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--surface);
+  }
+  .logo { font-size: 15px; font-weight: 600; letter-spacing: 0.05em; }
+  .logo span { color: var(--accent); }
+  .status { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; }
+  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--instamart); animation: pulse 2s infinite; }
+  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+
+  .main { padding: 32px; max-width: 1400px; margin: 0 auto; }
+
+  .page-header { margin-bottom: 28px; }
+  .page-title { font-size: 26px; font-weight: 500; margin-bottom: 4px; }
+  .page-sub { font-size: 13px; color: var(--muted); }
+  .page-sub span { color: var(--accent); font-family: 'DM Mono', monospace; }
+
+  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .metric {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .metric:hover { border-color: rgba(255,255,255,0.18); }
+  .metric::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+  }
+  .metric.z::before { background: var(--zepto); }
+  .metric.b::before { background: var(--blinkit); }
+  .metric.i::before { background: var(--instamart); }
+  .metric.t::before { background: var(--accent); }
+  .metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .metric-value { font-size: 28px; font-weight: 500; font-family: 'DM Mono', monospace; }
+  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
+
+  .charts { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-bottom: 28px; }
+  .chart-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 22px;
+  }
+  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+  .chart-title { font-size: 13px; font-weight: 500; }
+  .legend { display: flex; gap: 12px; flex-wrap: wrap; }
+  .leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
+  .leg-dot { width: 8px; height: 8px; border-radius: 2px; }
+
+  .platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
+  .platform-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 18px;
+    transition: border-color 0.2s;
+  }
+  .platform-card:hover { border-color: rgba(255,255,255,0.18); }
+  .platform-name { font-size: 13px; font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
+  .prow { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; }
+  .plabel { color: var(--muted); }
+  .pval { font-family: 'DM Mono', monospace; font-size: 11px; }
+
+  .loading {
+    position: fixed; inset: 0;
+    background: var(--bg);
+    display: flex; align-items: center; justify-content: center;
+    flex-direction: column; gap: 16px;
+    z-index: 100;
+    transition: opacity 0.4s;
+  }
+  .loading.hidden { opacity: 0; pointer-events: none; }
+  .spinner { width: 36px; height: 36px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loading-text { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  .error-banner {
+    background: rgba(231,76,60,0.1);
+    border: 1px solid rgba(231,76,60,0.3);
+    border-radius: 8px;
+    padding: 14px 18px;
+    font-size: 13px;
+    color: #e74c3c;
+    margin-bottom: 20px;
+    display: none;
+  }
+  .last-updated { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
+
+  @media (max-width: 900px) {
+    .metrics { grid-template-columns: repeat(2, 1fr); }
+    .charts { grid-template-columns: 1fr; }
+    .platforms { grid-template-columns: repeat(2, 1fr); }
+    .main { padding: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="loading" id="loader">
+  <div class="spinner"></div>
+  <div class="loading-text">fetching live data...</div>
+</div>
+
+<div class="topbar">
+  <div class="logo">SNACKIBLE <span>/ OMS</span></div>
+  <div class="status">
+    <div class="dot"></div>
+    <span id="statusText">connecting...</span>
+  </div>
+</div>
+
+<div class="main">
+  <div class="page-header">
+    <h1 class="page-title">Sales Dashboard — FY26-27</h1>
+    <p class="page-sub">Live data from Google Sheets · Auto-refreshes every <span>5 minutes</span> · <span id="lastUpdated">—</span></p>
+  </div>
+
+  <div class="error-banner" id="errorBanner">Could not load data from Google Sheets. Check your Apps Script URL.</div>
+
+  <div class="metrics">
+    <div class="metric t">
+      <div class="metric-label">Total Sales</div>
+      <div class="metric-value" id="totalSales">—</div>
+      <div class="metric-sub">All platforms</div>
+    </div>
+    <div class="metric b">
+      <div class="metric-label">Total Spends</div>
+      <div class="metric-value" id="totalSpends">—</div>
+      <div class="metric-sub">All platforms</div>
+    </div>
+    <div class="metric i">
+      <div class="metric-label">Best ROAS</div>
+      <div class="metric-value" id="bestRoas">—</div>
+      <div class="metric-sub" id="bestRoasPlatform">—</div>
+    </div>
+    <div class="metric z">
+      <div class="metric-label">Days Tracked</div>
+      <div class="metric-value" id="daysTracked">—</div>
+      <div class="metric-sub">This month</div>
+    </div>
+  </div>
+
+  <div class="charts">
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">Daily Sales by Platform</div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+        </div>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="salesChart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-header">
+        <div class="chart-title">ROAS Trend</div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+        </div>
+      </div>
+      <div style="position:relative;height:240px"><canvas id="roasChart"></canvas></div>
+    </div>
+  </div>
+
+  <div class="platforms" id="platformGrid">
+    <!-- filled by JS -->
+  </div>
+</div>
+
+<script>
+const SHEET_ID = '1_kSlU1yzCV92uf1ZEE3fT7nzqeQzaIfBNtcMKEqhmm8';
+const APPS_SCRIPT_URL = window.APPS_SCRIPT_URL || '';
+
+const PLATFORMS = [
+  { name: 'Zepto',     color: '#4f9cf9', salesCol: 2,  spendsCol: 3,  roasCol: 4,  unitsCol: 5  },
+  { name: 'Blinkit',   color: '#f5a623', salesCol: 7,  spendsCol: 8,  roasCol: 9,  unitsCol: 10 },
+  { name: 'Instamart', color: '#2ecc71', salesCol: 13, spendsCol: 14, roasCol: 15, unitsCol: 16 },
+  { name: 'Big Basket',color: '#e74c3c', salesCol: 19, spendsCol: 20, roasCol: 21, unitsCol: 22 },
+];
+
+function fmt(n) {
+  if (!n || isNaN(n)) return '—';
+  if (n >= 10000000) return '₹' + (n/10000000).toFixed(1) + 'Cr';
+  if (n >= 100000)   return '₹' + (n/100000).toFixed(1) + 'L';
+  if (n >= 1000)     return '₹' + (n/1000).toFixed(1) + 'K';
+  return '₹' + Math.round(n);
+}
+
+function fmtUnits(n) {
+  if (!n || isNaN(n)) return '—';
+  if (n >= 1000) return (n/1000).toFixed(1) + 'K';
+  return Math.round(n);
+}
+
+let salesChartInst, roasChartInst;
+
+async function fetchData() {
+  const url = APPS_SCRIPT_URL
+    ? APPS_SCRIPT_URL
+    : `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Sheet1`;
+
+  const res = await fetch(url, { cache: 'no-store' });
+  if (!res.ok) throw new Error('Fetch failed');
+
+  const text = await res.text();
+
+  if (APPS_SCRIPT_URL) {
+    return JSON.parse(text);
+  } else {
+    const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?$/, ''));
+    const rows = json.table.rows.map(r => r.c.map(c => c ? c.v : null));
+    return rows;
+  }
+}
+
+function parseRows(rows) {
+  const dataRows = rows.filter((r, i) => i >= 6 && r[0] && r[1]);
+  return dataRows.map(r => ({
+    date: r[0],
+    day:  r[1],
+    zepto:     { sales: +r[2]||0, spends: +r[3]||0, roas: +r[4]||0, units: +r[5]||0 },
+    blinkit:   { sales: +r[7]||0, spends: +r[8]||0, roas: +r[9]||0, units: +r[10]||0 },
+    instamart: { sales: +r[13]||0, spends: +r[14]||0, roas: +r[15]||0, units: +r[16]||0 },
+    bigbasket: { sales: +r[19]||0, spends: +r[20]||0, roas: +r[21]||0, units: +r[22]||0 },
+  })).filter(r => r.zepto.sales || r.blinkit.sales || r.instamart.sales);
+}
+
+function renderMetrics(rows) {
+  const total = (key, sub) => rows.reduce((a,r) => a + (r[key]?.[sub]||0), 0);
+  document.getElementById('totalSales').textContent = fmt(total('zepto','sales')+total('blinkit','sales')+total('instamart','sales')+total('bigbasket','sales'));
+  document.getElementById('totalSpends').textContent = fmt(total('zepto','spends')+total('blinkit','spends')+total('instamart','spends')+total('bigbasket','spends'));
+  document.getElementById('daysTracked').textContent = rows.length;
+
+  const avgRoas = p => {
+    const v = rows.filter(r=>r[p].roas>0).map(r=>r[p].roas);
+    return v.length ? v.reduce((a,b)=>a+b,0)/v.length : 0;
+  };
+  const roas = { zepto: avgRoas('zepto'), blinkit: avgRoas('blinkit'), instamart: avgRoas('instamart') };
+  const best = Object.entries(roas).sort((a,b)=>b[1]-a[1])[0];
+  document.getElementById('bestRoas').textContent = best[1].toFixed(1) + 'x';
+  document.getElementById('bestRoasPlatform').textContent = best[0].charAt(0).toUpperCase()+best[0].slice(1);
+}
+
+function renderCharts(rows) {
+  const labels = rows.map(r => {
+    const d = r.date;
+    if (typeof d === 'string') return d.slice(5,10);
+    if (d instanceof Date) return (d.getMonth()+1)+'/'+d.getDate();
+    return String(d).slice(0,5);
+  });
+
+  const chartOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ₹' + Math.round(ctx.raw).toLocaleString() } } },
+    scales: {
+      x: { stacked: true, ticks: { color: '#666', font: { size: 10 }, maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { stacked: true, ticks: { color: '#666', font: { size: 10 }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  };
+
+  if (salesChartInst) salesChartInst.destroy();
+  salesChartInst = new Chart(document.getElementById('salesChart'), {
+    type: 'bar',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Zepto',     data: rows.map(r=>r.zepto.sales),     backgroundColor: '#4f9cf9' },
+        { label: 'Blinkit',   data: rows.map(r=>r.blinkit.sales),   backgroundColor: '#f5a623' },
+        { label: 'Instamart', data: rows.map(r=>r.instamart.sales), backgroundColor: '#2ecc71' },
+      ]
+    },
+    options: chartOpts
+  });
+
+  const roasOpts = {
+    responsive: true, maintainAspectRatio: false,
+    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.raw.toFixed(1) + 'x' } } },
+    scales: {
+      x: { ticks: { color: '#666', font: { size: 10 }, maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.04)' } },
+      y: { ticks: { color: '#666', font: { size: 10 }, callback: v => v+'x' }, grid: { color: 'rgba(255,255,255,0.04)' } }
+    }
+  };
+
+  if (roasChartInst) roasChartInst.destroy();
+  roasChartInst = new Chart(document.getElementById('roasChart'), {
+    type: 'line',
+    data: {
+      labels,
+      datasets: [
+        { label: 'Zepto',     data: rows.map(r=>r.zepto.roas),     borderColor: '#4f9cf9', backgroundColor:'transparent', tension:0.3, pointRadius:3 },
+        { label: 'Blinkit',   data: rows.map(r=>r.blinkit.roas),   borderColor: '#f5a623', backgroundColor:'transparent', tension:0.3, pointRadius:3 },
+        { label: 'Instamart', data: rows.map(r=>r.instamart.roas), borderColor: '#2ecc71', backgroundColor:'transparent', tension:0.3, pointRadius:3 },
+      ]
+    },
+    options: roasOpts
+  });
+}
+
+function renderPlatforms(rows) {
+  const sum = (key, sub) => rows.reduce((a,r) => a+(r[key]?.[sub]||0), 0);
+  const avgRoas = p => {
+    const v = rows.filter(r=>r[p].roas>0).map(r=>r[p].roas);
+    return v.length ? (v.reduce((a,b)=>a+b,0)/v.length).toFixed(1)+'x' : '—';
+  };
+
+  const platforms = [
+    { name: 'Zepto',      key: 'zepto',     color: '#4f9cf9' },
+    { name: 'Blinkit',    key: 'blinkit',   color: '#f5a623' },
+    { name: 'Instamart',  key: 'instamart', color: '#2ecc71' },
+    { name: 'Big Basket', key: 'bigbasket', color: '#e74c3c' },
+  ];
+
+  document.getElementById('platformGrid').innerHTML = platforms.map(p => `
+    <div class="platform-card">
+      <div class="platform-name" style="color:${p.color}">${p.name}</div>
+      <div class="prow"><span class="plabel">Sales</span><span class="pval">${fmt(sum(p.key,'sales'))}</span></div>
+      <div class="prow"><span class="plabel">Spends</span><span class="pval">${fmt(sum(p.key,'spends'))}</span></div>
+      <div class="prow"><span class="plabel">Avg ROAS</span><span class="pval">${avgRoas(p.key)}</span></div>
+      <div class="prow"><span class="plabel">Units Sold</span><span class="pval">${fmtUnits(sum(p.key,'units'))}</span></div>
+    </div>
+  `).join('');
+}
+
+async function loadDashboard() {
+  try {
+    const raw = await fetchData();
+    const rows = parseRows(raw);
+    renderMetrics(rows);
+    renderCharts(rows);
+    renderPlatforms(rows);
+    document.getElementById('statusText').textContent = 'live · google sheets';
+    document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString();
+    document.getElementById('errorBanner').style.display = 'none';
+  } catch(e) {
+    console.error(e);
+    document.getElementById('errorBanner').style.display = 'block';
+    document.getElementById('statusText').textContent = 'error loading data';
+  } finally {
+    const loader = document.getElementById('loader');
+    loader.classList.add('hidden');
+    setTimeout(() => loader.style.display = 'none', 400);
+  }
+}
+
+loadDashboard();
+setInterval(loadDashboard, 5 * 60 * 1000);
+</script>
+</body>
+</html>
