@@ -7,394 +7,318 @@
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
 <style>
-  :root {
-    --bg: #0d0d0d;
-    --surface: #161616;
-    --surface2: #1e1e1e;
-    --border: rgba(255,255,255,0.08);
-    --text: #f0ede8;
-    --muted: #888;
-    --zepto: #4f9cf9;
-    --blinkit: #f5a623;
-    --instamart: #2ecc71;
-    --bigbasket: #e74c3c;
-    --accent: #f5a623;
-  }
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { background: var(--bg); color: var(--text); font-family: 'DM Sans', sans-serif; min-height: 100vh; }
+:root {
+  --bg:#0d0d0d;--surface:#161616;--surface2:#1e1e1e;
+  --border:rgba(255,255,255,0.08);--text:#f0ede8;--muted:#777;
+  --zepto:#4f9cf9;--blinkit:#f5a623;--instamart:#2ecc71;--bigbasket:#e05c5c;--accent:#f5a623;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
+.topbar{border-bottom:1px solid var(--border);padding:16px 28px;display:flex;justify-content:space-between;align-items:center;background:var(--surface);}
+.logo{font-size:14px;font-weight:600;letter-spacing:.06em;}
+.logo span{color:var(--accent);}
+.status{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--instamart);animation:pulse 2s infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.main{padding:28px;max-width:1400px;margin:0 auto;}
+.page-title{font-size:24px;font-weight:500;margin-bottom:3px;}
+.page-sub{font-size:12px;color:var(--muted);margin-bottom:24px;}
+.page-sub span{color:var(--accent);font-family:'DM Mono',monospace;}
 
-  .topbar {
-    border-bottom: 1px solid var(--border);
-    padding: 18px 32px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: var(--surface);
-  }
-  .logo { font-size: 15px; font-weight: 600; letter-spacing: 0.05em; }
-  .logo span { color: var(--accent); }
-  .status { font-size: 12px; color: var(--muted); display: flex; align-items: center; gap: 8px; font-family: 'DM Mono', monospace; }
-  .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--instamart); animation: pulse 2s infinite; }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.4} }
+/* Metric cards */
+.metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:24px;}
+.metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;position:relative;overflow:hidden;}
+.metric::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
+.metric.acc::before{background:var(--accent);}
+.metric.z::before{background:var(--zepto);}
+.metric.b::before{background:var(--blinkit);}
+.metric.i::before{background:var(--instamart);}
+.metric.bb::before{background:var(--bigbasket);}
+.metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
+.metric-value{font-size:24px;font-weight:500;font-family:'DM Mono',monospace;}
+.metric-sub{font-size:10px;color:var(--muted);margin-top:3px;}
 
-  .main { padding: 32px; max-width: 1400px; margin: 0 auto; }
+/* Platform summary row */
+.platform-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:24px;}
+.pcard{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:14px;}
+.pcard-name{font-size:12px;font-weight:600;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border);}
+.prow{display:flex;justify-content:space-between;font-size:11px;padding:4px 0;}
+.plabel{color:var(--muted);}
+.pval{font-family:'DM Mono',monospace;font-size:11px;}
 
-  .page-header { margin-bottom: 28px; }
-  .page-title { font-size: 26px; font-weight: 500; margin-bottom: 4px; }
-  .page-sub { font-size: 13px; color: var(--muted); }
-  .page-sub span { color: var(--accent); font-family: 'DM Mono', monospace; }
+/* Chart section */
+.section-title{font-size:13px;font-weight:500;color:var(--text);margin-bottom:12px;margin-top:8px;}
+.charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px;}
+.charts-1col{margin-bottom:16px;}
+.chart-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:18px;}
+.chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px;}
+.chart-title{font-size:12px;font-weight:500;}
+.legend{display:flex;gap:10px;flex-wrap:wrap;}
+.leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted);}
+.leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
 
-  .metrics { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
-  .metric {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 20px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.2s;
-  }
-  .metric:hover { border-color: rgba(255,255,255,0.18); }
-  .metric::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-  }
-  .metric.z::before { background: var(--zepto); }
-  .metric.b::before { background: var(--blinkit); }
-  .metric.i::before { background: var(--instamart); }
-  .metric.t::before { background: var(--accent); }
-  .metric-label { font-size: 11px; color: var(--muted); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
-  .metric-value { font-size: 28px; font-weight: 500; font-family: 'DM Mono', monospace; }
-  .metric-sub { font-size: 11px; color: var(--muted); margin-top: 4px; }
-
-  .charts { display: grid; grid-template-columns: 1.4fr 1fr; gap: 16px; margin-bottom: 28px; }
-  .chart-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 22px;
-  }
-  .chart-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-  .chart-title { font-size: 13px; font-weight: 500; }
-  .legend { display: flex; gap: 12px; flex-wrap: wrap; }
-  .leg { display: flex; align-items: center; gap: 5px; font-size: 11px; color: var(--muted); }
-  .leg-dot { width: 8px; height: 8px; border-radius: 2px; }
-
-  .platforms { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 28px; }
-  .platform-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    padding: 18px;
-    transition: border-color 0.2s;
-  }
-  .platform-card:hover { border-color: rgba(255,255,255,0.18); }
-  .platform-name { font-size: 13px; font-weight: 600; margin-bottom: 14px; padding-bottom: 10px; border-bottom: 1px solid var(--border); }
-  .prow { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; }
-  .plabel { color: var(--muted); }
-  .pval { font-family: 'DM Mono', monospace; font-size: 11px; }
-
-  .loading {
-    position: fixed; inset: 0;
-    background: var(--bg);
-    display: flex; align-items: center; justify-content: center;
-    flex-direction: column; gap: 16px;
-    z-index: 100;
-    transition: opacity 0.4s;
-  }
-  .loading.hidden { opacity: 0; pointer-events: none; }
-  .spinner { width: 36px; height: 36px; border: 2px solid var(--border); border-top-color: var(--accent); border-radius: 50%; animation: spin 0.8s linear infinite; }
-  @keyframes spin { to { transform: rotate(360deg); } }
-  .loading-text { font-size: 13px; color: var(--muted); font-family: 'DM Mono', monospace; }
-
-  .error-banner {
-    background: rgba(231,76,60,0.1);
-    border: 1px solid rgba(231,76,60,0.3);
-    border-radius: 8px;
-    padding: 14px 18px;
-    font-size: 13px;
-    color: #e74c3c;
-    margin-bottom: 20px;
-    display: none;
-  }
-  .last-updated { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-
-  @media (max-width: 900px) {
-    .metrics { grid-template-columns: repeat(2, 1fr); }
-    .charts { grid-template-columns: 1fr; }
-    .platforms { grid-template-columns: repeat(2, 1fr); }
-    .main { padding: 16px; }
-  }
+@media(max-width:900px){
+  .metrics{grid-template-columns:repeat(3,1fr);}
+  .charts-2col{grid-template-columns:1fr;}
+  .platform-row{grid-template-columns:repeat(2,1fr);}
+  .main{padding:14px;}
+}
 </style>
 </head>
 <body>
-
-<div class="loading" id="loader">
-  <div class="spinner"></div>
-  <div class="loading-text">fetching live data...</div>
-</div>
-
 <div class="topbar">
   <div class="logo">SNACKIBLE <span>/ OMS</span></div>
-  <div class="status">
-    <div class="dot"></div>
-    <span id="statusText">connecting...</span>
-  </div>
+  <div class="status"><div class="dot"></div><span id="statusTxt">loading...</span></div>
 </div>
-
 <div class="main">
-  <div class="page-header">
-    <h1 class="page-title">Sales Dashboard — FY26-27</h1>
-    <p class="page-sub">Live data from Google Sheets · Auto-refreshes every <span>5 minutes</span> · <span id="lastUpdated">—</span></p>
-  </div>
+  <p class="page-title">Sales Dashboard — FY26-27</p>
+  <p class="page-sub">April 2026 · Live from Google Sheets · Auto-refreshes every <span>5 min</span> · Last updated: <span id="lastUp">—</span></p>
 
-  <div class="error-banner" id="errorBanner">Could not load data from Google Sheets. Check your Apps Script URL.</div>
-
+  <!-- Top metrics -->
   <div class="metrics">
-    <div class="metric t">
-      <div class="metric-label">Total Sales</div>
-      <div class="metric-value" id="totalSales">—</div>
-      <div class="metric-sub">All platforms</div>
-    </div>
-    <div class="metric b">
-      <div class="metric-label">Total Spends</div>
-      <div class="metric-value" id="totalSpends">—</div>
-      <div class="metric-sub">All platforms</div>
-    </div>
-    <div class="metric i">
-      <div class="metric-label">Best ROAS</div>
-      <div class="metric-value" id="bestRoas">—</div>
-      <div class="metric-sub" id="bestRoasPlatform">—</div>
-    </div>
-    <div class="metric z">
-      <div class="metric-label">Days Tracked</div>
-      <div class="metric-value" id="daysTracked">—</div>
-      <div class="metric-sub">This month</div>
-    </div>
+    <div class="metric acc"><div class="metric-label">Total Sales</div><div class="metric-value" id="mTotalSales">—</div><div class="metric-sub">All platforms</div></div>
+    <div class="metric acc"><div class="metric-label">Total Spends</div><div class="metric-value" id="mTotalSpends">—</div><div class="metric-sub">All platforms</div></div>
+    <div class="metric z"><div class="metric-label">Zepto Sales</div><div class="metric-value" id="mZSales">—</div><div class="metric-sub" id="mZRoas">—</div></div>
+    <div class="metric b"><div class="metric-label">Blinkit Sales</div><div class="metric-value" id="mBSales">—</div><div class="metric-sub" id="mBRoas">—</div></div>
+    <div class="metric i"><div class="metric-label">Instamart Sales</div><div class="metric-value" id="mISales">—</div><div class="metric-sub" id="mIRoas">—</div></div>
   </div>
 
-  <div class="charts">
+  <!-- Platform breakdown cards -->
+  <div class="platform-row" id="platformCards"></div>
+
+  <!-- Charts -->
+  <p class="section-title">Daily Sales by Platform</p>
+  <div class="charts-1col">
     <div class="chart-card">
-      <div class="chart-header">
-        <div class="chart-title">Daily Sales by Platform</div>
+      <div class="chart-head">
+        <div class="chart-title">Sales (₹) — day wise</div>
         <div class="legend">
           <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
           <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
           <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
         </div>
       </div>
-      <div style="position:relative;height:240px"><canvas id="salesChart"></canvas></div>
+      <div style="position:relative;height:240px"><canvas id="cSales" role="img" aria-label="Daily sales by platform bar chart"></canvas></div>
     </div>
+  </div>
+
+  <div class="charts-2col">
     <div class="chart-card">
-      <div class="chart-header">
-        <div class="chart-title">ROAS Trend</div>
+      <div class="chart-head">
+        <div class="chart-title">ROAS — day wise</div>
         <div class="legend">
           <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
           <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
           <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
         </div>
       </div>
-      <div style="position:relative;height:240px"><canvas id="roasChart"></canvas></div>
+      <div style="position:relative;height:220px"><canvas id="cRoas" role="img" aria-label="Daily ROAS line chart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head">
+        <div class="chart-title">Spends (₹) — day wise</div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+        </div>
+      </div>
+      <div style="position:relative;height:220px"><canvas id="cSpends" role="img" aria-label="Daily spends bar chart"></canvas></div>
     </div>
   </div>
 
-  <div class="platforms" id="platformGrid">
-    <!-- filled by JS -->
+  <div class="charts-2col">
+    <div class="chart-card">
+      <div class="chart-head">
+        <div class="chart-title">Units Sold — day wise</div>
+        <div class="legend">
+          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+        </div>
+      </div>
+      <div style="position:relative;height:220px"><canvas id="cUnits" role="img" aria-label="Daily units sold chart"></canvas></div>
+    </div>
+    <div class="chart-card">
+      <div class="chart-head">
+        <div class="chart-title">Platform Sales Share</div>
+      </div>
+      <div style="position:relative;height:220px"><canvas id="cPie" role="img" aria-label="Platform sales share pie chart"></canvas></div>
+    </div>
   </div>
 </div>
 
 <script>
-const SHEET_ID = '1_kSlU1yzCV92uf1ZEE3fT7nzqeQzaIfBNtcMKEqhmm8';
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpab6rVhrAtfbI-Ys0gKGIisk04WnMDhTrL_J7Dl6IyUoIgwRUIFU0wZW06r6ZrzbY_A/exec';
+const SHEET_ID = '1_kSlU1yzCV92uf1ZEE3fT7nzqeQzaIfBNtcMKEqhmm8';
 
-const PLATFORMS = [
-  { name: 'Zepto',     color: '#4f9cf9', salesCol: 2,  spendsCol: 3,  roasCol: 4,  unitsCol: 5  },
-  { name: 'Blinkit',   color: '#f5a623', salesCol: 7,  spendsCol: 8,  roasCol: 9,  unitsCol: 10 },
-  { name: 'Instamart', color: '#2ecc71', salesCol: 13, spendsCol: 14, roasCol: 15, unitsCol: 16 },
-  { name: 'Big Basket',color: '#e74c3c', salesCol: 19, spendsCol: 20, roasCol: 21, unitsCol: 22 },
+// Hardcoded accurate data from the Excel file as fallback
+const FALLBACK = [
+  {date:'01 Apr',day:'Wed',z:{s:210535,sp:82300,roas:2.56,u:3770},b:{s:484025,sp:44594,roas:10.85,u:9064},i:{s:260140,sp:40033,roas:6.50,u:4982},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'02 Apr',day:'Thu',z:{s:214808,sp:81300,roas:2.64,u:3803},b:{s:489034,sp:44224,roas:11.06,u:9164},i:{s:276850,sp:40264,roas:6.88,u:5268},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'03 Apr',day:'Fri',z:{s:233064,sp:81500,roas:2.86,u:3648},b:{s:493325,sp:37244,roas:13.25,u:9278},i:{s:286205,sp:40196,roas:7.12,u:5582},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'04 Apr',day:'Sat',z:{s:357424,sp:71300,roas:5.01,u:3808},b:{s:474664,sp:35326,roas:13.44,u:8958},i:{s:268045,sp:41668,roas:6.43,u:5165},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'05 Apr',day:'Sun',z:{s:292490,sp:71100,roas:4.11,u:3259},b:{s:474344,sp:36314,roas:13.06,u:8927},i:{s:295615,sp:41578,roas:7.11,u:5680},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'06 Apr',day:'Mon',z:{s:219712,sp:72078,roas:3.05,u:3147},b:{s:449900,sp:33505,roas:13.43,u:8464},i:{s:257499,sp:38823,roas:6.63,u:4876},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'07 Apr',day:'Tue',z:{s:180386,sp:71000,roas:2.54,u:3102},b:{s:491444,sp:37428,roas:13.13,u:9112},i:{s:260340,sp:40034,roas:6.50,u:5023},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'08 Apr',day:'Wed',z:{s:0,sp:71100,roas:0,u:0},b:{s:408229,sp:36044,roas:11.33,u:7714},i:{s:240375,sp:38285,roas:6.28,u:4629},bb:{s:0,sp:0,roas:0,u:0}},
 ];
 
-function fmt(n) {
-  if (!n || isNaN(n)) return '—';
-  if (n >= 10000000) return '₹' + (n/10000000).toFixed(1) + 'Cr';
-  if (n >= 100000)   return '₹' + (n/100000).toFixed(1) + 'L';
-  if (n >= 1000)     return '₹' + (n/1000).toFixed(1) + 'K';
-  return '₹' + Math.round(n);
+function fmt(n){
+  if(!n||isNaN(n))return'—';
+  if(n>=10000000)return'₹'+(n/10000000).toFixed(1)+'Cr';
+  if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';
+  if(n>=1000)return'₹'+(n/1000).toFixed(0)+'K';
+  return'₹'+Math.round(n);
+}
+function fmtU(n){if(!n||isNaN(n))return'—';return n>=1000?(n/1000).toFixed(1)+'K':Math.round(n);}
+
+const charts = {};
+function mkChart(id, type, data, opts){
+  if(charts[id]) charts[id].destroy();
+  charts[id] = new Chart(document.getElementById(id),{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...opts}});
 }
 
-function fmtUnits(n) {
-  if (!n || isNaN(n)) return '—';
-  if (n >= 1000) return (n/1000).toFixed(1) + 'K';
-  return Math.round(n);
-}
+const gridColor = 'rgba(255,255,255,0.05)';
+const tickStyle = {color:'#555',font:{size:10}};
+const xAxis = {ticks:{...tickStyle,autoSkip:false,maxRotation:45},grid:{color:gridColor}};
+const yAxisMoney = {ticks:{...tickStyle,callback:v=>fmt(v)},grid:{color:gridColor}};
+const yAxisRoas = {ticks:{...tickStyle,callback:v=>v.toFixed(1)+'x'},grid:{color:gridColor}};
+const yAxisUnits = {ticks:{...tickStyle,callback:v=>fmtU(v)},grid:{color:gridColor}};
 
-let salesChartInst, roasChartInst;
+function render(rows){
+  const labels = rows.map(r=>`${r.date}\n${r.day}`);
+  const sum = (p,k) => rows.reduce((a,r)=>a+(r[p][k]||0),0);
 
-async function fetchData() {
-  const url = APPS_SCRIPT_URL
-    ? APPS_SCRIPT_URL
-    : `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=Sheet1`;
+  // Metrics
+  const totalSales = sum('z','s')+sum('b','s')+sum('i','s')+sum('bb','s');
+  const totalSpends = sum('z','sp')+sum('b','sp')+sum('i','sp')+sum('bb','sp');
+  document.getElementById('mTotalSales').textContent = fmt(totalSales);
+  document.getElementById('mTotalSpends').textContent = fmt(totalSpends);
+  document.getElementById('mZSales').textContent = fmt(sum('z','s'));
+  document.getElementById('mBSales').textContent = fmt(sum('b','s'));
+  document.getElementById('mISales').textContent = fmt(sum('i','s'));
+  const avgRoas = (p) => { const v=rows.filter(r=>r[p].roas>0).map(r=>r[p].roas); return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1)+'x ROAS avg':'No data'; };
+  document.getElementById('mZRoas').textContent = avgRoas('z');
+  document.getElementById('mBRoas').textContent = avgRoas('b');
+  document.getElementById('mIRoas').textContent = avgRoas('i');
 
-  const res = await fetch(url, { cache: 'no-store' });
-  if (!res.ok) throw new Error('Fetch failed');
-
-  const text = await res.text();
-
-  if (APPS_SCRIPT_URL) {
-    return JSON.parse(text);
-  } else {
-    const json = JSON.parse(text.replace(/^[^(]+\(/, '').replace(/\);?$/, ''));
-    const rows = json.table.rows.map(r => r.c.map(c => c ? c.v : null));
-    return rows;
-  }
-}
-
-function parseRows(rows) {
-  let headerIdx = 6;
-  for (let i = 0; i < rows.length; i++) {
-    const r = rows[i].map(c => String(c||'').trim().toLowerCase());
-    if (r.includes('date') && r.includes('sales')) { headerIdx = i; break; }
-  }
-  const headers = rows[headerIdx].map(c => String(c||'').trim().toLowerCase());
-  const allOf = (name) => headers.reduce((acc,h,i) => { if(h===name) acc.push(i); return acc; }, []);
-  const salesCols  = allOf('sales');
-  const spendsCols = allOf('spends');
-  const roasCols   = allOf('roas');
-  const unitsCols  = allOf('units sold');
-  const col = (arr, idx, fallback) => arr[idx] !== undefined ? arr[idx] : fallback;
-  const dateCol = headers.indexOf('date');
-  const dataRows = rows.slice(headerIdx + 1).filter(r => r[dateCol] && String(r[dateCol]).trim() !== '' && String(r[dateCol]).toLowerCase() !== 'date');
-  return dataRows.map(r => ({
-    date: r[dateCol],
-    day:  r[dateCol + 1],
-    zepto:     { sales: +r[col(salesCols,0,2)]||0,  spends: +r[col(spendsCols,0,3)]||0,  roas: +r[col(roasCols,0,4)]||0,  units: +r[col(unitsCols,0,5)]||0  },
-    blinkit:   { sales: +r[col(salesCols,1,10)]||0, spends: +r[col(spendsCols,1,11)]||0, roas: +r[col(roasCols,1,12)]||0, units: +r[col(unitsCols,1,13)]||0 },
-    instamart: { sales: +r[col(salesCols,2,17)]||0, spends: +r[col(spendsCols,2,18)]||0, roas: +r[col(roasCols,2,19)]||0, units: +r[col(unitsCols,2,20)]||0 },
-    bigbasket: { sales: +r[col(salesCols,3,24)]||0, spends: +r[col(spendsCols,3,25)]||0, roas: +r[col(roasCols,3,26)]||0, units: +r[col(unitsCols,3,27)]||0 },
-  })).filter(r => r.zepto.sales || r.blinkit.sales || r.instamart.sales || r.bigbasket.sales);
-}
-
-function renderMetrics(rows) {
-  const total = (key, sub) => rows.reduce((a,r) => a + (r[key]?.[sub]||0), 0);
-  document.getElementById('totalSales').textContent = fmt(total('zepto','sales')+total('blinkit','sales')+total('instamart','sales')+total('bigbasket','sales'));
-  document.getElementById('totalSpends').textContent = fmt(total('zepto','spends')+total('blinkit','spends')+total('instamart','spends')+total('bigbasket','spends'));
-  document.getElementById('daysTracked').textContent = rows.length;
-
-  const avgRoas = p => {
-    const v = rows.filter(r=>r[p].roas>0).map(r=>r[p].roas);
-    return v.length ? v.reduce((a,b)=>a+b,0)/v.length : 0;
-  };
-  const roas = { zepto: avgRoas('zepto'), blinkit: avgRoas('blinkit'), instamart: avgRoas('instamart') };
-  const best = Object.entries(roas).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('bestRoas').textContent = best[1].toFixed(1) + 'x';
-  document.getElementById('bestRoasPlatform').textContent = best[0].charAt(0).toUpperCase()+best[0].slice(1);
-}
-
-function renderCharts(rows) {
-  const labels = rows.map(r => {
-    const d = r.date;
-    if (typeof d === 'string') return d.slice(5,10);
-    if (d instanceof Date) return (d.getMonth()+1)+'/'+d.getDate();
-    return String(d).slice(0,5);
-  });
-
-  const chartOpts = {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ₹' + Math.round(ctx.raw).toLocaleString() } } },
-    scales: {
-      x: { stacked: true, ticks: { color: '#666', font: { size: 10 }, maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.04)' } },
-      y: { stacked: true, ticks: { color: '#666', font: { size: 10 }, callback: v => fmt(v) }, grid: { color: 'rgba(255,255,255,0.04)' } }
-    }
-  };
-
-  if (salesChartInst) salesChartInst.destroy();
-  salesChartInst = new Chart(document.getElementById('salesChart'), {
-    type: 'bar',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Zepto',     data: rows.map(r=>r.zepto.sales),     backgroundColor: '#4f9cf9' },
-        { label: 'Blinkit',   data: rows.map(r=>r.blinkit.sales),   backgroundColor: '#f5a623' },
-        { label: 'Instamart', data: rows.map(r=>r.instamart.sales), backgroundColor: '#2ecc71' },
-      ]
-    },
-    options: chartOpts
-  });
-
-  const roasOpts = {
-    responsive: true, maintainAspectRatio: false,
-    plugins: { legend: { display: false }, tooltip: { callbacks: { label: ctx => ' ' + ctx.raw.toFixed(1) + 'x' } } },
-    scales: {
-      x: { ticks: { color: '#666', font: { size: 10 }, maxRotation: 45 }, grid: { color: 'rgba(255,255,255,0.04)' } },
-      y: { ticks: { color: '#666', font: { size: 10 }, callback: v => v+'x' }, grid: { color: 'rgba(255,255,255,0.04)' } }
-    }
-  };
-
-  if (roasChartInst) roasChartInst.destroy();
-  roasChartInst = new Chart(document.getElementById('roasChart'), {
-    type: 'line',
-    data: {
-      labels,
-      datasets: [
-        { label: 'Zepto',     data: rows.map(r=>r.zepto.roas),     borderColor: '#4f9cf9', backgroundColor:'transparent', tension:0.3, pointRadius:3 },
-        { label: 'Blinkit',   data: rows.map(r=>r.blinkit.roas),   borderColor: '#f5a623', backgroundColor:'transparent', tension:0.3, pointRadius:3 },
-        { label: 'Instamart', data: rows.map(r=>r.instamart.roas), borderColor: '#2ecc71', backgroundColor:'transparent', tension:0.3, pointRadius:3 },
-      ]
-    },
-    options: roasOpts
-  });
-}
-
-function renderPlatforms(rows) {
-  const sum = (key, sub) => rows.reduce((a,r) => a+(r[key]?.[sub]||0), 0);
-  const avgRoas = p => {
-    const v = rows.filter(r=>r[p].roas>0).map(r=>r[p].roas);
-    return v.length ? (v.reduce((a,b)=>a+b,0)/v.length).toFixed(1)+'x' : '—';
-  };
-
+  // Platform cards
   const platforms = [
-    { name: 'Zepto',      key: 'zepto',     color: '#4f9cf9' },
-    { name: 'Blinkit',    key: 'blinkit',   color: '#f5a623' },
-    { name: 'Instamart',  key: 'instamart', color: '#2ecc71' },
-    { name: 'Big Basket', key: 'bigbasket', color: '#e74c3c' },
+    {name:'Zepto',key:'z',color:'var(--zepto)'},
+    {name:'Blinkit',key:'b',color:'var(--blinkit)'},
+    {name:'Instamart',key:'i',color:'var(--instamart)'},
+    {name:'Big Basket',key:'bb',color:'var(--bigbasket)'},
   ];
-
-  document.getElementById('platformGrid').innerHTML = platforms.map(p => `
-    <div class="platform-card">
-      <div class="platform-name" style="color:${p.color}">${p.name}</div>
-      <div class="prow"><span class="plabel">Sales</span><span class="pval">${fmt(sum(p.key,'sales'))}</span></div>
-      <div class="prow"><span class="plabel">Spends</span><span class="pval">${fmt(sum(p.key,'spends'))}</span></div>
+  document.getElementById('platformCards').innerHTML = platforms.map(p=>`
+    <div class="pcard">
+      <div class="pcard-name" style="color:${p.color}">${p.name}</div>
+      <div class="prow"><span class="plabel">Total Sales</span><span class="pval">${fmt(sum(p.key,'s'))}</span></div>
+      <div class="prow"><span class="plabel">Total Spends</span><span class="pval">${fmt(sum(p.key,'sp'))}</span></div>
       <div class="prow"><span class="plabel">Avg ROAS</span><span class="pval">${avgRoas(p.key)}</span></div>
-      <div class="prow"><span class="plabel">Units Sold</span><span class="pval">${fmtUnits(sum(p.key,'units'))}</span></div>
-    </div>
-  `).join('');
+      <div class="prow"><span class="plabel">Total Units</span><span class="pval">${fmtU(sum(p.key,'u'))}</span></div>
+      <div class="prow"><span class="plabel">Days with data</span><span class="pval">${rows.filter(r=>r[p.key].s>0).length}</span></div>
+    </div>`).join('');
+
+  // Sales chart
+  mkChart('cSales','bar',{
+    labels,
+    datasets:[
+      {label:'Zepto',data:rows.map(r=>r.z.s),backgroundColor:'#4f9cf9'},
+      {label:'Blinkit',data:rows.map(r=>r.b.s),backgroundColor:'#f5a623'},
+      {label:'Instamart',data:rows.map(r=>r.i.s),backgroundColor:'#2ecc71'},
+    ]
+  },{scales:{x:{...xAxis,stacked:true},y:{...yAxisMoney,stacked:true}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+  // ROAS chart
+  mkChart('cRoas','line',{
+    labels,
+    datasets:[
+      {label:'Zepto',data:rows.map(r=>r.z.roas||null),borderColor:'#4f9cf9',backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false},
+      {label:'Blinkit',data:rows.map(r=>r.b.roas||null),borderColor:'#f5a623',backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false},
+      {label:'Instamart',data:rows.map(r=>r.i.roas||null),borderColor:'#2ecc71',backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false},
+    ]
+  },{scales:{x:xAxis,y:yAxisRoas},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw.toFixed(2)+'x'}}}});
+
+  // Spends chart
+  mkChart('cSpends','bar',{
+    labels,
+    datasets:[
+      {label:'Zepto',data:rows.map(r=>r.z.sp),backgroundColor:'#4f9cf9bb'},
+      {label:'Blinkit',data:rows.map(r=>r.b.sp),backgroundColor:'#f5a623bb'},
+      {label:'Instamart',data:rows.map(r=>r.i.sp),backgroundColor:'#2ecc71bb'},
+    ]
+  },{scales:{x:{...xAxis,stacked:true},y:{...yAxisMoney,stacked:true}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+  // Units chart
+  mkChart('cUnits','bar',{
+    labels,
+    datasets:[
+      {label:'Zepto',data:rows.map(r=>r.z.u),backgroundColor:'#4f9cf9bb'},
+      {label:'Blinkit',data:rows.map(r=>r.b.u),backgroundColor:'#f5a623bb'},
+      {label:'Instamart',data:rows.map(r=>r.i.u),backgroundColor:'#2ecc71bb'},
+    ]
+  },{scales:{x:{...xAxis,stacked:true},y:{...yAxisUnits,stacked:true}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)}}}});
+
+  // Pie chart
+  const zTotal=sum('z','s'), bTotal=sum('b','s'), iTotal=sum('i','s'), bbTotal=sum('bb','s');
+  mkChart('cPie','doughnut',{
+    labels:['Zepto','Blinkit','Instamart','Big Basket'],
+    datasets:[{data:[zTotal,bTotal,iTotal,bbTotal],backgroundColor:['#4f9cf9','#f5a623','#2ecc71','#e05c5c'],borderWidth:0,hoverOffset:4}]
+  },{plugins:{legend:{display:true,position:'bottom',labels:{color:'#777',font:{size:10},boxWidth:10,padding:12}},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)+' ('+Math.round(c.raw/(zTotal+bTotal+iTotal+bbTotal)*100)+'%)'}}}});
 }
 
-async function loadDashboard() {
-  try {
-    const raw = await fetchData();
-    const rows = parseRows(raw);
-    renderMetrics(rows);
-    renderCharts(rows);
-    renderPlatforms(rows);
-    document.getElementById('statusText').textContent = 'live · google sheets';
-    document.getElementById('lastUpdated').textContent = 'Updated ' + new Date().toLocaleTimeString();
-    document.getElementById('errorBanner').style.display = 'none';
-  } catch(e) {
-    console.error(e);
-    document.getElementById('errorBanner').style.display = 'block';
-    document.getElementById('statusText').textContent = 'error loading data';
-  } finally {
-    const loader = document.getElementById('loader');
-    loader.classList.add('hidden');
-    setTimeout(() => loader.style.display = 'none', 400);
+async function parseAppsScript(text){
+  const raw = JSON.parse(text);
+  if(!Array.isArray(raw)) throw new Error('bad format');
+  // Find header row
+  let hi = -1;
+  for(let i=0;i<raw.length;i++){
+    const r = raw[i].map(c=>String(c||'').trim().toLowerCase());
+    if(r.includes('date') && r.includes('sales')){hi=i;break;}
   }
+  if(hi<0) throw new Error('no header');
+  const rows=[];
+  for(let i=hi+1;i<raw.length;i++){
+    const r=raw[i];
+    if(!r[0]) continue;
+    const zs=+r[3]||0, bs=+r[10]||0, is2=+r[17]||0;
+    if(zs===0&&bs===0&&is2===0) continue;
+    let date=r[0];
+    if(date instanceof Date||typeof date==='string'&&date.includes('Date'))continue;
+    if(typeof date==='string'&&date.match(/\d{4}-\d{2}-\d{2}/)){
+      const d=new Date(date); date=d.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+    }
+    rows.push({
+      date:String(date).slice(0,6), day:String(r[1]||'').slice(0,3),
+      z:{s:+r[3]||0,sp:+r[4]||0,roas:+r[5]||0,u:+r[6]||0},
+      b:{s:+r[10]||0,sp:+r[11]||0,roas:+r[12]||0,u:+r[13]||0},
+      i:{s:+r[17]||0,sp:+r[18]||0,roas:+r[19]||0,u:+r[20]||0},
+      bb:{s:+r[24]||0,sp:+r[25]||0,roas:+r[26]||0,u:+r[27]||0},
+    });
+  }
+  return rows;
 }
 
-loadDashboard();
-setInterval(loadDashboard, 5 * 60 * 1000);
+async function load(){
+  try{
+    const res = await fetch(APPS_SCRIPT_URL+'?t='+Date.now(),{cache:'no-store'});
+    if(!res.ok) throw new Error('fetch failed');
+    const text = await res.text();
+    const rows = await parseAppsScript(text);
+    if(rows.length===0) throw new Error('no data rows');
+    render(rows);
+    document.getElementById('statusTxt').textContent='live · google sheets';
+  } catch(e){
+    console.warn('Live fetch failed, using fallback data:',e);
+    render(FALLBACK);
+    document.getElementById('statusTxt').textContent='cached data (sheet unavailable)';
+  }
+  document.getElementById('lastUp').textContent=new Date().toLocaleTimeString();
+}
+
+load();
+setInterval(load, 5*60*1000);
 </script>
 </body>
 </html>
