@@ -10,7 +10,9 @@
 :root{--bg:#0d0d0d;--surface:#161616;--surface2:#1e1e1e;--border:rgba(255,255,255,0.08);--text:#f0ede8;--muted:#666;--zepto:#4f9cf9;--blinkit:#f5a623;--instamart:#2ecc71;--bigbasket:#e05c5c;--accent:#f5a623;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min-height:100vh;}
-.topbar{border-bottom:1px solid var(--border);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;background:var(--surface);position:sticky;top:0;z-index:10;}
+
+/* Topbar */
+.topbar{border-bottom:1px solid var(--border);padding:14px 28px;display:flex;justify-content:space-between;align-items:center;background:var(--surface);position:sticky;top:0;z-index:20;}
 .logo{font-size:14px;font-weight:600;letter-spacing:.06em;}
 .logo span{color:var(--accent);}
 .status{font-size:11px;color:var(--muted);display:flex;align-items:center;gap:7px;font-family:'DM Mono',monospace;}
@@ -18,24 +20,25 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 @keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
 
 .main{padding:24px 28px;max-width:1400px;margin:0 auto;}
+
+/* Page header */
 .page-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:20px;flex-wrap:wrap;gap:12px;}
-.page-titles{}
 .page-title{font-size:22px;font-weight:500;margin-bottom:2px;}
 .page-sub{font-size:11px;color:var(--muted);}
 .page-sub span{color:var(--accent);font-family:'DM Mono',monospace;}
 
 /* Date filter */
-.date-filter{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:12px 16px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
+.date-filter{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:10px 14px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;}
 .filter-label{font-size:11px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;white-space:nowrap;}
-.date-input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:6px 10px;outline:none;cursor:pointer;}
+.date-input{background:var(--surface2);border:1px solid var(--border);border-radius:6px;color:var(--text);font-family:'DM Mono',monospace;font-size:12px;padding:5px 9px;outline:none;cursor:pointer;}
 .date-input:focus{border-color:var(--accent);}
 .filter-sep{font-size:11px;color:var(--muted);}
-.quick-btns{display:flex;gap:6px;}
+.quick-btns{display:flex;gap:5px;}
 .qbtn{background:transparent;border:1px solid var(--border);border-radius:6px;color:var(--muted);font-size:11px;padding:5px 10px;cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;}
 .qbtn:hover,.qbtn.active{background:var(--accent);border-color:var(--accent);color:#000;font-weight:500;}
 .filter-info{font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;}
 
-/* Metric cards */
+/* Metrics */
 .metrics{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:20px;}
 .metric{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;position:relative;overflow:hidden;transition:border-color .2s;}
 .metric:hover{border-color:rgba(255,255,255,.15);}
@@ -44,11 +47,19 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .metric.z::before{background:var(--zepto);}
 .metric.b::before{background:var(--blinkit);}
 .metric.i::before{background:var(--instamart);}
-.metric.bb::before{background:var(--bigbasket);}
 .metric-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px;}
 .metric-value{font-size:22px;font-weight:500;font-family:'DM Mono',monospace;}
 .metric-sub{font-size:10px;color:var(--muted);margin-top:4px;}
-.metric-change{font-size:10px;margin-top:3px;font-family:'DM Mono',monospace;}
+
+/* Tabs */
+.tabs-bar{display:flex;gap:0;border-bottom:1px solid var(--border);margin-bottom:20px;}
+.tab{padding:10px 22px;font-size:13px;font-weight:500;color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s;user-select:none;}
+.tab:hover{color:var(--text);}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent);}
+
+/* Tab panels */
+.tab-panel{display:none;}
+.tab-panel.active{display:block;}
 
 /* Platform cards */
 .platform-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px;}
@@ -60,35 +71,45 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 .pval{font-family:'DM Mono',monospace;font-size:11px;}
 
 /* Charts */
-.section-title{font-size:12px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:10px;margin-top:4px;}
+.section-title{font-size:11px;font-weight:500;color:var(--muted);text-transform:uppercase;letter-spacing:.07em;margin-bottom:10px;margin-top:4px;}
 .charts-2col{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .charts-1col{margin-bottom:12px;}
 .chart-card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:16px;}
-.chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;}
+.chart-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;flex-wrap:wrap;gap:6px;}
 .chart-title{font-size:12px;font-weight:500;}
 .legend{display:flex;gap:10px;flex-wrap:wrap;}
 .leg{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--muted);}
 .leg-dot{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
 
-@media(max-width:1000px){.metrics{grid-template-columns:repeat(3,1fr);}.charts-2col{grid-template-columns:1fr;}.platform-row{grid-template-columns:repeat(2,1fr);}}
-@media(max-width:600px){.metrics{grid-template-columns:repeat(2,1fr);}.main{padding:12px;}.page-header{flex-direction:column;}}
+/* Per-platform section (tab 2) */
+.platform-section{margin-bottom:28px;}
+.platform-section-title{font-size:13px;font-weight:600;padding:8px 14px;border-radius:8px 8px 0 0;border:1px solid var(--border);border-bottom:none;display:flex;align-items:center;gap:8px;}
+.platform-section-body{border:1px solid var(--border);border-radius:0 8px 8px 8px;padding:16px;background:var(--surface);}
+.platform-mini-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px;}
+.mini-metric{background:var(--surface2);border-radius:8px;padding:12px;}
+.mini-label{font-size:10px;color:var(--muted);text-transform:uppercase;letter-spacing:.06em;margin-bottom:5px;}
+.mini-value{font-size:18px;font-weight:500;font-family:'DM Mono',monospace;}
+
+@media(max-width:1000px){.metrics{grid-template-columns:repeat(3,1fr);}.charts-2col{grid-template-columns:1fr;}.platform-row{grid-template-columns:repeat(2,1fr);}.platform-mini-grid{grid-template-columns:repeat(2,1fr);}}
+@media(max-width:600px){.metrics{grid-template-columns:repeat(2,1fr);}.main{padding:12px;}.page-header{flex-direction:column;}.platform-mini-grid{grid-template-columns:1fr 1fr;}}
 </style>
 </head>
 <body>
+
 <div class="topbar">
   <div class="logo">SNACKIBLE <span>/ OMS</span></div>
   <div class="status"><div class="dot"></div><span id="statusTxt">loading...</span></div>
 </div>
 
 <div class="main">
+  <!-- Header + date filter -->
   <div class="page-header">
-    <div class="page-titles">
+    <div>
       <p class="page-title">Sales Dashboard — FY26-27</p>
-      <p class="page-sub">Live from Google Sheets · Auto-refreshes every <span>5 min</span> · <span id="lastUp">—</span></p>
+      <p class="page-sub">Live from Google Sheets · Refreshes every <span>5 min</span> · <span id="lastUp">—</span></p>
     </div>
-    <!-- Date filter -->
     <div class="date-filter">
-      <span class="filter-label">Date range</span>
+      <span class="filter-label">Range</span>
       <input type="date" class="date-input" id="dateFrom">
       <span class="filter-sep">→</span>
       <input type="date" class="date-input" id="dateTo">
@@ -102,7 +123,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     </div>
   </div>
 
-  <!-- Metrics -->
+  <!-- Summary metrics (always visible) -->
   <div class="metrics">
     <div class="metric acc"><div class="metric-label">Total Sales</div><div class="metric-value" id="mTotalSales">—</div><div class="metric-sub">All platforms</div></div>
     <div class="metric acc"><div class="metric-label">Total Spends</div><div class="metric-value" id="mTotalSpends">—</div><div class="metric-sub" id="mOverallRoas">—</div></div>
@@ -111,65 +132,86 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="metric i"><div class="metric-label">Instamart Sales</div><div class="metric-value" id="mISales">—</div><div class="metric-sub" id="mIRoas">—</div></div>
   </div>
 
-  <!-- Platform cards -->
-  <div class="platform-row" id="platformCards"></div>
+  <!-- Tabs -->
+  <div class="tabs-bar">
+    <div class="tab active" data-tab="overview">Overview</div>
+    <div class="tab" data-tab="platform">Platform View</div>
+    <div class="tab" data-tab="product">Product View</div>
+  </div>
 
-  <!-- Charts -->
-  <p class="section-title">Daily Sales by Platform</p>
-  <div class="charts-1col">
-    <div class="chart-card">
-      <div class="chart-head">
-        <div class="chart-title">Sales (₹) — day wise</div>
-        <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+  <!-- ═══ TAB 1: OVERVIEW ═══ -->
+  <div class="tab-panel active" id="tab-overview">
+    <div class="platform-row" id="platformCards"></div>
+
+    <p class="section-title">Daily Sales — grouped by platform</p>
+    <div class="charts-1col">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Sales (₹) per day</div>
+          <div class="legend">
+            <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+          </div>
         </div>
+        <div style="position:relative;height:260px"><canvas id="cSales" role="img" aria-label="Grouped daily sales by platform"></canvas></div>
       </div>
-      <div style="position:relative;height:240px"><canvas id="cSales" role="img" aria-label="Daily sales by platform"></canvas></div>
+    </div>
+
+    <div class="charts-2col">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Spends (₹) per day</div>
+          <div class="legend">
+            <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+          </div>
+        </div>
+        <div style="position:relative;height:220px"><canvas id="cSpends" role="img" aria-label="Grouped daily spends"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">Units Sold per day</div>
+          <div class="legend">
+            <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+          </div>
+        </div>
+        <div style="position:relative;height:220px"><canvas id="cUnits" role="img" aria-label="Grouped daily units sold"></canvas></div>
+      </div>
+    </div>
+
+    <div class="charts-2col">
+      <div class="chart-card">
+        <div class="chart-head">
+          <div class="chart-title">ROAS trend per day</div>
+          <div class="legend">
+            <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
+            <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
+          </div>
+        </div>
+        <div style="position:relative;height:220px"><canvas id="cRoas" role="img" aria-label="ROAS trend line chart"></canvas></div>
+      </div>
+      <div class="chart-card">
+        <div class="chart-head"><div class="chart-title">Platform Sales Share</div></div>
+        <div style="position:relative;height:220px"><canvas id="cPie" role="img" aria-label="Platform share doughnut"></canvas></div>
+      </div>
     </div>
   </div>
 
-  <div class="charts-2col">
-    <div class="chart-card">
-      <div class="chart-head">
-        <div class="chart-title">ROAS — day wise</div>
-        <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
-        </div>
-      </div>
-      <div style="position:relative;height:220px"><canvas id="cRoas" role="img" aria-label="Daily ROAS"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-head">
-        <div class="chart-title">Spends (₹) — day wise</div>
-        <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
-        </div>
-      </div>
-      <div style="position:relative;height:220px"><canvas id="cSpends" role="img" aria-label="Daily spends"></canvas></div>
-    </div>
+  <!-- ═══ TAB 2: PLATFORM VIEW ═══ -->
+  <div class="tab-panel" id="tab-platform">
+    <div id="platformSections"></div>
   </div>
 
-  <div class="charts-2col">
-    <div class="chart-card">
-      <div class="chart-head">
-        <div class="chart-title">Units Sold — day wise</div>
-        <div class="legend">
-          <div class="leg"><div class="leg-dot" style="background:var(--zepto)"></div>Zepto</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--blinkit)"></div>Blinkit</div>
-          <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
-        </div>
-      </div>
-      <div style="position:relative;height:220px"><canvas id="cUnits" role="img" aria-label="Daily units sold"></canvas></div>
-    </div>
-    <div class="chart-card">
-      <div class="chart-head"><div class="chart-title">Platform Sales Share</div></div>
-      <div style="position:relative;height:220px"><canvas id="cPie" role="img" aria-label="Platform share pie chart"></canvas></div>
+  <!-- ═══ TAB 3: PRODUCT VIEW ═══ -->
+  <div class="tab-panel" id="tab-product">
+    <div style="background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:32px;text-align:center;color:var(--muted);">
+      <p style="font-size:14px;margin-bottom:8px;">Product-level data not available in current sheet</p>
+      <p style="font-size:12px;">To enable this tab, add a "Product" column to your Google Sheet and the dashboard will automatically populate this view.</p>
     </div>
   </div>
 </div>
@@ -177,7 +219,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 <script>
 const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzpab6rVhrAtfbI-Ys0gKGIisk04WnMDhTrL_J7Dl6IyUoIgwRUIFU0wZW06r6ZrzbY_A/exec';
 
-// Accurate data from Excel (fallback + initial render)
 const ALL_DATA = [
   {date:'2026-04-01',label:'01 Apr',day:'Wed',z:{s:210535,sp:82300,roas:2.56,u:3770},b:{s:484025,sp:44594,roas:10.85,u:9064},i:{s:260140,sp:40033,roas:6.50,u:4982},bb:{s:0,sp:0,roas:0,u:0}},
   {date:'2026-04-02',label:'02 Apr',day:'Thu',z:{s:214808,sp:81300,roas:2.64,u:3803},b:{s:489034,sp:44224,roas:11.06,u:9164},i:{s:276850,sp:40264,roas:6.88,u:5268},bb:{s:0,sp:0,roas:0,u:0}},
@@ -197,31 +238,32 @@ function fmtU(n){if(!n||isNaN(n)||n===0)return'—';return n>=1000?(n/1000).toFi
 function sum(rows,p,k){return rows.reduce((a,r)=>a+(r[p]?.[k]||0),0);}
 function avgRoas(rows,p){const v=rows.filter(r=>r[p].roas>0).map(r=>r[p].roas);return v.length?(v.reduce((a,b)=>a+b,0)/v.length).toFixed(1)+'x ROAS avg':'No data';}
 
-// ── Charts ───────────────────────────────────────────────
+// ── Chart helpers ────────────────────────────────────────
 const charts={};
 function mkChart(id,type,data,opts){
   if(charts[id])charts[id].destroy();
-  charts[id]=new Chart(document.getElementById(id),{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...opts}});
+  const el=document.getElementById(id);
+  if(!el)return;
+  charts[id]=new Chart(el,{type,data,options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:false}},...opts}});
 }
 const gc='rgba(255,255,255,0.05)';
 const tk={color:'#555',font:{size:10}};
 const xA={ticks:{...tk,autoSkip:false,maxRotation:45},grid:{color:gc}};
 const yM={ticks:{...tk,callback:v=>fmt(v)},grid:{color:gc}};
-const yR={ticks:{...tk,callback:v=>v.toFixed(1)+'x'},grid:{color:gc}};
+const yR={ticks:{...tk,callback:v=>v.toFixed(1)+'x'},grid:{color:gc},min:0};
 const yU={ticks:{...tk,callback:v=>fmtU(v)},grid:{color:gc}};
+const grpOpts={barPercentage:.8,categoryPercentage:.7};
 
-// ── Render with filtered rows ─────────────────────────────
+// ── Render ────────────────────────────────────────────────
 function render(rows){
-  if(!rows.length){rows=liveData;}
-  const labels=rows.map(r=>`${r.label}\n${r.day}`);
+  const labels=rows.map(r=>`${r.label} ${r.day}`);
 
-  const tSales=sum(rows,'z','s')+sum(rows,'b','s')+sum(rows,'i','s')+sum(rows,'bb','s');
-  const tSpends=sum(rows,'z','sp')+sum(rows,'b','sp')+sum(rows,'i','sp')+sum(rows,'bb','sp');
-  const overallRoas=tSpends>0?(tSales/tSpends).toFixed(1)+'x overall ROAS':'—';
-
-  document.getElementById('mTotalSales').textContent=fmt(tSales);
-  document.getElementById('mTotalSpends').textContent=fmt(tSpends);
-  document.getElementById('mOverallRoas').textContent=overallRoas;
+  // Metrics
+  const tS=sum(rows,'z','s')+sum(rows,'b','s')+sum(rows,'i','s')+sum(rows,'bb','s');
+  const tSp=sum(rows,'z','sp')+sum(rows,'b','sp')+sum(rows,'i','sp')+sum(rows,'bb','sp');
+  document.getElementById('mTotalSales').textContent=fmt(tS);
+  document.getElementById('mTotalSpends').textContent=fmt(tSp);
+  document.getElementById('mOverallRoas').textContent=tSp>0?(tS/tSp).toFixed(1)+'x overall ROAS':'—';
   document.getElementById('mZSales').textContent=fmt(sum(rows,'z','s'));
   document.getElementById('mBSales').textContent=fmt(sum(rows,'b','s'));
   document.getElementById('mISales').textContent=fmt(sum(rows,'i','s'));
@@ -229,6 +271,7 @@ function render(rows){
   document.getElementById('mBRoas').textContent=avgRoas(rows,'b');
   document.getElementById('mIRoas').textContent=avgRoas(rows,'i');
 
+  // Platform summary cards
   const platforms=[
     {name:'Zepto',key:'z',color:'var(--zepto)'},
     {name:'Blinkit',key:'b',color:'var(--blinkit)'},
@@ -242,14 +285,29 @@ function render(rows){
       <div class="prow"><span class="plabel">Total Spends</span><span class="pval">${fmt(sum(rows,p.key,'sp'))}</span></div>
       <div class="prow"><span class="plabel">Avg ROAS</span><span class="pval">${avgRoas(rows,p.key)}</span></div>
       <div class="prow"><span class="plabel">Total Units</span><span class="pval">${fmtU(sum(rows,p.key,'u'))}</span></div>
-      <div class="prow"><span class="plabel">Days with data</span><span class="pval">${rows.filter(r=>r[p.key].s>0).length} / ${rows.length}</span></div>
+      <div class="prow"><span class="plabel">Active days</span><span class="pval">${rows.filter(r=>r[p.key].s>0).length} / ${rows.length}</span></div>
     </div>`).join('');
 
+  // ── OVERVIEW CHARTS (grouped bars) ───────────────────────
+  const grouped={scales:{x:{...xA},y:{...yM}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}},...grpOpts};
+
   mkChart('cSales','bar',{labels,datasets:[
-    {label:'Zepto',data:rows.map(r=>r.z.s),backgroundColor:'#4f9cf9'},
-    {label:'Blinkit',data:rows.map(r=>r.b.s),backgroundColor:'#f5a623'},
-    {label:'Instamart',data:rows.map(r=>r.i.s),backgroundColor:'#2ecc71'},
-  ]},{scales:{x:{...xA,stacked:true},y:{...yM,stacked:true}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+    {label:'Zepto',data:rows.map(r=>r.z.s),backgroundColor:'#4f9cf9',...grpOpts},
+    {label:'Blinkit',data:rows.map(r=>r.b.s),backgroundColor:'#f5a623',...grpOpts},
+    {label:'Instamart',data:rows.map(r=>r.i.s),backgroundColor:'#2ecc71',...grpOpts},
+  ]},{scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+  mkChart('cSpends','bar',{labels,datasets:[
+    {label:'Zepto',data:rows.map(r=>r.z.sp),backgroundColor:'#4f9cf9',...grpOpts},
+    {label:'Blinkit',data:rows.map(r=>r.b.sp),backgroundColor:'#f5a623',...grpOpts},
+    {label:'Instamart',data:rows.map(r=>r.i.sp),backgroundColor:'#2ecc71',...grpOpts},
+  ]},{scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+  mkChart('cUnits','bar',{labels,datasets:[
+    {label:'Zepto',data:rows.map(r=>r.z.u),backgroundColor:'#4f9cf9',...grpOpts},
+    {label:'Blinkit',data:rows.map(r=>r.b.u),backgroundColor:'#f5a623',...grpOpts},
+    {label:'Instamart',data:rows.map(r=>r.i.u),backgroundColor:'#2ecc71',...grpOpts},
+  ]},{scales:{x:xA,y:yU},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)}}}});
 
   mkChart('cRoas','line',{labels,datasets:[
     {label:'Zepto',data:rows.map(r=>r.z.roas||null),borderColor:'#4f9cf9',backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false},
@@ -257,67 +315,124 @@ function render(rows){
     {label:'Instamart',data:rows.map(r=>r.i.roas||null),borderColor:'#2ecc71',backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false},
   ]},{scales:{x:xA,y:yR},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw.toFixed(2)+'x'}}}});
 
-  mkChart('cSpends','bar',{labels,datasets:[
-    {label:'Zepto',data:rows.map(r=>r.z.sp),backgroundColor:'#4f9cf9bb'},
-    {label:'Blinkit',data:rows.map(r=>r.b.sp),backgroundColor:'#f5a623bb'},
-    {label:'Instamart',data:rows.map(r=>r.i.sp),backgroundColor:'#2ecc71bb'},
-  ]},{scales:{x:{...xA,stacked:true},y:{...yM,stacked:true}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
-
-  mkChart('cUnits','bar',{labels,datasets:[
-    {label:'Zepto',data:rows.map(r=>r.z.u),backgroundColor:'#4f9cf9bb'},
-    {label:'Blinkit',data:rows.map(r=>r.b.u),backgroundColor:'#f5a623bb'},
-    {label:'Instamart',data:rows.map(r=>r.i.u),backgroundColor:'#2ecc71bb'},
-  ]},{scales:{x:{...xA,stacked:true},y:{...yU,stacked:true}},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)}}}});
-
   const zT=sum(rows,'z','s'),bT=sum(rows,'b','s'),iT=sum(rows,'i','s'),bbT=sum(rows,'bb','s');
   mkChart('cPie','doughnut',{
     labels:['Zepto','Blinkit','Instamart','Big Basket'],
     datasets:[{data:[zT,bT,iT,bbT],backgroundColor:['#4f9cf9','#f5a623','#2ecc71','#e05c5c'],borderWidth:0,hoverOffset:4}]
-  },{plugins:{legend:{display:true,position:'bottom',labels:{color:'#666',font:{size:10},boxWidth:10,padding:10}},tooltip:{callbacks:{label:c=>{const tot=zT+bT+iT+bbT;return' '+fmt(c.raw)+' ('+Math.round(c.raw/tot*100)+'%)';}}}}}); 
+  },{plugins:{legend:{display:true,position:'bottom',labels:{color:'#666',font:{size:10},boxWidth:10,padding:10}},tooltip:{callbacks:{label:c=>{const tot=zT+bT+iT+bbT;return' '+fmt(c.raw)+' ('+Math.round(c.raw/tot*100)+'%)';}}}}});
+
+  // ── PLATFORM TAB ────────────────────────────────────────
+  const pfDefs=[
+    {name:'Zepto',key:'z',color:'#4f9cf9',bg:'rgba(79,156,249,0.08)'},
+    {name:'Blinkit',key:'b',color:'#f5a623',bg:'rgba(245,166,35,0.08)'},
+    {name:'Instamart',key:'i',color:'#2ecc71',bg:'rgba(46,204,113,0.08)'},
+    {name:'Big Basket',key:'bb',color:'#e05c5c',bg:'rgba(224,92,92,0.08)'},
+  ];
+  document.getElementById('platformSections').innerHTML=pfDefs.map(p=>`
+    <div class="platform-section">
+      <div class="platform-section-title" style="background:${p.bg};color:${p.color};">
+        <span style="width:10px;height:10px;border-radius:50%;background:${p.color};display:inline-block;"></span>
+        ${p.name}
+      </div>
+      <div class="platform-section-body">
+        <div class="platform-mini-grid">
+          <div class="mini-metric"><div class="mini-label">Total Sales</div><div class="mini-value">${fmt(sum(rows,p.key,'s'))}</div></div>
+          <div class="mini-metric"><div class="mini-label">Total Spends</div><div class="mini-value">${fmt(sum(rows,p.key,'sp'))}</div></div>
+          <div class="mini-metric"><div class="mini-label">Avg ROAS</div><div class="mini-value">${avgRoas(rows,p.key)}</div></div>
+        </div>
+        <div class="charts-2col">
+          <div>
+            <p class="section-title">Sales (₹)</p>
+            <div style="position:relative;height:180px"><canvas id="p_sales_${p.key}" role="img" aria-label="${p.name} daily sales"></canvas></div>
+          </div>
+          <div>
+            <p class="section-title">ROAS</p>
+            <div style="position:relative;height:180px"><canvas id="p_roas_${p.key}" role="img" aria-label="${p.name} ROAS trend"></canvas></div>
+          </div>
+        </div>
+        <div class="charts-2col" style="margin-top:12px">
+          <div>
+            <p class="section-title">Spends (₹)</p>
+            <div style="position:relative;height:160px"><canvas id="p_spends_${p.key}" role="img" aria-label="${p.name} daily spends"></canvas></div>
+          </div>
+          <div>
+            <p class="section-title">Units Sold</p>
+            <div style="position:relative;height:160px"><canvas id="p_units_${p.key}" role="img" aria-label="${p.name} units sold"></canvas></div>
+          </div>
+        </div>
+      </div>
+    </div>`).join('');
+
+  // Render per-platform charts
+  pfDefs.forEach(p=>{
+    const pRows=rows.filter(r=>r[p.key].s>0||r[p.key].sp>0);
+    const pLabels=pRows.map(r=>`${r.label} ${r.day}`);
+    const barClr=p.color+'cc';
+    const lineClr=p.color;
+
+    mkChart(`p_sales_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Sales',data:pRows.map(r=>r[p.key].s),backgroundColor:barClr,...grpOpts}]},
+      {scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+    mkChart(`p_roas_${p.key}`,'line',{labels:pLabels,datasets:[{label:'ROAS',data:pRows.map(r=>r[p.key].roas||null),borderColor:lineClr,backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false}]},
+      {scales:{x:xA,y:yR},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw.toFixed(2)+'x'}}}});
+
+    mkChart(`p_spends_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Spends',data:pRows.map(r=>r[p.key].sp),backgroundColor:barClr+'99',...grpOpts}]},
+      {scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+    mkChart(`p_units_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Units',data:pRows.map(r=>r[p.key].u),backgroundColor:barClr+'99',...grpOpts}]},
+      {scales:{x:xA,y:yU},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)}}}});
+  });
 }
 
-// ── Date filtering ────────────────────────────────────────
-function filterAndRender(){
+// ── Date filter ───────────────────────────────────────────
+function getFiltered(){
   const from=document.getElementById('dateFrom').value;
   const to=document.getElementById('dateTo').value;
   let rows=liveData;
-  if(from) rows=rows.filter(r=>r.date>=from);
-  if(to)   rows=rows.filter(r=>r.date<=to);
+  if(from)rows=rows.filter(r=>r.date>=from);
+  if(to)rows=rows.filter(r=>r.date<=to);
+  return rows.length?rows:liveData;
+}
+function filterAndRender(){
+  const rows=getFiltered();
   document.getElementById('filterInfo').textContent=rows.length+' day'+(rows.length===1?'':'s');
-  render(rows.length?rows:liveData);
+  render(rows);
 }
 
-function setQuickRange(days){
-  document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('active'));
-  if(days==='all'){
-    document.getElementById('dateFrom').value='';
-    document.getElementById('dateTo').value='';
-    document.getElementById('filterInfo').textContent=liveData.length+' days';
-    render(liveData);
-    return;
-  }
-  // Use last N days from available data
-  const sorted=[...liveData].sort((a,b)=>b.date.localeCompare(a.date));
-  const latest=sorted[0]?.date;
-  if(!latest)return;
-  const fromDate=new Date(latest);
-  fromDate.setDate(fromDate.getDate()-(days-1));
-  const fromStr=fromDate.toISOString().slice(0,10);
-  document.getElementById('dateFrom').value=fromStr;
-  document.getElementById('dateTo').value=latest;
-  filterAndRender();
-}
-
-// Quick buttons
 document.querySelectorAll('.qbtn').forEach(btn=>{
   btn.addEventListener('click',()=>{
     document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('active'));
     btn.classList.add('active');
-    setQuickRange(btn.dataset.range==='all'?'all':+btn.dataset.range);
+    const r=btn.dataset.range;
+    if(r==='all'){
+      document.getElementById('dateFrom').value='';
+      document.getElementById('dateTo').value='';
+    } else {
+      const sorted=[...liveData].sort((a,b)=>b.date.localeCompare(a.date));
+      const latest=sorted[0]?.date;
+      if(latest){
+        const fd=new Date(latest);fd.setDate(fd.getDate()-(+r-1));
+        document.getElementById('dateFrom').value=fd.toISOString().slice(0,10);
+        document.getElementById('dateTo').value=latest;
+      }
+    }
+    filterAndRender();
   });
 });
 document.getElementById('dateFrom').addEventListener('change',()=>{document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('active'));filterAndRender();});
 document.getElementById('dateTo').addEventListener('change',()=>{document.querySelectorAll('.qbtn').forEach(b=>b.classList.remove('active'));filterAndRender();});
+
+// ── Tabs ──────────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p=>p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-'+tab.dataset.tab).classList.add('active');
+    // Re-render charts when switching tabs (canvas may have been hidden)
+    setTimeout(()=>render(getFiltered()),50);
+  });
+});
 
 // ── Live fetch ────────────────────────────────────────────
 async function parseAppsScript(text){
@@ -328,17 +443,11 @@ async function parseAppsScript(text){
   if(hi<0)throw new Error('no header');
   const rows=[];
   for(let i=hi+1;i<raw.length;i++){
-    const r=raw[i];
-    if(!r[0])continue;
-    let d=r[0];
-    let dateStr='';
+    const r=raw[i];if(!r[0])continue;
+    let d=r[0],dateStr='';
     if(typeof d==='string'&&d.match(/\d{4}-\d{2}-\d{2}/)){dateStr=d.slice(0,10);}
-    else if(typeof d==='string'){
-      // Try to parse dd/mm/yyyy or similar
-      const parts=d.split(/[\/-]/);
-      if(parts.length===3){dateStr=`${parts[2]}-${parts[1].padStart(2,'0')}-${parts[0].padStart(2,'0')}`;}
-      else dateStr=d.slice(0,10);
-    } else dateStr=String(d).slice(0,10);
+    else if(typeof d==='string'){const p=d.split(/[\/-]/);if(p.length===3)dateStr=`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`;else dateStr=d.slice(0,10);}
+    else dateStr=String(d).slice(0,10);
     const zs=+r[3]||0,bs=+r[10]||0,is2=+r[17]||0;
     if(zs===0&&bs===0&&is2===0)continue;
     const dt=new Date(dateStr);
@@ -358,20 +467,19 @@ async function load(){
     const res=await fetch(APPS_SCRIPT_URL+'?t='+Date.now(),{cache:'no-store'});
     if(!res.ok)throw new Error('fail');
     const rows=await parseAppsScript(await res.text());
-    if(rows.length>0){liveData=rows;document.getElementById('statusTxt').textContent='live · google sheets';}
-    else throw new Error('empty');
+    if(rows.length>0){
+      liveData=rows;
+      document.getElementById('statusTxt').textContent='live · google sheets';
+    } else throw new Error('empty');
   }catch(e){
-    console.warn('Using fallback:',e.message);
+    console.warn('Fallback:',e.message);
     document.getElementById('statusTxt').textContent='cached data';
   }
-
-  // Set date inputs min/max
   const dates=liveData.map(r=>r.date).sort();
   document.getElementById('dateFrom').min=dates[0];
   document.getElementById('dateFrom').max=dates[dates.length-1];
   document.getElementById('dateTo').min=dates[0];
   document.getElementById('dateTo').max=dates[dates.length-1];
-
   document.getElementById('filterInfo').textContent=liveData.length+' days';
   document.getElementById('lastUp').textContent='Updated '+new Date().toLocaleTimeString();
   render(liveData);
