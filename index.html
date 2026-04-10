@@ -449,18 +449,7 @@ async function parseAppsScript(text){
 }
 
 async function load(){
-  try{
-    const res=await fetch(APPS_SCRIPT_URL+'?t='+Date.now(),{cache:'no-store'});
-    if(!res.ok)throw new Error('fail');
-    const rows=await parseAppsScript(await res.text());
-    if(rows.length>0){
-      liveData=rows;
-      document.getElementById('statusTxt').textContent='live · google sheets';
-    } else throw new Error('empty');
-  }catch(e){
-    console.warn('Fallback:',e.message);
-    document.getElementById('statusTxt').textContent='cached data';
-  }
+  // Render hardcoded data IMMEDIATELY - never show a blank/loading screen
   const dates=liveData.map(r=>r.date).sort();
   document.getElementById('dateFrom').min=dates[0];
   document.getElementById('dateFrom').max=dates[dates.length-1];
@@ -469,95 +458,31 @@ async function load(){
   document.getElementById('filterInfo').textContent=liveData.length+' days';
   document.getElementById('lastUp').textContent='Updated '+new Date().toLocaleTimeString();
   render(liveData);
-}
 
-// ── SWIGGY DATA (March 2026 - from Excel) ────────────────
-const SWIGGY_DATA = [
-  {date:"2026-03-01",label:"01 Mar",day:"Sun",total:311986,ragi:222455,dipsters:20390,puffs:18380,others:50761,ragi_u:4620,dipsters_u:611,puffs_u:440,others_u:586},
-  {date:"2026-03-02",label:"02 Mar",day:"Mon",total:272631,ragi:188065,dipsters:17390,puffs:19320,others:47856,ragi_u:3911,dipsters_u:526,puffs_u:471,others_u:545},
-  {date:"2026-03-03",label:"03 Mar",day:"Tue",total:309055,ragi:221880,dipsters:17640,puffs:20870,others:48665,ragi_u:4537,dipsters_u:532,puffs_u:505,others_u:562},
-  {date:"2026-03-04",label:"04 Mar",day:"Wed",total:300950,ragi:221525,dipsters:18705,puffs:17870,others:42850,ragi_u:4596,dipsters_u:570,puffs_u:430,others_u:502},
-  {date:"2026-03-05",label:"05 Mar",day:"Thu",total:284625,ragi:208580,dipsters:17470,puffs:19020,others:39555,ragi_u:4326,dipsters_u:538,puffs_u:457,others_u:475},
-  {date:"2026-03-06",label:"06 Mar",day:"Fri",total:272931,ragi:193445,dipsters:19020,puffs:20300,others:40166,ragi_u:4013,dipsters_u:572,puffs_u:489,others_u:484},
-  {date:"2026-03-07",label:"07 Mar",day:"Sat",total:296984,ragi:217380,dipsters:20845,puffs:19930,others:38829,ragi_u:4473,dipsters_u:624,puffs_u:474,others_u:456},
-  {date:"2026-03-08",label:"08 Mar",day:"Sun",total:339078,ragi:247520,dipsters:21600,puffs:25750,others:44208,ragi_u:5106,dipsters_u:656,puffs_u:618,others_u:516},
-  {date:"2026-03-09",label:"09 Mar",day:"Mon",total:225001,ragi:154300,dipsters:17590,puffs:17450,others:35661,ragi_u:3205,dipsters_u:524,puffs_u:419,others_u:422},
-  {date:"2026-03-10",label:"10 Mar",day:"Tue",total:251505,ragi:175275,dipsters:18705,puffs:19610,others:37915,ragi_u:3664,dipsters_u:563,puffs_u:470,others_u:469},
-  {date:"2026-03-11",label:"11 Mar",day:"Wed",total:266170,ragi:187495,dipsters:17465,puffs:18790,others:42420,ragi_u:3872,dipsters_u:517,puffs_u:455,others_u:513},
-  {date:"2026-03-12",label:"12 Mar",day:"Thu",total:293630,ragi:212325,dipsters:19535,puffs:18900,others:42870,ragi_u:4416,dipsters_u:583,puffs_u:446,others_u:538},
-  {date:"2026-03-13",label:"13 Mar",day:"Fri",total:272608,ragi:202755,dipsters:15715,puffs:16550,others:37588,ragi_u:4191,dipsters_u:473,puffs_u:399,others_u:451},
-  {date:"2026-03-14",label:"14 Mar",day:"Sat",total:296695,ragi:216706,dipsters:18686,puffs:18550,others:42753,ragi_u:4464,dipsters_u:553,puffs_u:449,others_u:524},
-  {date:"2026-03-15",label:"15 Mar",day:"Sun",total:278280,ragi:203500,dipsters:18875,puffs:18510,others:37395,ragi_u:4212,dipsters_u:567,puffs_u:443,others_u:447},
-  {date:"2026-03-16",label:"16 Mar",day:"Mon",total:261188,ragi:185250,dipsters:16295,puffs:16630,others:43013,ragi_u:3812,dipsters_u:488,puffs_u:395,others_u:515},
-  {date:"2026-03-17",label:"17 Mar",day:"Tue",total:276996,ragi:194590,dipsters:18715,puffs:19180,others:44511,ragi_u:4059,dipsters_u:570,puffs_u:459,others_u:555},
-  {date:"2026-03-18",label:"18 Mar",day:"Wed",total:259075,ragi:184935,dipsters:18280,puffs:16360,others:39500,ragi_u:3852,dipsters_u:555,puffs_u:391,others_u:475},
-  {date:"2026-03-19",label:"19 Mar",day:"Thu",total:269068,ragi:194025,dipsters:19265,puffs:15520,others:40258,ragi_u:4019,dipsters_u:577,puffs_u:375,others_u:480},
-  {date:"2026-03-20",label:"20 Mar",day:"Fri",total:272285,ragi:193770,dipsters:16435,puffs:17360,others:44720,ragi_u:4013,dipsters_u:491,puffs_u:418,others_u:535},
-  {date:"2026-03-21",label:"21 Mar",day:"Sat",total:299587,ragi:209181,dipsters:23051,puffs:19470,others:47885,ragi_u:4377,dipsters_u:700,puffs_u:467,others_u:578},
-  {date:"2026-03-22",label:"22 Mar",day:"Sun",total:281198,ragi:195470,dipsters:20345,puffs:18850,others:46533,ragi_u:4087,dipsters_u:613,puffs_u:455,others_u:551},
-  {date:"2026-03-23",label:"23 Mar",day:"Mon",total:262700,ragi:179030,dipsters:18690,puffs:17730,others:47250,ragi_u:3735,dipsters_u:570,puffs_u:420,others_u:560},
-  {date:"2026-03-24",label:"24 Mar",day:"Tue",total:272325,ragi:188820,dipsters:19375,puffs:18900,others:45230,ragi_u:3905,dipsters_u:575,puffs_u:447,others_u:547},
-  {date:"2026-03-25",label:"25 Mar",day:"Wed",total:280886,ragi:189936,dipsters:19415,puffs:19730,others:51805,ragi_u:3937,dipsters_u:584,puffs_u:468,others_u:592},
-  {date:"2026-03-26",label:"26 Mar",day:"Thu",total:292723,ragi:200818,dipsters:21590,puffs:24600,others:45715,ragi_u:4174,dipsters_u:658,puffs_u:582,others_u:559},
-  {date:"2026-03-27",label:"27 Mar",day:"Fri",total:282135,ragi:194160,dipsters:20425,puffs:19980,others:47570,ragi_u:4023,dipsters_u:611,puffs_u:474,others_u:569},
-  {date:"2026-03-28",label:"28 Mar",day:"Sat",total:312150,ragi:217005,dipsters:23320,puffs:21330,others:50495,ragi_u:4534,dipsters_u:704,puffs_u:510,others_u:618},
-  {date:"2026-03-29",label:"29 Mar",day:"Sun",total:290203,ragi:192618,dipsters:21180,puffs:21010,others:55395,ragi_u:4000,dipsters_u:636,puffs_u:505,others_u:650},
-  {date:"2026-03-30",label:"30 Mar",day:"Mon",total:264740,ragi:176775,dipsters:18730,puffs:20340,others:48895,ragi_u:3675,dipsters_u:554,puffs_u:484,others_u:591},
-  {date:"2026-03-31",label:"31 Mar",day:"Tue",total:290450,ragi:194190,dipsters:20575,puffs:21290,others:54395,ragi_u:4032,dipsters_u:611,puffs_u:510,others_u:644},
-];
-
-function renderSwiggy(rows){
-  const labels = rows.map(r=>`${r.label}\n${r.day}`);
-  const sumSw = k => rows.reduce((a,r)=>a+(r[k]||0),0);
-  const bp = {barPercentage:.75,categoryPercentage:.65};
-
-  // Metrics
-  document.getElementById('sw_total').textContent = fmt(sumSw('total'));
-  document.getElementById('sw_ragi').textContent = fmt(sumSw('ragi'));
-  document.getElementById('sw_ragi_u').textContent = fmtU(sumSw('ragi_u'))+' units';
-  document.getElementById('sw_dipsters').textContent = fmt(sumSw('dipsters'));
-  document.getElementById('sw_dipsters_u').textContent = fmtU(sumSw('dipsters_u'))+' units';
-  document.getElementById('sw_puffs').textContent = fmt(sumSw('puffs'));
-  document.getElementById('sw_puffs_u').textContent = fmtU(sumSw('puffs_u'))+' units';
-
-  // GMV grouped bar chart
-  mkChart('sw_gmv','bar',{labels,datasets:[
-    {label:'Ragi Chips',data:rows.map(r=>r.ragi),backgroundColor:'#e8732a',...bp},
-    {label:'Dipsters',data:rows.map(r=>r.dipsters),backgroundColor:'#9b59b6',...bp},
-    {label:'Puffs',data:rows.map(r=>r.puffs),backgroundColor:'#1abc9c',...bp},
-    {label:'Others',data:rows.map(r=>r.others),backgroundColor:'#7f8c8d',...bp},
-  ]},{scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
-
-  // Units grouped bar
-  mkChart('sw_units','bar',{labels,datasets:[
-    {label:'Ragi Chips',data:rows.map(r=>r.ragi_u),backgroundColor:'#e8732a',...bp},
-    {label:'Dipsters',data:rows.map(r=>r.dipsters_u),backgroundColor:'#9b59b6',...bp},
-    {label:'Puffs',data:rows.map(r=>r.puffs_u),backgroundColor:'#1abc9c',...bp},
-  ]},{scales:{x:xA,y:yU},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)+' units'}}}});
-
-  // Pie
-  const rT=sumSw('ragi'),dT=sumSw('dipsters'),pT=sumSw('puffs'),oT=sumSw('others');
-  mkChart('sw_pie','doughnut',{
-    labels:['Ragi Chips','Dipsters','Puffs','Others'],
-    datasets:[{data:[rT,dT,pT,oT],backgroundColor:['#e8732a','#9b59b6','#1abc9c','#7f8c8d'],borderWidth:0,hoverOffset:4}]
-  },{plugins:{legend:{display:true,position:'bottom',labels:{color:'#666',font:{size:10},boxWidth:10,padding:10}},
-    tooltip:{callbacks:{label:c=>{const tot=rT+dT+pT+oT;return' '+fmt(c.raw)+' ('+Math.round(c.raw/tot*100)+'%)';}}}}}); 
-
-  // Total GMV line
-  mkChart('sw_total_line','line',{labels,datasets:[
-    {label:'Total GMV',data:rows.map(r=>r.total),borderColor:'#f5a623',backgroundColor:'rgba(245,166,35,0.08)',tension:.3,pointRadius:3,fill:true}
-  ]},{scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
-}
-
-// Filter swiggy data by date range too
-function getFilteredSwiggy(){
-  const from = document.getElementById('dateFrom').value;
-  const to = document.getElementById('dateTo').value;
-  // Swiggy is March data — show all if OMS filter doesn't overlap
-  let rows = SWIGGY_DATA;
-  if(from && from > '2026-03-31') return SWIGGY_DATA; // different month, show all
-  if(to && to < '2026-03-01') return SWIGGY_DATA;
-  return rows;
+  // Try live fetch in background with 10s timeout
+  try{
+    const ctrl=new AbortController();
+    const t=setTimeout(()=>ctrl.abort(),10000);
+    const res=await fetch(APPS_SCRIPT_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+    clearTimeout(t);
+    if(!res.ok)throw new Error('status '+res.status);
+    const rows=await parseAppsScript(await res.text());
+    if(rows.length>0){
+      liveData=rows;
+      const d2=liveData.map(r=>r.date).sort();
+      document.getElementById('dateFrom').min=d2[0];
+      document.getElementById('dateFrom').max=d2[d2.length-1];
+      document.getElementById('dateTo').min=d2[0];
+      document.getElementById('dateTo').max=d2[d2.length-1];
+      document.getElementById('filterInfo').textContent=liveData.length+' days';
+      document.getElementById('statusTxt').textContent='live · google sheets';
+      document.getElementById('lastUp').textContent='Live: '+new Date().toLocaleTimeString();
+      render(liveData);
+    }
+  }catch(e){
+    console.warn('Live fetch skipped:',e.message);
+    document.getElementById('statusTxt').textContent='showing cached data';
+  }
 }
 
 load();
