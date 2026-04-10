@@ -363,23 +363,23 @@ function render(rows){
       </div>
     </div>`).join('');
 
-  // Render per-platform charts
+  // Render per-platform charts — use ALL rows so spends/units show even if sales=0
   pfDefs.forEach(p=>{
-    const pRows=rows.filter(r=>r[p.key].s>0||r[p.key].sp>0);
-    const pLabels=pRows.map(r=>`${r.label} ${r.day}`);
+    const pLabels=rows.map(r=>`${r.label} ${r.day}`);
     const barClr=p.color+'cc';
     const lineClr=p.color;
+    const bp={barPercentage:.7,categoryPercentage:.6};
 
-    mkChart(`p_sales_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Sales',data:pRows.map(r=>r[p.key].s),backgroundColor:barClr,...grpOpts}]},
+    mkChart(`p_sales_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Sales',data:rows.map(r=>r[p.key].s),backgroundColor:barClr,...bp}]},
       {scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
 
-    mkChart(`p_roas_${p.key}`,'line',{labels:pLabels,datasets:[{label:'ROAS',data:pRows.map(r=>r[p.key].roas||null),borderColor:lineClr,backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false}]},
+    mkChart(`p_roas_${p.key}`,'line',{labels:pLabels,datasets:[{label:'ROAS',data:rows.map(r=>r[p.key].roas||null),borderColor:lineClr,backgroundColor:'transparent',tension:.3,pointRadius:4,spanGaps:false}]},
       {scales:{x:xA,y:yR},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw.toFixed(2)+'x'}}}});
 
-    mkChart(`p_spends_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Spends',data:pRows.map(r=>r[p.key].sp),backgroundColor:barClr+'99',...grpOpts}]},
+    mkChart(`p_spends_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Spends',data:rows.map(r=>r[p.key].sp),backgroundColor:barClr+'99',...bp}]},
       {scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
 
-    mkChart(`p_units_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Units',data:pRows.map(r=>r[p.key].u),backgroundColor:barClr+'99',...grpOpts}]},
+    mkChart(`p_units_${p.key}`,'bar',{labels:pLabels,datasets:[{label:'Units',data:rows.map(r=>r[p.key].u),backgroundColor:barClr+'99',...bp}]},
       {scales:{x:xA,y:yU},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)}}}});
   });
 }
