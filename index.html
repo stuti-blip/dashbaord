@@ -102,7 +102,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
 </div>
 
 <div class="main">
-  <!-- Header + date filter -->
   <div class="page-header">
     <div>
       <p class="page-title">Sales Dashboard — FY26-27</p>
@@ -123,7 +122,6 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     </div>
   </div>
 
-  <!-- Summary metrics (always visible) -->
   <div class="metrics">
     <div class="metric acc"><div class="metric-label">Total Sales</div><div class="metric-value" id="mTotalSales">—</div><div class="metric-sub">All platforms</div></div>
     <div class="metric acc"><div class="metric-label">Total Spends</div><div class="metric-value" id="mTotalSpends">—</div><div class="metric-sub" id="mOverallRoas">—</div></div>
@@ -132,17 +130,15 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
     <div class="metric i"><div class="metric-label">Instamart Sales</div><div class="metric-value" id="mISales">—</div><div class="metric-sub" id="mIRoas">—</div></div>
   </div>
 
-  <!-- Tabs -->
   <div class="tabs-bar">
     <div class="tab active" data-tab="overview">Overview</div>
     <div class="tab" data-tab="platform">Platform View</div>
     <div class="tab" data-tab="swiggy">Swiggy / Product</div>
   </div>
 
-  <!-- ═══ TAB 1: OVERVIEW ═══ -->
+  <!-- TAB 1: OVERVIEW -->
   <div class="tab-panel active" id="tab-overview">
     <div class="platform-row" id="platformCards"></div>
-
     <p class="section-title">Daily Sales — grouped by platform</p>
     <div class="charts-1col">
       <div class="chart-card">
@@ -154,10 +150,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
             <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
           </div>
         </div>
-        <div style="position:relative;height:260px"><canvas id="cSales" role="img" aria-label="Grouped daily sales by platform"></canvas></div>
+        <div style="position:relative;height:260px"><canvas id="cSales"></canvas></div>
       </div>
     </div>
-
     <div class="charts-2col">
       <div class="chart-card">
         <div class="chart-head">
@@ -168,7 +163,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
             <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
           </div>
         </div>
-        <div style="position:relative;height:220px"><canvas id="cSpends" role="img" aria-label="Grouped daily spends"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="cSpends"></canvas></div>
       </div>
       <div class="chart-card">
         <div class="chart-head">
@@ -179,10 +174,9 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
             <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
           </div>
         </div>
-        <div style="position:relative;height:220px"><canvas id="cUnits" role="img" aria-label="Grouped daily units sold"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="cUnits"></canvas></div>
       </div>
     </div>
-
     <div class="charts-2col">
       <div class="chart-card">
         <div class="chart-head">
@@ -193,24 +187,22 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
             <div class="leg"><div class="leg-dot" style="background:var(--instamart)"></div>Instamart</div>
           </div>
         </div>
-        <div style="position:relative;height:220px"><canvas id="cRoas" role="img" aria-label="ROAS trend line chart"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="cRoas"></canvas></div>
       </div>
       <div class="chart-card">
         <div class="chart-head"><div class="chart-title">Platform Sales Share</div></div>
-        <div style="position:relative;height:220px"><canvas id="cPie" role="img" aria-label="Platform share doughnut"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="cPie"></canvas></div>
       </div>
     </div>
   </div>
 
-  <!-- ═══ TAB 2: PLATFORM VIEW ═══ -->
+  <!-- TAB 2: PLATFORM VIEW -->
   <div class="tab-panel" id="tab-platform">
     <div id="platformSections"></div>
   </div>
 
-  <!-- ═══ TAB 3: SWIGGY / PRODUCT ═══ -->
+  <!-- TAB 3: SWIGGY / PRODUCT -->
   <div class="tab-panel" id="tab-swiggy">
-
-    <!-- Controls row -->
     <div style="display:flex;gap:10px;margin-bottom:16px;flex-wrap:wrap;align-items:center;">
       <div class="date-filter" style="flex:1;min-width:260px;">
         <span class="filter-label">Product</span>
@@ -225,7 +217,7 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
           <optgroup label="Dipsters">
             <option value="21280">biscuit sticks (caramel dip)</option>
             <option value="10685">biscuit sticks (chocolatey dip)</option>
-            <option value="25745">biscuit sticks crispies & creamy</option>
+            <option value="25745">biscuit sticks crispies &amp; creamy</option>
           </optgroup>
           <optgroup label="Puffs">
             <option value="31250">dahi papdi quinoa puffs</option>
@@ -250,42 +242,218 @@ body{background:var(--bg);color:var(--text);font-family:'DM Sans',sans-serif;min
         </select>
       </div>
       <div style="font-size:11px;color:var(--muted);font-family:'DM Mono',monospace;padding:10px 14px;background:var(--surface);border:1px solid var(--border);border-radius:10px;">
-        March 2026 · Swiggy · <span id="sw_note" style="color:var(--accent)">All 24 products</span>
+        Swiggy · <span id="sw_note" style="color:var(--accent)">All products</span>
       </div>
     </div>
-
-    <!-- Summary metrics -->
-    <div class="metrics" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;" id="sw_metrics">
-      <div class="metric acc"><div class="metric-label">Total GMV</div><div class="metric-value" id="sw_total">—</div><div class="metric-sub" id="sw_total_sub">March 2026</div></div>
+    <div class="metrics" style="grid-template-columns:repeat(4,1fr);margin-bottom:20px;">
+      <div class="metric acc"><div class="metric-label">Total GMV</div><div class="metric-value" id="sw_total">—</div><div class="metric-sub" id="sw_total_sub">—</div></div>
       <div class="metric acc"><div class="metric-label">Total Units</div><div class="metric-value" id="sw_units_total">—</div><div class="metric-sub">units sold</div></div>
       <div class="metric acc"><div class="metric-label">Best Day</div><div class="metric-value" id="sw_best_day">—</div><div class="metric-sub" id="sw_best_gmv">—</div></div>
       <div class="metric acc"><div class="metric-label">Daily Avg GMV</div><div class="metric-value" id="sw_avg_gmv">—</div><div class="metric-sub">per day</div></div>
     </div>
-
-    <!-- GMV chart -->
     <div class="charts-1col">
       <div class="chart-card">
-        <div class="chart-head">
-          <div class="chart-title" id="sw_gmv_title">Daily GMV — All Products (March 2026)</div>
-        </div>
-        <div style="position:relative;height:260px"><canvas id="sw_gmv" role="img" aria-label="Swiggy daily GMV"></canvas></div>
+        <div class="chart-head"><div class="chart-title" id="sw_gmv_title">Daily GMV — All Products</div></div>
+        <div style="position:relative;height:260px"><canvas id="sw_gmv"></canvas></div>
       </div>
     </div>
-
     <div class="charts-2col">
       <div class="chart-card">
         <div class="chart-head"><div class="chart-title">Units Sold — daily</div></div>
-        <div style="position:relative;height:220px"><canvas id="sw_units_chart" role="img" aria-label="Swiggy daily units"></canvas></div>
+        <div style="position:relative;height:220px"><canvas id="sw_units_chart"></canvas></div>
       </div>
       <div class="chart-card">
-        <div class="chart-head"><div class="chart-title" id="sw_share_title">Product GMV Share (March 2026)</div></div>
-        <div style="position:relative;height:220px"><canvas id="sw_pie" role="img" aria-label="Swiggy product share"></canvas></div>
+        <div class="chart-head"><div class="chart-title" id="sw_share_title">Product GMV Share</div></div>
+        <div style="position:relative;height:220px"><canvas id="sw_pie"></canvas></div>
       </div>
     </div>
   </div>
 
-// ── SWIGGY PRODUCT DATA ──────────────────────────────────
-const SW_PRODUCTS = [
+</div><!-- /.main -->
+
+<script>
+// ── CONFIG — paste your Apps Script URLs here ─────────────────
+const APPS_SCRIPT_URL   = '';  // Sheet 2 (OMS): Zepto/Blinkit/Instamart/BigBasket
+const SWIGGY_SCRIPT_URL = '';  // Sheet 1 (Swiggy): pivot table
+
+// ── HELPERS ───────────────────────────────────────────────────
+const fmt  = v => '₹' + Math.round(v || 0).toLocaleString('en-IN');
+const fmtU = v => Math.round(v || 0).toLocaleString('en-IN');
+
+// ── CHART REGISTRY ────────────────────────────────────────────
+const charts = {};
+const xA = {ticks:{color:'#555',font:{size:10}},grid:{color:'rgba(255,255,255,0.04)'}};
+const yM = {ticks:{color:'#555',font:{size:10},callback:v=>'₹'+v.toLocaleString('en-IN')},grid:{color:'rgba(255,255,255,0.06)'}};
+const yU = {ticks:{color:'#555',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}};
+
+function mkChart(id, type, data, options) {
+  if (charts[id]) charts[id].destroy();
+  const canvas = document.getElementById(id);
+  if (!canvas) return;
+  charts[id] = new Chart(canvas, {type, data, options:{responsive:true,maintainAspectRatio:false,...options}});
+}
+
+let liveData = [];
+
+// ── TAB SWITCHING ─────────────────────────────────────────────
+document.querySelectorAll('.tab').forEach(tab => {
+  tab.addEventListener('click', () => {
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    tab.classList.add('active');
+    document.getElementById('tab-' + tab.dataset.tab).classList.add('active');
+    if (tab.dataset.tab === 'swiggy') renderSwiggy();
+  });
+});
+
+// ── DATE FILTER ───────────────────────────────────────────────
+function getFilteredData() {
+  const from = document.getElementById('dateFrom').value;
+  const to   = document.getElementById('dateTo').value;
+  if (!from && !to) return liveData;
+  return liveData.filter(r => (!from || r.date >= from) && (!to || r.date <= to));
+}
+function applyFilter() {
+  const filtered = getFilteredData();
+  document.getElementById('filterInfo').textContent = filtered.length + ' days';
+  render(filtered);
+}
+document.querySelectorAll('.qbtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.qbtn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const range = btn.dataset.range;
+    if (range === 'all') {
+      document.getElementById('dateFrom').value = '';
+      document.getElementById('dateTo').value = '';
+    } else {
+      const to = new Date(), from = new Date(to);
+      from.setDate(to.getDate() - (+range - 1));
+      document.getElementById('dateFrom').value = from.toISOString().slice(0,10);
+      document.getElementById('dateTo').value   = to.toISOString().slice(0,10);
+    }
+    applyFilter();
+  });
+});
+['dateFrom','dateTo'].forEach(id => {
+  document.getElementById(id).addEventListener('change', () => {
+    document.querySelectorAll('.qbtn').forEach(b => b.classList.remove('active'));
+    applyFilter();
+  });
+});
+
+// ── RENDER (OMS tab 1 & 2) ────────────────────────────────────
+function render(rows) {
+  if (!rows || !rows.length) {
+    ['mTotalSales','mTotalSpends','mOverallRoas','mZSales','mZRoas','mBSales','mBRoas','mISales','mIRoas'].forEach(id => {
+      const el = document.getElementById(id); if (el) el.textContent = '—';
+    });
+    document.getElementById('platformCards').innerHTML = '';
+    document.getElementById('platformSections').innerHTML = '';
+    return;
+  }
+  const sorted = [...rows].sort((a,b) => a.date.localeCompare(b.date));
+  const labels = sorted.map(r => r.label);
+  const sum = (k, s) => sorted.reduce((a, r) => a + (r[k]?.[s] || 0), 0);
+  const bp  = {barPercentage:.7, categoryPercentage:.65};
+
+  const tZS=sum('z','s'), tBS=sum('b','s'), tIS=sum('i','s'), tBBS=sum('bb','s');
+  const tZSp=sum('z','sp'), tBSp=sum('b','sp'), tISp=sum('i','sp');
+  const tTotal=tZS+tBS+tIS+tBBS, tTotalSp=tZSp+tBSp+tISp;
+
+  document.getElementById('mTotalSales').textContent  = fmt(tTotal);
+  document.getElementById('mTotalSpends').textContent = fmt(tTotalSp);
+  document.getElementById('mOverallRoas').textContent = tTotalSp>0 ? 'ROAS '+(tTotal/tTotalSp).toFixed(2)+'x' : '—';
+  document.getElementById('mZSales').textContent = fmt(tZS);
+  document.getElementById('mZRoas').textContent  = tZSp>0 ? 'ROAS '+(tZS/tZSp).toFixed(2)+'x' : '—';
+  document.getElementById('mBSales').textContent = fmt(tBS);
+  document.getElementById('mBRoas').textContent  = tBSp>0 ? 'ROAS '+(tBS/tBSp).toFixed(2)+'x' : '—';
+  document.getElementById('mISales').textContent = fmt(tIS);
+  document.getElementById('mIRoas').textContent  = tISp>0 ? 'ROAS '+(tIS/tISp).toFixed(2)+'x' : '—';
+
+  const PLATS = [
+    {n:'Zepto',k:'z',c:'var(--zepto)'},{n:'Blinkit',k:'b',c:'var(--blinkit)'},
+    {n:'Instamart',k:'i',c:'var(--instamart)'},{n:'BigBasket',k:'bb',c:'var(--bigbasket)'},
+  ];
+  document.getElementById('platformCards').innerHTML = PLATS.map(p => {
+    const s=sum(p.k,'s'), sp=sum(p.k,'sp'), u=sum(p.k,'u');
+    const roas=sp>0?(s/sp).toFixed(2):'—', share=tTotal>0?Math.round(s/tTotal*100):0;
+    return `<div class="pcard">
+      <div class="pcard-name" style="color:${p.c}">${p.n}</div>
+      <div class="prow"><span class="plabel">Sales</span><span class="pval">${fmt(s)}</span></div>
+      <div class="prow"><span class="plabel">Spends</span><span class="pval">${fmt(sp)}</span></div>
+      <div class="prow"><span class="plabel">ROAS</span><span class="pval">${roas}x</span></div>
+      <div class="prow"><span class="plabel">Units</span><span class="pval">${fmtU(u)}</span></div>
+      <div class="prow"><span class="plabel">Share</span><span class="pval">${share}%</span></div>
+    </div>`;
+  }).join('');
+
+  const zS=sorted.map(r=>r.z?.s||0), bS=sorted.map(r=>r.b?.s||0), iS=sorted.map(r=>r.i?.s||0);
+  const zSp=sorted.map(r=>r.z?.sp||0), bSp=sorted.map(r=>r.b?.sp||0), iSp=sorted.map(r=>r.i?.sp||0);
+  const zU=sorted.map(r=>r.z?.u||0), bU=sorted.map(r=>r.b?.u||0), iU=sorted.map(r=>r.i?.u||0);
+  const zR=sorted.map(r=>r.z?.sp>0?+(r.z.s/r.z.sp).toFixed(2):0);
+  const bR=sorted.map(r=>r.b?.sp>0?+(r.b.s/r.b.sp).toFixed(2):0);
+  const iR=sorted.map(r=>r.i?.sp>0?+(r.i.s/r.i.sp).toFixed(2):0);
+
+  mkChart('cSales','bar',{labels,datasets:[
+    {label:'Zepto',data:zS,backgroundColor:'rgba(79,156,249,0.8)',...bp},
+    {label:'Blinkit',data:bS,backgroundColor:'rgba(245,166,35,0.8)',...bp},
+    {label:'Instamart',data:iS,backgroundColor:'rgba(46,204,113,0.8)',...bp},
+  ]},{scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+  mkChart('cSpends','bar',{labels,datasets:[
+    {label:'Zepto',data:zSp,backgroundColor:'rgba(79,156,249,0.7)',...bp},
+    {label:'Blinkit',data:bSp,backgroundColor:'rgba(245,166,35,0.7)',...bp},
+    {label:'Instamart',data:iSp,backgroundColor:'rgba(46,204,113,0.7)',...bp},
+  ]},{scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+
+  mkChart('cUnits','bar',{labels,datasets:[
+    {label:'Zepto',data:zU,backgroundColor:'rgba(79,156,249,0.7)',...bp},
+    {label:'Blinkit',data:bU,backgroundColor:'rgba(245,166,35,0.7)',...bp},
+    {label:'Instamart',data:iU,backgroundColor:'rgba(46,204,113,0.7)',...bp},
+  ]},{scales:{x:xA,y:yU},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)+' units'}}}});
+
+  mkChart('cRoas','line',{labels,datasets:[
+    {label:'Zepto',data:zR,borderColor:'#4f9cf9',backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2},
+    {label:'Blinkit',data:bR,borderColor:'#f5a623',backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2},
+    {label:'Instamart',data:iR,borderColor:'#2ecc71',backgroundColor:'transparent',tension:.3,pointRadius:3,borderWidth:2},
+  ]},{scales:{x:xA,y:{ticks:{color:'#555',font:{size:10}},grid:{color:'rgba(255,255,255,0.06)'}}},
+     plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+c.raw+'x'}}}});
+
+  const pieTotal=tZS+tBS+tIS+tBBS||1;
+  mkChart('cPie','doughnut',
+    {labels:['Zepto','Blinkit','Instamart','BigBasket'],
+     datasets:[{data:[tZS,tBS,tIS,tBBS],backgroundColor:['#4f9cf9','#f5a623','#2ecc71','#e05c5c'],borderWidth:0,hoverOffset:4}]},
+    {plugins:{legend:{display:true,position:'bottom',labels:{color:'#666',font:{size:10},boxWidth:10,padding:10}},
+      tooltip:{callbacks:{label:c=>' '+fmt(c.raw)+' ('+Math.round(c.raw/pieTotal*100)+'%)'}}}});
+
+  document.getElementById('platformSections').innerHTML = PLATS.map(p => {
+    const s=sum(p.k,'s'), sp=sum(p.k,'sp'), u=sum(p.k,'u');
+    const roas=sp>0?(s/sp).toFixed(2):'—';
+    return `<div class="platform-section">
+      <div class="platform-section-title" style="color:${p.c}"><span>${p.n}</span></div>
+      <div class="platform-section-body">
+        <div class="platform-mini-grid">
+          <div class="mini-metric"><div class="mini-label">Total Sales</div><div class="mini-value" style="color:${p.c}">${fmt(s)}</div></div>
+          <div class="mini-metric"><div class="mini-label">Total Spends</div><div class="mini-value">${fmt(sp)}</div></div>
+          <div class="mini-metric"><div class="mini-label">ROAS</div><div class="mini-value">${roas}x</div></div>
+        </div>
+        <div style="position:relative;height:200px"><canvas id="pc_${p.k}"></canvas></div>
+      </div>
+    </div>`;
+  }).join('');
+
+  setTimeout(() => {
+    PLATS.forEach(p => {
+      mkChart('pc_'+p.k,'bar',
+        {labels,datasets:[{label:'Sales',data:sorted.map(r=>r[p.k]?.s||0),backgroundColor:p.c+'cc',...bp}]},
+        {scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
+    });
+  }, 0);
+}
+
+// ── SWIGGY PRODUCT DATA (fallback) ────────────────────────────
+let SW_PRODUCTS = [
   {code:200141,tag:'Ragi Chips',name:'desi masala ragi chips',color:'#e8732a',
    labels:["01 Mar Sun","02 Mar Mon","03 Mar Tue","04 Mar Wed","05 Mar Thu","06 Mar Fri","07 Mar Sat","08 Mar Sun","09 Mar Mon","10 Mar Tue","11 Mar Wed","12 Mar Thu","13 Mar Fri","14 Mar Sat","15 Mar Sun","16 Mar Mon","17 Mar Tue","18 Mar Wed","19 Mar Thu","20 Mar Fri","21 Mar Sat","22 Mar Sun","23 Mar Mon","24 Mar Tue","25 Mar Wed","26 Mar Thu","27 Mar Fri","28 Mar Sat","29 Mar Sun","30 Mar Mon","31 Mar Tue"],
    gmv:[12700,9700,11600,10900,10800,10200,11700,13250,8850,12500,12050,11450,11750,10000,11550,9900,9650,9700,8600,10750,14050,12150,9300,9000,9750,12500,12800,12400,12650,10700,11850],
@@ -346,96 +514,149 @@ const SW_PRODUCTS = [
 
 const SW_TAG_COLORS = {'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
 
-function renderSwiggy(){
+function renderSwiggy() {
   const sel = document.getElementById('sw_product_select').value;
   const bp = {barPercentage:.7,categoryPercentage:.65};
-
   let labels, gmvData, unitsData, title, noteText, color;
 
-  if(sel === 'all'){
-    // Aggregate all 31 days across all products
+  if (sel === 'all') {
     const allLabels = SW_PRODUCTS[0].labels;
     const gmvAgg = allLabels.map((_,i) => SW_PRODUCTS.reduce((a,p) => a+(p.gmv[i]||0), 0));
     const uAgg   = allLabels.map((_,i) => SW_PRODUCTS.reduce((a,p) => a+(p.units[i]||0), 0));
     labels = allLabels; gmvData = gmvAgg; unitsData = uAgg;
-    title = 'Daily GMV — All Products (March 2026)';
-    noteText = 'All 24 products';
-    color = '#f5a623';
-
-    // Pie: by tag
+    title = 'Daily GMV — All Products'; noteText = 'All '+SW_PRODUCTS.length+' products'; color = '#f5a623';
     const byTag = {};
     SW_PRODUCTS.forEach(p => { byTag[p.tag] = (byTag[p.tag]||0) + p.gmv.reduce((a,b)=>a+b,0); });
-    const pieLabels = Object.keys(byTag);
-    const pieData = pieLabels.map(t=>byTag[t]);
+    const pieLabels = Object.keys(byTag), pieData = pieLabels.map(t=>byTag[t]);
     const pieColors = pieLabels.map(t=>SW_TAG_COLORS[t]||'#95a5a6');
     const pieTotal = pieData.reduce((a,b)=>a+b,0);
-    if(charts['sw_pie'])charts['sw_pie'].destroy();
-    charts['sw_pie'] = new Chart(document.getElementById('sw_pie'),{type:'doughnut',data:{labels:pieLabels,datasets:[{data:pieData,backgroundColor:pieColors,borderWidth:0,hoverOffset:4}]},
+    if (charts['sw_pie']) charts['sw_pie'].destroy();
+    charts['sw_pie'] = new Chart(document.getElementById('sw_pie'),{type:'doughnut',
+      data:{labels:pieLabels,datasets:[{data:pieData,backgroundColor:pieColors,borderWidth:0,hoverOffset:4}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{color:'#666',font:{size:10},boxWidth:10,padding:10}},
       tooltip:{callbacks:{label:c=>' '+fmt(c.raw)+' ('+Math.round(c.raw/pieTotal*100)+'%)'}}}}});
     document.getElementById('sw_share_title').textContent = 'GMV Share by Category';
   } else {
     const p = SW_PRODUCTS.find(x=>x.code==+sel);
-    if(!p) return;
+    if (!p) return;
     labels = p.labels; gmvData = p.gmv; unitsData = p.units;
-    title = p.name + ' — daily GMV (March 2026)';
-    noteText = p.tag + ' · ' + p.name;
-    color = p.color;
-
-    // Pie: this product vs rest of its category
+    title = p.name + ' — daily GMV'; noteText = p.tag + ' · ' + p.name; color = p.color;
     const catProds = SW_PRODUCTS.filter(x=>x.tag===p.tag);
     const thisTotal = p.gmv.reduce((a,b)=>a+b,0);
-    const catTotal = catProds.reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    const otherTotal = catTotal - thisTotal;
-    if(charts['sw_pie'])charts['sw_pie'].destroy();
+    const catTotal  = catProds.reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    if (charts['sw_pie']) charts['sw_pie'].destroy();
     charts['sw_pie'] = new Chart(document.getElementById('sw_pie'),{type:'doughnut',
-      data:{labels:[p.name,'Rest of '+p.tag],datasets:[{data:[thisTotal,otherTotal],backgroundColor:[color,'#333'],borderWidth:0,hoverOffset:4}]},
+      data:{labels:[p.name,'Rest of '+p.tag],datasets:[{data:[thisTotal,catTotal-thisTotal],backgroundColor:[color,'#333'],borderWidth:0,hoverOffset:4}]},
       options:{responsive:true,maintainAspectRatio:false,plugins:{legend:{display:true,position:'bottom',labels:{color:'#666',font:{size:10},boxWidth:10,padding:10}},
       tooltip:{callbacks:{label:c=>' '+fmt(c.raw)+' ('+Math.round(c.raw/catTotal*100)+'%)'}}}}});
     document.getElementById('sw_share_title').textContent = 'Share within ' + p.tag;
   }
 
-  // Update metrics
-  const totalGmv = gmvData.reduce((a,b)=>a+b,0);
+  const totalGmv   = gmvData.reduce((a,b)=>a+b,0);
   const totalUnits = unitsData.reduce((a,b)=>a+b,0);
-  const bestIdx = gmvData.indexOf(Math.max(...gmvData));
-  const avgGmv = totalGmv / gmvData.filter(v=>v>0).length;
+  const bestIdx    = gmvData.indexOf(Math.max(...gmvData));
+  const avgGmv     = totalGmv / (gmvData.filter(v=>v>0).length || 1);
 
-  document.getElementById('sw_total').textContent = fmt(totalGmv);
-  document.getElementById('sw_units_total').textContent = fmtU(totalUnits);
-  document.getElementById('sw_best_day').textContent = labels[bestIdx]?.slice(0,6)||'—';
-  document.getElementById('sw_best_gmv').textContent = fmt(gmvData[bestIdx]);
-  document.getElementById('sw_avg_gmv').textContent = fmt(Math.round(avgGmv));
-  document.getElementById('sw_gmv_title').textContent = title;
-  document.getElementById('sw_note').textContent = noteText;
+  document.getElementById('sw_total').textContent      = fmt(totalGmv);
+  document.getElementById('sw_units_total').textContent= fmtU(totalUnits);
+  document.getElementById('sw_best_day').textContent   = labels[bestIdx]?.slice(0,6)||'—';
+  document.getElementById('sw_best_gmv').textContent   = fmt(gmvData[bestIdx]);
+  document.getElementById('sw_avg_gmv').textContent    = fmt(Math.round(avgGmv));
+  document.getElementById('sw_gmv_title').textContent  = title;
+  document.getElementById('sw_note').textContent       = noteText;
 
-  // GMV bar chart
-  mkChart('sw_gmv','bar',{labels,datasets:[{label:'GMV',data:gmvData,backgroundColor:color+'cc',barPercentage:.7,categoryPercentage:.65}]},
+  mkChart('sw_gmv','bar',{labels,datasets:[{label:'GMV',data:gmvData,backgroundColor:color+'cc',...bp}]},
     {scales:{x:xA,y:yM},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmt(c.raw)}}}});
-
-  // Units bar chart
-  mkChart('sw_units_chart','bar',{labels,datasets:[{label:'Units',data:unitsData,backgroundColor:color+'99',barPercentage:.7,categoryPercentage:.65}]},
+  mkChart('sw_units_chart','bar',{labels,datasets:[{label:'Units',data:unitsData,backgroundColor:color+'99',...bp}]},
     {scales:{x:xA,y:yU},plugins:{legend:{display:false},tooltip:{callbacks:{label:c=>' '+fmtU(c.raw)+' units'}}}});
 }
 
 document.getElementById('sw_product_select').addEventListener('change', renderSwiggy);
 
-// ── Live fetch ────────────────────────────────────────────// ── Live fetch ────────────────────────────────────────────
-async function parseAppsScript(text){
-  const raw=JSON.parse(text);
-  if(!Array.isArray(raw))throw new Error('bad');
-  let hi=-1;
-  for(let i=0;i<raw.length;i++){const r=raw[i].map(c=>String(c||'').toLowerCase());if(r.includes('date')&&r.includes('sales')){hi=i;break;}}
-  if(hi<0)throw new Error('no header');
-  const rows=[];
-  for(let i=hi+1;i<raw.length;i++){
-    const r=raw[i];if(!r[0])continue;
-    let d=r[0],dateStr='';
-    if(typeof d==='string'&&d.match(/\d{4}-\d{2}-\d{2}/)){dateStr=d.slice(0,10);}
-    else if(typeof d==='string'){const p=d.split(/[\/-]/);if(p.length===3)dateStr=`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`;else dateStr=d.slice(0,10);}
-    else dateStr=String(d).slice(0,10);
-    const zs=+r[3]||0,bs=+r[10]||0,is2=+r[17]||0;
-    if(zs===0&&bs===0&&is2===0)continue;
+// ── SWIGGY LIVE FETCH (Sheet 1 — pivot table) ─────────────────
+function parseSwiggyData(raw) {
+  let hdr = -1;
+  for (let i = 0; i < Math.min(12, raw.length); i++) {
+    const r = raw[i].map(c => String(c||'').toUpperCase());
+    if (r.some(v=>v.includes('PRODUCT')) || r.some(v=>v==='TAGS')) { hdr = i; break; }
+  }
+  if (hdr < 0) throw new Error('no header row found');
+  const dayNumRow = hdr > 0 ? raw[hdr-1] : [];
+  let maxDay = 0;
+  for (let col = 7; col < dayNumRow.length; col += 3) {
+    const v = +dayNumRow[col]; if (v>0 && v<=31) maxDay = Math.max(maxDay, v);
+  }
+  if (maxDay === 0) maxDay = 31;
+  const MNAMES = {january:0,february:1,march:2,april:3,may:4,june:5,july:6,august:7,september:8,october:9,november:10,december:11};
+  const DSHORT = ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'];
+  let mIdx = new Date().getMonth(), yr = new Date().getFullYear();
+  for (let i = Math.max(0,hdr-4); i <= hdr+1; i++) {
+    if (!raw[i]) continue;
+    const m = raw[i].join(' ').match(/(January|February|March|April|May|June|July|August|September|October|November|December)[- ]?(\d{4})/i);
+    if (m) { mIdx = MNAMES[m[1].toLowerCase()] ?? mIdx; yr = +m[2]||yr; break; }
+  }
+  const genLabels = n => Array.from({length:n},(_,i) => {
+    const d = new Date(yr,mIdx,i+1);
+    return String(i+1).padStart(2,'0')+' '+d.toLocaleString('en',{month:'short'})+' '+DSHORT[d.getDay()];
+  });
+  const products = [];
+  for (let i = hdr+2; i < raw.length; i++) {
+    const row = raw[i];
+    const codeStr = String(row[0]||'').replace(/,/g,'').trim();
+    if (!codeStr || isNaN(+codeStr)) continue;
+    const tag=String(row[1]||'').trim(), name=String(row[2]||'').trim();
+    const gmv=[], units=[];
+    for (let d=0; d<maxDay; d++) { units.push(+row[7+d*3]||0); gmv.push(+row[8+d*3]||0); }
+    products.push({code:+codeStr,tag,name,color:SW_TAG_COLORS[tag]||'#95a5a6',labels:genLabels(maxDay),gmv,units});
+  }
+  return products;
+}
+
+async function loadSwiggy() {
+  if (!SWIGGY_SCRIPT_URL) return;
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(() => ctrl.abort(), 10000);
+    const res = await fetch(SWIGGY_SCRIPT_URL+'?t='+Date.now(), {cache:'no-store',signal:ctrl.signal});
+    clearTimeout(t);
+    if (!res.ok) throw new Error('status '+res.status);
+    const products = parseSwiggyData(JSON.parse(await res.text()));
+    if (products.length > 0) {
+      SW_PRODUCTS = products;
+      const sel = document.getElementById('sw_product_select');
+      const tagGroups = {};
+      products.forEach(p => { (tagGroups[p.tag]=tagGroups[p.tag]||[]).push(p); });
+      sel.innerHTML = '<option value="all">All Products</option>' +
+        Object.entries(tagGroups).map(([tag,prods]) =>
+          `<optgroup label="${tag}">`+prods.map(p=>`<option value="${p.code}">${p.name}</option>`).join('')+`</optgroup>`
+        ).join('');
+      if (document.querySelector('.tab[data-tab="swiggy"]')?.classList.contains('active')) renderSwiggy();
+      console.info('Swiggy: loaded', products.length, 'products from live sheet');
+    }
+  } catch(e) { console.warn('Swiggy fetch skipped:', e.message); }
+}
+
+// ── OMS LIVE FETCH (Sheet 2) ──────────────────────────────────
+async function parseAppsScript(text) {
+  const raw = JSON.parse(text);
+  if (!Array.isArray(raw)) throw new Error('bad');
+  let hi = -1;
+  for (let i=0; i<raw.length; i++) {
+    const r = raw[i].map(c=>String(c||'').toLowerCase());
+    if (r.includes('date') && r.includes('sales')) { hi=i; break; }
+  }
+  if (hi < 0) throw new Error('no header');
+  const rows = [];
+  for (let i=hi+1; i<raw.length; i++) {
+    const r = raw[i]; if (!r[0]) continue;
+    let d=r[0], dateStr='';
+    if (typeof d==='string' && d.match(/\d{4}-\d{2}-\d{2}/)) { dateStr=d.slice(0,10); }
+    else if (typeof d==='string') {
+      const p=d.split(/[\/-]/);
+      dateStr = p.length===3 ? `${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}` : d.slice(0,10);
+    } else dateStr=String(d).slice(0,10);
+    const zs=+r[3]||0, bs=+r[10]||0, is2=+r[17]||0;
+    if (zs===0 && bs===0 && is2===0) continue;
     const dt=new Date(dateStr);
     const label=isNaN(dt)?dateStr:dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
     rows.push({date:dateStr,label,day:String(r[1]||'').slice(0,3),
@@ -448,45 +669,39 @@ async function parseAppsScript(text){
   return rows;
 }
 
-async function load(){
-  // Render hardcoded data IMMEDIATELY - never show a blank/loading screen
-  const dates=liveData.map(r=>r.date).sort();
-  document.getElementById('dateFrom').min=dates[0];
-  document.getElementById('dateFrom').max=dates[dates.length-1];
-  document.getElementById('dateTo').min=dates[0];
-  document.getElementById('dateTo').max=dates[dates.length-1];
-  document.getElementById('filterInfo').textContent=liveData.length+' days';
-  document.getElementById('lastUp').textContent='Updated '+new Date().toLocaleTimeString();
+async function load() {
+  document.getElementById('filterInfo').textContent = liveData.length+' days';
+  document.getElementById('lastUp').textContent = 'Updated '+new Date().toLocaleTimeString();
   render(liveData);
-
-  // Try live fetch in background with 10s timeout
-  try{
-    const ctrl=new AbortController();
-    const t=setTimeout(()=>ctrl.abort(),10000);
-    const res=await fetch(APPS_SCRIPT_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+  if (!APPS_SCRIPT_URL) { document.getElementById('statusTxt').textContent='no Apps Script URL set'; return; }
+  try {
+    const ctrl = new AbortController();
+    const t = setTimeout(()=>ctrl.abort(), 10000);
+    const res = await fetch(APPS_SCRIPT_URL+'?t='+Date.now(), {cache:'no-store',signal:ctrl.signal});
     clearTimeout(t);
-    if(!res.ok)throw new Error('status '+res.status);
-    const rows=await parseAppsScript(await res.text());
-    if(rows.length>0){
-      liveData=rows;
-      const d2=liveData.map(r=>r.date).sort();
-      document.getElementById('dateFrom').min=d2[0];
-      document.getElementById('dateFrom').max=d2[d2.length-1];
-      document.getElementById('dateTo').min=d2[0];
-      document.getElementById('dateTo').max=d2[d2.length-1];
+    if (!res.ok) throw new Error('status '+res.status);
+    const rows = await parseAppsScript(await res.text());
+    if (rows.length > 0) {
+      liveData = rows;
+      const dates = liveData.map(r=>r.date).sort();
+      document.getElementById('dateFrom').min=dates[0];
+      document.getElementById('dateFrom').max=dates[dates.length-1];
+      document.getElementById('dateTo').min=dates[0];
+      document.getElementById('dateTo').max=dates[dates.length-1];
       document.getElementById('filterInfo').textContent=liveData.length+' days';
       document.getElementById('statusTxt').textContent='live · google sheets';
       document.getElementById('lastUp').textContent='Live: '+new Date().toLocaleTimeString();
       render(liveData);
     }
-  }catch(e){
-    console.warn('Live fetch skipped:',e.message);
+  } catch(e) {
+    console.warn('Live fetch skipped:', e.message);
     document.getElementById('statusTxt').textContent='showing cached data';
   }
 }
 
 load();
-setInterval(load,5*60*1000);
+loadSwiggy();
+setInterval(() => { load(); loadSwiggy(); }, 5 * 60 * 1000);
 </script>
 </body>
 </html>
