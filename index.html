@@ -348,7 +348,10 @@ function hideTip(){tip.style.display='none';}
 function barChart(containerId,labels,datasets,opts={}){
   const el=document.getElementById(containerId);
   if(!el)return;
-  const W=el.offsetWidth||800,H=opts.h||220;
+  // Force layout reflow to get real width
+  el.style.minHeight=(opts.h||220)+'px';
+  const W=Math.max(el.getBoundingClientRect().width||0,el.offsetWidth||0)||700;
+  const H=opts.h||220;
   const PAD={t:10,r:10,b:50,l:60};
   const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
   const n=labels.length,ds=datasets.length;
@@ -393,7 +396,9 @@ function barChart(containerId,labels,datasets,opts={}){
 function lineChart(containerId,labels,datasets,opts={}){
   const el=document.getElementById(containerId);
   if(!el)return;
-  const W=el.offsetWidth||800,H=opts.h||200;
+  el.style.minHeight=(opts.h||200)+'px';
+  const W=Math.max(el.getBoundingClientRect().width||0,el.offsetWidth||0)||700;
+  const H=opts.h||200;
   const PAD={t:10,r:10,b:50,l:60};
   const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
   const allVals=datasets.flatMap(d=>d.data).filter(v=>v>0);
@@ -441,7 +446,9 @@ function lineChart(containerId,labels,datasets,opts={}){
 function donutChart(containerId,labels,data,colors){
   const el=document.getElementById(containerId);
   if(!el)return;
-  const W=el.offsetWidth||400,H=200,cx=W/2,cy=H/2-10,R=70,r=42;
+  el.style.minHeight='200px';
+  const W=Math.max(el.getBoundingClientRect().width||0,el.offsetWidth||0)||400;
+  const H=200,cx=W/2,cy=H/2-10,R=70,r=42;
   const total=data.reduce((a,b)=>a+b,0);
   let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display:block">`;
   let angle=-Math.PI/2;
@@ -779,10 +786,18 @@ catFilter('ztcat','ztsel',renderZT);
 catFilter('bkcat','bksel',renderBK);
 
 // ── Start ─────────────────────────────────────────────────
-go();
-renderSW();
-renderZT();
-renderBK();
+// Use requestAnimationFrame to ensure DOM is fully painted before rendering
+function bootRender(){
+  go();
+  renderSW();
+  renderZT();
+  renderBK();
+}
+if(document.readyState==='complete'){
+  requestAnimationFrame(()=>requestAnimationFrame(bootRender));
+} else {
+  window.addEventListener('load',()=>requestAnimationFrame(()=>requestAnimationFrame(bootRender)));
+}
 
 // Background live fetch
 (async()=>{
@@ -947,6 +962,9 @@ renderBK();
 })();
 
 setInterval(go,5*60*1000);
+// Re-render charts on resize
+let resizeTimer;
+window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{go();},200);});
 </script>
 </body>
 </html>
