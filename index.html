@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OMS Tracker — FY26-27</title>
 <style>
-:root{--bg:#0d0d0d;--s:#161616;--s2:#1e1e1e;--b:rgba(255,255,255,.08);--t:#f0ede8;--m:#666;--z:#4f9cf9;--bl:#f5a623;--in:#2ecc71;--bb:#e05c5c;--ac:#f5a623;}
+:root{--bg:#0d0d0d;--s:#161616;--s2:#1e1e1e;--b:rgba(255,255,255,.08);--t:#ffffff;--m:#aaaaaa;--z:#4f9cf9;--bl:#f5a623;--in:#2ecc71;--bb:#e05c5c;--ac:#f5a623;}
 *{box-sizing:border-box;margin:0;padding:0;}
 body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-height:100vh;}
 .bar{border-bottom:1px solid var(--b);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;background:var(--s);position:sticky;top:0;z-index:20;}
@@ -25,8 +25,8 @@ body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-he
 .mc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px;position:relative;overflow:hidden;}
 .mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .mc.a::before{background:var(--ac)}.mc.z::before{background:var(--z)}.mc.bl::before{background:var(--bl)}.mc.in::before{background:var(--in)}
-.ml{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
-.mv{font-size:21px;font-weight:500;font-family:monospace;}.ms{font-size:10px;color:var(--m);margin-top:3px;}
+.ml{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.mv{font-size:21px;font-weight:500;font-family:monospace;color:#fff;}.ms{font-size:10px;color:#aaa;margin-top:3px;}
 .tabs{display:flex;border-bottom:1px solid var(--b);margin-bottom:18px;}
 .tab{padding:9px 20px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .tab.on{color:var(--ac);border-bottom-color:var(--ac);}
@@ -35,7 +35,7 @@ body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-he
 .pc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:13px;}
 .pn{font-size:12px;font-weight:600;margin-bottom:9px;padding-bottom:7px;border-bottom:1px solid var(--b);}
 .pr{display:flex;justify-content:space-between;font-size:11px;padding:3px 0;}
-.pl{color:var(--m);}.pv{font-family:monospace;font-size:11px;}
+.pl{color:var(--m);}.pv{font-family:monospace;font-size:11px;color:#fff;}
 .g2{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:12px;}
 .g1{margin-bottom:12px;}
 .cc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:15px;}
@@ -50,7 +50,7 @@ svg text{font-family:system-ui,sans-serif;}
 .bar-tip{position:absolute;background:#222;border:1px solid #444;padding:4px 8px;border-radius:4px;font-size:11px;pointer-events:none;display:none;white-space:nowrap;z-index:100;}
 .pm{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:13px;}
 .mm{background:var(--s2);border-radius:8px;padding:11px;}
-.mmv{font-size:17px;font-weight:500;font-family:monospace;}
+.mmv{font-size:17px;font-weight:500;font-family:monospace;color:#fff;}
 .mml{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
 .sw-ctrl{display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap;align-items:center;}
 select.di{min-width:220px;cursor:pointer;}
@@ -165,10 +165,18 @@ select.di{min-width:220px;cursor:pointer;}
 </div>
   <!-- ZEPTO PRODUCT TAB -->
   <div class="tp" id="tp-zt">
-    <div class="sw-ctrl">
-      <div class="df">
-        <span class="fl">Product</span>
-        <select class="di" id="ztsel">
+    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+      <div class="df" style="flex:1;min-width:280px;">
+        <span class="fl">Category</span>
+        <select class="di" id="ztcat" style="min-width:130px;">
+          <option value="all">All Categories</option>
+          <option value="Ragi Chips">Ragi Chips</option>
+          <option value="Dipsters">Dipsters</option>
+          <option value="Puffs">Puffs</option>
+          <option value="Others">Others</option>
+        </select>
+        <span class="fl" style="margin-left:6px;">Product</span>
+        <select class="di" id="ztsel" style="flex:1;min-width:180px;">
           <option value="all">All Products</option>
           <optgroup label="Ragi Chips">
             <option value="RC Peri Peri">RC Peri Peri ⭐</option>
@@ -195,28 +203,42 @@ select.di{min-width:220px;cursor:pointer;}
           </optgroup>
         </select>
       </div>
-      <div style="font-size:11px;color:var(--m);padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Zepto · <span id="ztnote" style="color:var(--ac)">All products</span></div>
+      <div class="df">
+        <span class="fl">Date</span>
+        <input type="date" class="di" id="ztdf" style="width:130px;" min="2026-04-01" max="2026-04-13">
+        <span style="font-size:11px;color:#aaa">→</span>
+        <input type="date" class="di" id="ztdt" style="width:130px;" min="2026-04-01" max="2026-04-13">
+        <button class="qb on" data-tab="zt" data-r="all">All</button>
+        <button class="qb" data-tab="zt" data-r="7">7d</button>
+        <button class="qb" data-tab="zt" data-r="3">3d</button>
+      </div>
+      <div style="font-size:11px;color:#aaa;padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Zepto · <span id="ztnote" style="color:var(--z)">All products</span></div>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
-      <div class="mc a"><div class="ml">Total GMV</div><div class="mv" id="ztt">—</div><div class="ms">April 2026</div></div>
-      <div class="mc a"><div class="ml">Total Units</div><div class="mv" id="ztu">—</div><div class="ms">units sold</div></div>
-      <div class="mc a"><div class="ml">Best Day</div><div class="mv" id="ztbd">—</div><div class="ms" id="ztbg">—</div></div>
-      <div class="mc a"><div class="ml">Daily Avg GMV</div><div class="mv" id="ztav">—</div><div class="ms">per day</div></div>
+      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Total GMV</div><div class="mv" id="ztt">—</div><div class="ms">filtered range</div></div>
+      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Total Units</div><div class="mv" id="ztu">—</div><div class="ms">units sold</div></div>
+      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Best Day</div><div class="mv" id="ztbd">—</div><div class="ms" id="ztbg">—</div></div>
+      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Daily Avg GMV</div><div class="mv" id="ztav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztgt">Daily GMV — All Products (Zepto)</div></div><div class="chart-wrap" id="ztG"></div></div></div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztGtitle">Daily GMV</div></div><div class="chart-wrap" id="ztG"></div></div></div>
     <div class="g2">
       <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="ztU"></div></div>
       <div class="cc"><div class="ch"><div class="ct" id="ztpt">Product GMV share</div></div><div class="chart-wrap" id="ztP"></div></div>
     </div>
   </div>
-</div>
-
-  <!-- BLINKIT PRODUCT TAB -->
+    <!-- BLINKIT PRODUCT TAB -->
   <div class="tp" id="tp-bk">
-    <div class="sw-ctrl">
-      <div class="df">
-        <span class="fl">Product</span>
-        <select class="di" id="bksel">
+    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+      <div class="df" style="flex:1;min-width:280px;">
+        <span class="fl">Category</span>
+        <select class="di" id="bkcat" style="min-width:130px;">
+          <option value="all">All Categories</option>
+          <option value="Ragi Chips">Ragi Chips</option>
+          <option value="Dipsters">Dipsters</option>
+          <option value="Others">Others</option>
+        </select>
+        <span class="fl" style="margin-left:6px;">Product</span>
+        <select class="di" id="bksel" style="flex:1;min-width:180px;">
           <option value="all">All Products</option>
           <optgroup label="Ragi Chips">
             <option value="Snackible Peri Peri Ragi Chips">Peri Peri Ragi Chips ⭐</option>
@@ -237,15 +259,24 @@ select.di{min-width:220px;cursor:pointer;}
           </optgroup>
         </select>
       </div>
-      <div style="font-size:11px;color:var(--m);padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Blinkit · <span id="bknote" style="color:var(--bl)">All products</span></div>
+      <div class="df">
+        <span class="fl">Date</span>
+        <input type="date" class="di" id="bkdf" style="width:130px;" min="2026-04-01" max="2026-04-13">
+        <span style="font-size:11px;color:#aaa">→</span>
+        <input type="date" class="di" id="bkdt" style="width:130px;" min="2026-04-01" max="2026-04-13">
+        <button class="qb on" data-tab="bk" data-r="all">All</button>
+        <button class="qb" data-tab="bk" data-r="7">7d</button>
+        <button class="qb" data-tab="bk" data-r="3">3d</button>
+      </div>
+      <div style="font-size:11px;color:#aaa;padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Blinkit · <span id="bknote" style="color:var(--bl)">All products</span></div>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
-      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total GMV</div><div class="mv" id="bkt">—</div><div class="ms">April 2026</div></div>
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total GMV</div><div class="mv" id="bkt">—</div><div class="ms">filtered range</div></div>
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total Units</div><div class="mv" id="bku">—</div><div class="ms">units sold</div></div>
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Best Day</div><div class="mv" id="bkbd">—</div><div class="ms" id="bkbg">—</div></div>
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Daily Avg GMV</div><div class="mv" id="bkav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkgt">Daily GMV — All Products (Blinkit)</div></div><div class="chart-wrap" id="bkG"></div></div></div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkGtitle">Daily GMV</div></div><div class="chart-wrap" id="bkG"></div></div></div>
     <div class="g2">
       <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="bkU"></div></div>
       <div class="cc"><div class="ch"><div class="ct" id="bkpt">Product GMV share</div></div><div class="chart-wrap" id="bkP"></div></div>
@@ -315,8 +346,8 @@ function barChart(containerId,labels,datasets,opts={}){
     const y=PAD.t+cH-(i/yTicks)*cH;
     const val=maxV*i/yTicks;
     const label=opts.yFmt?opts.yFmt(val):fmt(val);
-    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
-    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#555" font-size="9">${label}</text>`;
+    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.1)" stroke-width="1"/>`;
+    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#ccc" font-size="9">${label}</text>`;
   }
   // bars
   datasets.forEach((d,di)=>{
@@ -333,11 +364,11 @@ function barChart(containerId,labels,datasets,opts={}){
   // x labels
   labels.forEach((lbl,i)=>{
     const x=PAD.l+i*grpW+grpW/2;
-    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#555" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
+    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#ccc" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
   });
   // axes
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
   svg+='</svg>';
   el.innerHTML=svg;
 }
@@ -359,8 +390,8 @@ function lineChart(containerId,labels,datasets,opts={}){
     const y=PAD.t+cH-(i/yTicks)*cH;
     const val=maxV*i/yTicks;
     const label=opts.yFmt?opts.yFmt(val):fmt(val);
-    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
-    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#555" font-size="9">${label}</text>`;
+    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.1)" stroke-width="1"/>`;
+    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#ccc" font-size="9">${label}</text>`;
   }
   datasets.forEach(d=>{
     const pts=d.data.map((v,i)=>{
@@ -382,10 +413,10 @@ function lineChart(containerId,labels,datasets,opts={}){
   });
   labels.forEach((lbl,i)=>{
     const x=PAD.l+i*(cW/(n-1||1));
-    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#555" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
+    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#ccc" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
   });
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
   svg+='</svg>';
   el.innerHTML=svg;
 }
@@ -485,73 +516,85 @@ function renderOMS(rows){
 }
 
 // ── Render Swiggy ─────────────────────────────────────────
+function getSwFiltered(data, labels, dates){
+  const f=document.getElementById('swdf').value;
+  const t=document.getElementById('swdt').value;
+  if(!f&&!t)return{gmv:data.gmv,units:data.units||[],labels};
+  const fi=dates.findIndex(d=>!f||d>=f);
+  const ti=dates.reduce((a,d,i)=>(!t||d<=t)?i:a,-1);
+  if(fi<0||ti<0||fi>ti)return{gmv:data.gmv,units:data.units||[],labels};
+  return{gmv:data.gmv.slice(fi,ti+1),units:(data.units||[]).slice(fi,ti+1),labels:labels.slice(fi,ti+1)};
+}
+
+const SW_DATES=["2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31"];
+
 function renderSW(){
   const sel=document.getElementById('swsel').value;
-  let gmvD,unitsD,color,title,note;
+  const cat=document.getElementById('swcat').value;
+  let srcData, color, title, note;
+
+  // Filter by category first
+  const catFiltered = cat==='all' ? SW : SW.filter(p=>p.tag===cat);
+
   if(sel==='all'){
-    gmvD=SW_L.map((_,i)=>SW.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    unitsD=SW_L.map((_,i)=>SW.reduce((a,p)=>a+(p.units[i]||0),0));
-    color='#f5a623';title='Daily GMV — All Products';note='All products';
-    const byTag={};SW.forEach(p=>{byTag[p.tag]=(byTag[p.tag]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    const gmvFull=SW_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    const unitsFull=SW_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.units[i]||0),0));
+    srcData={gmv:gmvFull,units:unitsFull};
+    color='#f5a623'; note=cat==='all'?'All products':cat;
+    title='Daily GMV — '+(cat==='all'?'All Products':cat)+' (Swiggy)';
+  }else{
+    const p=SW.find(x=>x.code==+sel);
+    if(!p)return;
+    srcData={gmv:p.gmv,units:p.units}; color=p.color;
+    note=p.tag+' · '+p.name; title=p.name+' — daily GMV';
+  }
+
+  const {gmv:gmvD,units:unitsD,labels:filtLabels}=getSwFiltered(srcData,SW_L,SW_DATES);
+
+  // Pie (always full data for context)
+  if(sel==='all'){
+    const byTag={};catFiltered.forEach(p=>{byTag[p.tag]=(byTag[p.tag]||0)+p.gmv.reduce((a,b)=>a+b,0);});
     const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
     const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
     donutChart('swP',tl,td,tl.map(t=>tc[t]||'#888'));
     document.getElementById('swpt').textContent='GMV share by category';
   }else{
     const p=SW.find(x=>x.code==+sel);
-    if(!p)return;
-    gmvD=p.gmv;unitsD=p.units;color=p.color;
-    title=p.name+' — daily GMV';note=p.tag+' · '+p.name;
-    const thisT=p.gmv.reduce((a,b)=>a+b,0);
-    const catT=SW.filter(x=>x.tag===p.tag).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('swP',[p.name,'Rest of '+p.tag],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('swpt').textContent='Share within '+p.tag;
+    if(p){const thisT=p.gmv.reduce((a,b)=>a+b,0);const catT=SW.filter(x=>x.tag===p.tag).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart('swP',[p.name.slice(0,20),'Rest of '+p.tag],[thisT,catT-thisT],[color,'#333']);
+    document.getElementById('swpt').textContent='Share within '+p.tag;}
   }
+
   const tot=gmvD.reduce((a,b)=>a+b,0);
   const uTot=unitsD.reduce((a,b)=>a+b,0);
   const bi=gmvD.indexOf(Math.max(...gmvD));
   document.getElementById('swt').textContent=fmt(tot);
   document.getElementById('swu').textContent=fu(uTot);
-  document.getElementById('swbd').textContent=SW_L[bi]||'—';
+  document.getElementById('swbd').textContent=filtLabels[bi]||'—';
   document.getElementById('swbg').textContent=fmt(gmvD[bi]);
-  document.getElementById('swav').textContent=fmt(Math.round(tot/gmvD.filter(v=>v>0).length));
-  document.getElementById('swgt').textContent=title;
+  document.getElementById('swav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
+  document.getElementById('swGtitle').textContent=title;
   document.getElementById('swnote').textContent=note;
-  barChart('swG',SW_L,[{label:'GMV',data:gmvD,color:color}],{h:240});
-  barChart('swU',SW_L,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
+  barChart('swG',filtLabels,[{label:'GMV',data:gmvD,color}],{h:240});
+  barChart('swU',filtLabels,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
 }
 
-// ── Filter & render ───────────────────────────────────────
-function filtered(){
-  const f=document.getElementById('df').value,t=document.getElementById('dt').value;
-  let r=liveOMS;
-  if(f)r=r.filter(x=>x.date>=f);
-  if(t)r=r.filter(x=>x.date<=t);
-  return r.length?r:liveOMS;
-}
-function go(){
-  const r=filtered();
-  document.getElementById('fi').textContent=r.length+' day'+(r.length===1?'':'s');
-  document.getElementById('lu').textContent='Updated '+new Date().toLocaleTimeString();
-  renderOMS(r);
-  if(document.getElementById('tp-sw').classList.contains('on'))renderSW();
-}
-
-document.querySelectorAll('.qb').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.qb').forEach(x=>x.classList.remove('on'));
-  b.classList.add('on');
-  const rv=b.dataset.r;
-  if(rv==='all'){document.getElementById('df').value='';document.getElementById('dt').value='';}
-  else{
-    const sorted=[...liveOMS].sort((a,b)=>b.date.localeCompare(a.date));
-    const latest=sorted[0]?.date;
-    if(latest){const fd=new Date(latest);fd.setDate(fd.getDate()-(+rv-1));document.getElementById('df').value=fd.toISOString().slice(0,10);document.getElementById('dt').value=latest;}
-  }
-  go();
-}));
-document.getElementById('df').addEventListener('change',()=>{document.querySelectorAll('.qb').forEach(x=>x.classList.remove('on'));go();});
-document.getElementById('dt').addEventListener('change',()=>{document.querySelectorAll('.qb').forEach(x=>x.classList.remove('on'));go();});
+// Category filter cascades to product dropdown
+document.getElementById('swcat').addEventListener('change',()=>{
+  const cat=document.getElementById('swcat').value;
+  const sel=document.getElementById('swsel');
+  Array.from(sel.options).forEach(o=>{
+    const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';
+    o.style.display=(cat==='all'||og===cat||o.value==='all')?'':'none';
+  });
+  if(cat!=='all'){const firstVisible=Array.from(sel.options).find(o=>o.style.display!=='none'&&o.value!=='all');if(firstVisible)sel.value=firstVisible.value;}
+  else sel.value='all';
+  renderSW();
+});
 document.getElementById('swsel').addEventListener('change',renderSW);
+document.getElementById('swdf').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="sw"]').forEach(b=>b.classList.remove('on'));renderSW();});
+document.getElementById('swdt').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="sw"]').forEach(b=>b.classList.remove('on'));renderSW();});
+
 
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
@@ -577,14 +620,30 @@ const BK=[
   {cat:"Others",name:"Snackible Munchies Gift Pack",color:"#f5a623",gmv:[0,799,0,799,799,0,799,799,799,1598,1598,799,0],units:[0,1,0,1,1,0,1,1,1,2,2,1,0]},
 ];
 
+const BK_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
+
+function getBkFiltered(gmvFull, unitsFull){
+  const f=document.getElementById('bkdf').value;
+  const t=document.getElementById('bkdt').value;
+  if(!f&&!t)return{gmv:gmvFull,units:unitsFull,labels:BK_L};
+  const fi=BK_DATES.findIndex(d=>!f||d>=f);
+  const ti=BK_DATES.reduce((a,d,i)=>(!t||d<=t)?i:a,-1);
+  if(fi<0||ti<0||fi>ti)return{gmv:gmvFull,units:unitsFull,labels:BK_L};
+  return{gmv:gmvFull.slice(fi,ti+1),units:unitsFull.slice(fi,ti+1),labels:BK_L.slice(fi,ti+1)};
+}
+
 function renderBK(){
   const sel=document.getElementById('bksel').value;
-  let gmvD,unitsD,color='#f5a623',title,note;
+  const cat=document.getElementById('bkcat').value;
+  let gmvFull,unitsFull,color='#f5a623',title,note;
+  const catFiltered=cat==='all'?BK:BK.filter(p=>p.cat===cat);
+
   if(sel==='all'){
-    gmvD=BK_L.map((_,i)=>BK.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    unitsD=BK_L.map((_,i)=>BK.reduce((a,p)=>a+(p.units[i]||0),0));
-    title='Daily GMV — All Products (Blinkit April 2026)';note='All products';
-    const byTag={};BK.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    gmvFull=BK_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    unitsFull=BK_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — '+(cat==='all'?'All Products':cat)+' (Blinkit)';
+    note=cat==='all'?'All products':cat;
+    const byTag={};catFiltered.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
     const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
     const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Others':'#95a5a6'};
     donutChart('bkP',tl,td,tl.map(t=>tc[t]||'#888'));
@@ -592,27 +651,39 @@ function renderBK(){
   }else{
     const p=BK.find(x=>x.name===sel);
     if(!p)return;
-    gmvD=p.gmv;unitsD=p.units;
+    gmvFull=p.gmv;unitsFull=p.units;color=p.color;
     title=p.name+' — daily GMV (Blinkit)';note=p.cat+' · '+p.name;
     const thisT=p.gmv.reduce((a,b)=>a+b,0);
     const catT=BK.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('bkP',[p.name.slice(0,20),'Rest of '+p.cat],[thisT,catT-thisT],['#f5a623','#333']);
+    donutChart('bkP',[p.name.slice(0,20),'Rest of '+p.cat],[thisT,catT-thisT],[color,'#333']);
     document.getElementById('bkpt').textContent='Share within '+p.cat;
   }
+
+  const {gmv:gmvD,units:unitsD,labels:filtLabels}=getBkFiltered(gmvFull,unitsFull);
   const tot=gmvD.reduce((a,b)=>a+b,0);
   const uTot=unitsD.reduce((a,b)=>a+b,0);
   const bi=gmvD.indexOf(Math.max(...gmvD));
   document.getElementById('bkt').textContent=fmt(tot);
   document.getElementById('bku').textContent=fu(uTot);
-  document.getElementById('bkbd').textContent=BK_L[bi]||'—';
+  document.getElementById('bkbd').textContent=filtLabels[bi]||'—';
   document.getElementById('bkbg').textContent=fmt(gmvD[bi]);
-  document.getElementById('bkav').textContent=fmt(Math.round(tot/gmvD.filter(v=>v>0).length));
-  document.getElementById('bkgt').textContent=title;
+  document.getElementById('bkav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
+  document.getElementById('bkGtitle').textContent=title;
   document.getElementById('bknote').textContent=note;
-  barChart('bkG',BK_L,[{label:'GMV',data:gmvD,color:'#f5a623'}],{h:240});
-  barChart('bkU',BK_L,[{label:'Units',data:unitsD,color:'#f5a62399'}],{h:210,yFmt:fu,valFmt:fu});
+  barChart('bkG',filtLabels,[{label:'GMV',data:gmvD,color}],{h:240});
+  barChart('bkU',filtLabels,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
 }
+document.getElementById('bkcat').addEventListener('change',()=>{
+  const cat=document.getElementById('bkcat').value;
+  const sel=document.getElementById('bksel');
+  Array.from(sel.options).forEach(o=>{const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';o.style.display=(cat==='all'||og===cat||o.value==='all')?'':'none';});
+  if(cat!=='all'){const fv=Array.from(sel.options).find(o=>o.style.display!=='none'&&o.value!=='all');if(fv)sel.value=fv.value;}else sel.value='all';
+  renderBK();
+});
 document.getElementById('bksel').addEventListener('change',renderBK);
+document.getElementById('bkdf').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="bk"]').forEach(b=>b.classList.remove('on'));renderBK();});
+document.getElementById('bkdt').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="bk"]').forEach(b=>b.classList.remove('on'));renderBK();});
+
 
 // ── ZEPTO PRODUCT DATA (April 2026) ──────────────────────
 const ZT_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
@@ -635,14 +706,30 @@ const ZT=[
   {cat:"Others",name:"Other Tomato DK",color:"#95a5a6",gmv:[0,120,240,0,240,0,240,240,120,0,0,0,0],units:[0,1,2,0,2,0,2,2,1,0,0,0,0]},
 ];
 
+const ZT_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
+
+function getZtFiltered(gmvFull, unitsFull){
+  const f=document.getElementById('ztdf').value;
+  const t=document.getElementById('ztdt').value;
+  if(!f&&!t)return{gmv:gmvFull,units:unitsFull,labels:ZT_L};
+  const fi=ZT_DATES.findIndex(d=>!f||d>=f);
+  const ti=ZT_DATES.reduce((a,d,i)=>(!t||d<=t)?i:a,-1);
+  if(fi<0||ti<0||fi>ti)return{gmv:gmvFull,units:unitsFull,labels:ZT_L};
+  return{gmv:gmvFull.slice(fi,ti+1),units:unitsFull.slice(fi,ti+1),labels:ZT_L.slice(fi,ti+1)};
+}
+
 function renderZT(){
   const sel=document.getElementById('ztsel').value;
-  let gmvD,unitsD,color,title,note;
+  const cat=document.getElementById('ztcat').value;
+  let gmvFull, unitsFull, color='#4f9cf9', title, note;
+  const catFiltered=cat==='all'?ZT:ZT.filter(p=>p.cat===cat);
+
   if(sel==='all'){
-    gmvD=ZT_L.map((_,i)=>ZT.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    unitsD=ZT_L.map((_,i)=>ZT.reduce((a,p)=>a+(p.units[i]||0),0));
-    color='#4f9cf9';title='Daily GMV — All Products (Zepto April 2026)';note='All products';
-    const byTag={};ZT.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    gmvFull=ZT_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    unitsFull=ZT_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — '+(cat==='all'?'All Products':cat)+' (Zepto)';
+    note=cat==='all'?'All products':cat;
+    const byTag={};catFiltered.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
     const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
     const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
     donutChart('ztP',tl,td,tl.map(t=>tc[t]||'#888'));
@@ -650,27 +737,59 @@ function renderZT(){
   }else{
     const p=ZT.find(x=>x.name===sel);
     if(!p)return;
-    gmvD=p.gmv;unitsD=p.units;color=p.color;
+    gmvFull=p.gmv;unitsFull=p.units;color=p.color;
     title=p.name+' — daily GMV (Zepto)';note=p.cat+' · '+p.name;
     const thisT=p.gmv.reduce((a,b)=>a+b,0);
     const catT=ZT.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('ztP',[p.name,'Rest of '+p.cat],[thisT,catT-thisT],[color,'#333']);
+    donutChart('ztP',[p.name.slice(0,20),'Rest of '+p.cat],[thisT,catT-thisT],[color,'#333']);
     document.getElementById('ztpt').textContent='Share within '+p.cat;
   }
+
+  const {gmv:gmvD,units:unitsD,labels:filtLabels}=getZtFiltered(gmvFull,unitsFull);
   const tot=gmvD.reduce((a,b)=>a+b,0);
   const uTot=unitsD.reduce((a,b)=>a+b,0);
   const bi=gmvD.indexOf(Math.max(...gmvD));
   document.getElementById('ztt').textContent=fmt(tot);
   document.getElementById('ztu').textContent=fu(uTot);
-  document.getElementById('ztbd').textContent=ZT_L[bi]||'—';
+  document.getElementById('ztbd').textContent=filtLabels[bi]||'—';
   document.getElementById('ztbg').textContent=fmt(gmvD[bi]);
-  document.getElementById('ztav').textContent=fmt(Math.round(tot/gmvD.filter(v=>v>0).length));
-  document.getElementById('ztgt').textContent=title;
+  document.getElementById('ztav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
+  document.getElementById('ztGtitle').textContent=title;
   document.getElementById('ztnote').textContent=note;
-  barChart('ztG',ZT_L,[{label:'GMV',data:gmvD,color:color}],{h:240});
-  barChart('ztU',ZT_L,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
+  barChart('ztG',filtLabels,[{label:'GMV',data:gmvD,color}],{h:240});
+  barChart('ztU',filtLabels,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
 }
+document.getElementById('ztcat').addEventListener('change',()=>{
+  const cat=document.getElementById('ztcat').value;
+  const sel=document.getElementById('ztsel');
+  Array.from(sel.options).forEach(o=>{const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';o.style.display=(cat==='all'||og===cat||o.value==='all')?'':'none';});
+  if(cat!=='all'){const fv=Array.from(sel.options).find(o=>o.style.display!=='none'&&o.value!=='all');if(fv)sel.value=fv.value;}else sel.value='all';
+  renderZT();
+});
 document.getElementById('ztsel').addEventListener('change',renderZT);
+document.getElementById('ztdf').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="zt"]').forEach(b=>b.classList.remove('on'));renderZT();});
+document.getElementById('ztdt').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="zt"]').forEach(b=>b.classList.remove('on'));renderZT();});
+
+
+// ── Product tab quick-range buttons ─────────────────────
+document.querySelectorAll('.qb[data-tab]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    const tab=b.dataset.tab;
+    document.querySelectorAll(`.qb[data-tab="${tab}"]`).forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    const rv=b.dataset.r;
+    const dateMap={sw:{dates:SW_DATES,df:'swdf',dt:'swdt',fn:renderSW},zt:{dates:ZT_DATES,df:'ztdf',dt:'ztdt',fn:renderZT},bk:{dates:BK_DATES,df:'bkdf',dt:'bkdt',fn:renderBK}};
+    const m=dateMap[tab];if(!m)return;
+    if(rv==='all'){document.getElementById(m.df).value='';document.getElementById(m.dt).value='';}
+    else{
+      const latest=m.dates.filter(Boolean).pop();
+      const fd=new Date(latest);fd.setDate(fd.getDate()-(+rv-1));
+      document.getElementById(m.df).value=fd.toISOString().slice(0,10);
+      document.getElementById(m.dt).value=latest;
+    }
+    m.fn();
+  });
+});
 
 // ── Start ─────────────────────────────────────────────────
 go();
