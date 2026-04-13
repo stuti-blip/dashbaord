@@ -25,8 +25,8 @@ body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-he
 .mc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px;position:relative;overflow:hidden;}
 .mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
 .mc.a::before{background:var(--ac)}.mc.z::before{background:var(--z)}.mc.bl::before{background:var(--bl)}.mc.in::before{background:var(--in)}
-.ml{font-size:10px;color:#aaa;text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
-.mv{font-size:21px;font-weight:500;font-family:monospace;color:#fff;}.ms{font-size:10px;color:#aaa;margin-top:3px;}
+.ml{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
+.mv{font-size:21px;font-weight:500;font-family:monospace;color:#fff;}.ms{font-size:10px;color:var(--m);margin-top:3px;}
 .tabs{display:flex;border-bottom:1px solid var(--b);margin-bottom:18px;}
 .tab{padding:9px 20px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
 .tab.on{color:var(--ac);border-bottom-color:var(--ac);}
@@ -118,10 +118,18 @@ select.di{min-width:220px;cursor:pointer;}
 
   <!-- SWIGGY -->
   <div class="tp" id="tp-sw">
-    <div class="sw-ctrl">
-      <div class="df">
+    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+      <div class="df" style="gap:6px;flex-wrap:wrap;">
+        <span class="fl">Cat</span>
+        <select class="di" id="swcat">
+          <option value="all">All</option>
+          <option value="Ragi Chips">Ragi Chips</option>
+          <option value="Dipsters">Dipsters</option>
+          <option value="Puffs">Puffs</option>
+          <option value="Others">Others</option>
+        </select>
         <span class="fl">Product</span>
-        <select class="di" id="swsel">
+        <select class="di" id="swsel" style="min-width:170px;">
           <option value="all">All Products</option>
           <optgroup label="Ragi Chips">
             <option value="10684">peri peri ragi chips ⭐</option>
@@ -130,72 +138,82 @@ select.di{min-width:220px;cursor:pointer;}
             <option value="25001">jalepeno ragi chips</option>
           </optgroup>
           <optgroup label="Dipsters">
-            <option value="10685">biscuit sticks chocolatey dip</option>
-            <option value="25745">biscuit sticks crispies creamy</option>
-            <option value="21280">biscuit sticks caramel dip</option>
+            <option value="10685">biscuit sticks chocolatey</option>
+            <option value="25745">biscuit sticks crispies</option>
+            <option value="21280">biscuit sticks caramel</option>
           </optgroup>
           <optgroup label="Puffs">
             <option value="30888">nacho cheese jowar puffs ⭐</option>
             <option value="31250">dahi papdi quinoa puffs</option>
-            <option value="31249">tangy tomato chickpea puffs</option>
-            <option value="924774">korean bbq jowar puffs</option>
+            <option value="31249">tangy tomato chickpea</option>
+            <option value="924774">korean bbq jowar</option>
           </optgroup>
           <optgroup label="Others">
             <option value="64817">cheese dosa khakra ⭐</option>
-            <option value="330874">chatpata masala millet fingers</option>
+            <option value="330874">chatpata masala millet</option>
             <option value="10683">baked pizza sticks</option>
-            <option value="42604">garlic bread chickpea chips</option>
+            <option value="42604">garlic bread chickpea</option>
+            <option value="383795">korean barbeque chickpea</option>
+            <option value="161918">salted banana chips</option>
           </optgroup>
         </select>
       </div>
-      <div style="font-size:11px;color:var(--m);padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">March 2026 · Swiggy · <span id="swnote" style="color:var(--ac)">All products</span></div>
+      <div class="df" style="gap:6px;">
+        <span class="fl">Date</span>
+        <input type="date" class="di" id="swdf" min="2026-03-01" max="2026-03-31">
+        <span style="color:#aaa;font-size:11px">→</span>
+        <input type="date" class="di" id="swdt" min="2026-03-01" max="2026-03-31">
+        <button class="qb on" id="swAll">All</button>
+        <button class="qb" id="sw7d">7d</button>
+        <button class="qb" id="sw3d">3d</button>
+      </div>
+      <span style="font-size:11px;color:#aaa;padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Swiggy Mar · <span id="swnote" style="color:var(--ac)">All</span></span>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
-      <div class="mc a"><div class="ml">Total GMV</div><div class="mv" id="swt">—</div><div class="ms">March 2026</div></div>
+      <div class="mc a"><div class="ml">Total GMV</div><div class="mv" id="swt">—</div><div class="ms">filtered</div></div>
       <div class="mc a"><div class="ml">Total Units</div><div class="mv" id="swu">—</div><div class="ms">units sold</div></div>
       <div class="mc a"><div class="ml">Best Day</div><div class="mv" id="swbd">—</div><div class="ms" id="swbg">—</div></div>
-      <div class="mc a"><div class="ml">Daily Avg GMV</div><div class="mv" id="swav">—</div><div class="ms">per day</div></div>
+      <div class="mc a"><div class="ml">Daily Avg</div><div class="mv" id="swav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="swgt">Daily GMV — All Products</div></div><div class="chart-wrap" id="swG"></div></div></div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="swgt">Daily GMV</div></div><div class="chart-wrap" id="swG"></div></div></div>
     <div class="g2">
       <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="swU"></div></div>
       <div class="cc"><div class="ch"><div class="ct" id="swpt">Product share</div></div><div class="chart-wrap" id="swP"></div></div>
     </div>
   </div>
-</div>
-  <!-- ZEPTO PRODUCT TAB -->
+    <!-- ZEPTO PRODUCT TAB -->
   <div class="tp" id="tp-zt">
     <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
-      <div class="df" style="flex:1;min-width:280px;">
-        <span class="fl">Category</span>
-        <select class="di" id="ztcat" style="min-width:130px;">
-          <option value="all">All Categories</option>
+      <div class="df" style="gap:6px;flex-wrap:wrap;">
+        <span class="fl">Cat</span>
+        <select class="di" id="ztcat">
+          <option value="all">All</option>
           <option value="Ragi Chips">Ragi Chips</option>
           <option value="Dipsters">Dipsters</option>
           <option value="Puffs">Puffs</option>
           <option value="Others">Others</option>
         </select>
-        <span class="fl" style="margin-left:6px;">Product</span>
-        <select class="di" id="ztsel" style="flex:1;min-width:180px;">
+        <span class="fl">Product</span>
+        <select class="di" id="ztsel" style="min-width:180px;">
           <option value="all">All Products</option>
           <optgroup label="Ragi Chips">
             <option value="RC Peri Peri">RC Peri Peri ⭐</option>
             <option value="RC Cheesy Jalapeno Dip">RC Cheesy Jalapeno Dip</option>
             <option value="RC desi masala">RC desi masala</option>
-            <option value="Snackible Chatpata Crunch Ragi Chips- No">Chatpata Crunch Ragi Chips</option>
+            <option value="Snackible Chatpata Crunch Ragi Chips- No">Chatpata Crunch</option>
             <option value="RC jalapeno">RC jalapeno</option>
           </optgroup>
           <optgroup label="Dipsters">
             <option value="dip choco BS">Biscuit Sticks Chocolatey</option>
           </optgroup>
           <optgroup label="Puffs">
-            <option value="puff nacho jowar">Nacho Cheese Jowar Puffs ⭐</option>
+            <option value="puff nacho jowar">Nacho Jowar Puffs ⭐</option>
             <option value="Puff sriracha quinoa">Sriracha Quinoa Puffs</option>
           </optgroup>
           <optgroup label="Others">
             <option value="holi box">Holi Box ⭐</option>
             <option value="other dosa khakra">Dosa Khakra</option>
-            <option value="Snackible Kunafa Chocolate Bites 1.0 PIE">Kunafa Chocolate Bites</option>
+            <option value="Snackible Kunafa Chocolate Bites 1.0 PIE">Kunafa Bites</option>
             <option value="dip baked pizza">Baked Pizza Sticks</option>
             <option value="other salted banana">Salted Banana Chips</option>
             <option value="Other Millet Bhujia">Millet Bhujia</option>
@@ -203,47 +221,47 @@ select.di{min-width:220px;cursor:pointer;}
           </optgroup>
         </select>
       </div>
-      <div class="df">
+      <div class="df" style="gap:6px;">
         <span class="fl">Date</span>
-        <input type="date" class="di" id="ztdf" style="width:130px;" min="2026-04-01" max="2026-04-13">
-        <span style="font-size:11px;color:#aaa">→</span>
-        <input type="date" class="di" id="ztdt" style="width:130px;" min="2026-04-01" max="2026-04-13">
-        <button class="qb on" data-tab="zt" data-r="all">All</button>
-        <button class="qb" data-tab="zt" data-r="7">7d</button>
-        <button class="qb" data-tab="zt" data-r="3">3d</button>
+        <input type="date" class="di" id="ztdf" min="2026-04-01" max="2026-04-13">
+        <span style="color:#aaa;font-size:11px">→</span>
+        <input type="date" class="di" id="ztdt" min="2026-04-01" max="2026-04-13">
+        <button class="qb on" id="ztAll">All</button>
+        <button class="qb" id="zt7d">7d</button>
+        <button class="qb" id="zt3d">3d</button>
       </div>
-      <div style="font-size:11px;color:#aaa;padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Zepto · <span id="ztnote" style="color:var(--z)">All products</span></div>
+      <span style="font-size:11px;color:#aaa;padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Zepto Apr · <span id="ztnote" style="color:var(--z)">All</span></span>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
-      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Total GMV</div><div class="mv" id="ztt">—</div><div class="ms">filtered range</div></div>
+      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Total GMV</div><div class="mv" id="ztt">—</div><div class="ms">filtered</div></div>
       <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Total Units</div><div class="mv" id="ztu">—</div><div class="ms">units sold</div></div>
       <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Best Day</div><div class="mv" id="ztbd">—</div><div class="ms" id="ztbg">—</div></div>
-      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Daily Avg GMV</div><div class="mv" id="ztav">—</div><div class="ms">per day</div></div>
+      <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Daily Avg</div><div class="mv" id="ztav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztGtitle">Daily GMV</div></div><div class="chart-wrap" id="ztG"></div></div></div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztgt">Daily GMV (Zepto)</div></div><div class="chart-wrap" id="ztG"></div></div></div>
     <div class="g2">
       <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="ztU"></div></div>
-      <div class="cc"><div class="ch"><div class="ct" id="ztpt">Product GMV share</div></div><div class="chart-wrap" id="ztP"></div></div>
+      <div class="cc"><div class="ch"><div class="ct" id="ztpt">GMV share</div></div><div class="chart-wrap" id="ztP"></div></div>
     </div>
   </div>
     <!-- BLINKIT PRODUCT TAB -->
   <div class="tp" id="tp-bk">
     <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
-      <div class="df" style="flex:1;min-width:280px;">
-        <span class="fl">Category</span>
-        <select class="di" id="bkcat" style="min-width:130px;">
-          <option value="all">All Categories</option>
+      <div class="df" style="gap:6px;flex-wrap:wrap;">
+        <span class="fl">Cat</span>
+        <select class="di" id="bkcat">
+          <option value="all">All</option>
           <option value="Ragi Chips">Ragi Chips</option>
           <option value="Dipsters">Dipsters</option>
           <option value="Others">Others</option>
         </select>
-        <span class="fl" style="margin-left:6px;">Product</span>
-        <select class="di" id="bksel" style="flex:1;min-width:180px;">
+        <span class="fl">Product</span>
+        <select class="di" id="bksel" style="min-width:180px;">
           <option value="all">All Products</option>
           <optgroup label="Ragi Chips">
             <option value="Snackible Peri Peri Ragi Chips">Peri Peri Ragi Chips ⭐</option>
             <option value="Snackible Desi Masala Ragi Chips">Desi Masala Ragi Chips</option>
-            <option value="Snackible Chatpata Crunch Ragi Chips">Chatpata Crunch Ragi Chips</option>
+            <option value="Snackible Chatpata Crunch Ragi Chips">Chatpata Crunch</option>
             <option value="Snackible Dipsters Piri Piri Ragi Chips with Chees">Piri Piri Ragi Chips</option>
           </optgroup>
           <optgroup label="Dipsters">
@@ -259,31 +277,30 @@ select.di{min-width:220px;cursor:pointer;}
           </optgroup>
         </select>
       </div>
-      <div class="df">
+      <div class="df" style="gap:6px;">
         <span class="fl">Date</span>
-        <input type="date" class="di" id="bkdf" style="width:130px;" min="2026-04-01" max="2026-04-13">
-        <span style="font-size:11px;color:#aaa">→</span>
-        <input type="date" class="di" id="bkdt" style="width:130px;" min="2026-04-01" max="2026-04-13">
-        <button class="qb on" data-tab="bk" data-r="all">All</button>
-        <button class="qb" data-tab="bk" data-r="7">7d</button>
-        <button class="qb" data-tab="bk" data-r="3">3d</button>
+        <input type="date" class="di" id="bkdf" min="2026-04-01" max="2026-04-13">
+        <span style="color:#aaa;font-size:11px">→</span>
+        <input type="date" class="di" id="bkdt" min="2026-04-01" max="2026-04-13">
+        <button class="qb on" id="bkAll">All</button>
+        <button class="qb" id="bk7d">7d</button>
+        <button class="qb" id="bk3d">3d</button>
       </div>
-      <div style="font-size:11px;color:#aaa;padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Blinkit · <span id="bknote" style="color:var(--bl)">All products</span></div>
+      <span style="font-size:11px;color:#aaa;padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Blinkit Apr · <span id="bknote" style="color:var(--bl)">All</span></span>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
-      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total GMV</div><div class="mv" id="bkt">—</div><div class="ms">filtered range</div></div>
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total GMV</div><div class="mv" id="bkt">—</div><div class="ms">filtered</div></div>
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total Units</div><div class="mv" id="bku">—</div><div class="ms">units sold</div></div>
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Best Day</div><div class="mv" id="bkbd">—</div><div class="ms" id="bkbg">—</div></div>
-      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Daily Avg GMV</div><div class="mv" id="bkav">—</div><div class="ms">per day</div></div>
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Daily Avg</div><div class="mv" id="bkav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkGtitle">Daily GMV</div></div><div class="chart-wrap" id="bkG"></div></div></div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkgt">Daily GMV (Blinkit)</div></div><div class="chart-wrap" id="bkG"></div></div></div>
     <div class="g2">
       <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="bkU"></div></div>
-      <div class="cc"><div class="ch"><div class="ct" id="bkpt">Product GMV share</div></div><div class="chart-wrap" id="bkP"></div></div>
+      <div class="cc"><div class="ch"><div class="ct" id="bkpt">GMV share</div></div><div class="chart-wrap" id="bkP"></div></div>
     </div>
   </div>
 </div>
-
 <div class="bar-tip" id="tip"></div>
 
 <script>
@@ -346,8 +363,8 @@ function barChart(containerId,labels,datasets,opts={}){
     const y=PAD.t+cH-(i/yTicks)*cH;
     const val=maxV*i/yTicks;
     const label=opts.yFmt?opts.yFmt(val):fmt(val);
-    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.1)" stroke-width="1"/>`;
-    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#ccc" font-size="9">${label}</text>`;
+    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
+    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#555" font-size="9">${label}</text>`;
   }
   // bars
   datasets.forEach((d,di)=>{
@@ -364,11 +381,11 @@ function barChart(containerId,labels,datasets,opts={}){
   // x labels
   labels.forEach((lbl,i)=>{
     const x=PAD.l+i*grpW+grpW/2;
-    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#ccc" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
+    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#555" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
   });
   // axes
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
   svg+='</svg>';
   el.innerHTML=svg;
 }
@@ -390,8 +407,8 @@ function lineChart(containerId,labels,datasets,opts={}){
     const y=PAD.t+cH-(i/yTicks)*cH;
     const val=maxV*i/yTicks;
     const label=opts.yFmt?opts.yFmt(val):fmt(val);
-    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.1)" stroke-width="1"/>`;
-    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#ccc" font-size="9">${label}</text>`;
+    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
+    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#555" font-size="9">${label}</text>`;
   }
   datasets.forEach(d=>{
     const pts=d.data.map((v,i)=>{
@@ -413,10 +430,10 @@ function lineChart(containerId,labels,datasets,opts={}){
   });
   labels.forEach((lbl,i)=>{
     const x=PAD.l+i*(cW/(n-1||1));
-    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#ccc" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
+    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#555" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
   });
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
   svg+='</svg>';
   el.innerHTML=svg;
 }
@@ -516,84 +533,78 @@ function renderOMS(rows){
 }
 
 // ── Render Swiggy ─────────────────────────────────────────
-function getSwFiltered(data, labels, dates){
-  const f=document.getElementById('swdf').value;
-  const t=document.getElementById('swdt').value;
-  if(!f&&!t)return{gmv:data.gmv,units:data.units||[],labels};
-  const fi=dates.findIndex(d=>!f||d>=f);
-  const ti=dates.reduce((a,d,i)=>(!t||d<=t)?i:a,-1);
-  if(fi<0||ti<0||fi>ti)return{gmv:data.gmv,units:data.units||[],labels};
-  return{gmv:data.gmv.slice(fi,ti+1),units:(data.units||[]).slice(fi,ti+1),labels:labels.slice(fi,ti+1)};
-}
-
+// ── Date/cat helpers ─────────────────────────────────────
 const SW_DATES=["2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31"];
+const ZT_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
+const BK_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
+function sliceD(gmv,units,labels,dates,fid,tid){
+  const f=document.getElementById(fid).value,t=document.getElementById(tid).value;
+  if(!f&&!t)return{g:gmv,u:units,l:labels};
+  let fi=0,ti=dates.length-1;
+  if(f){const i=dates.findIndex(d=>d>=f);if(i>=0)fi=i;}
+  if(t){let i=dates.length-1;while(i>=0&&dates[i]>t)i--;ti=i;}
+  if(fi>ti||ti<0)return{g:gmv,u:units,l:labels};
+  return{g:gmv.slice(fi,ti+1),u:units.slice(fi,ti+1),l:labels.slice(fi,ti+1)};
+}
+function setupQb(prefix,dates,fn){
+  ['All','7d','3d'].forEach(id=>{const el=document.getElementById(prefix+id);if(el)el.onclick=()=>{
+    document.getElementById(prefix+'df').value='';document.getElementById(prefix+'dt').value='';
+    if(id!=='All'){const lat=dates[dates.length-1];const fd=new Date(lat);fd.setDate(fd.getDate()-(id==='7d'?6:2));document.getElementById(prefix+'df').value=fd.toISOString().slice(0,10);document.getElementById(prefix+'dt').value=lat;}
+    ['All','7d','3d'].forEach(x=>{const b=document.getElementById(prefix+x);if(b)b.classList.remove('on');});
+    document.getElementById(prefix+id).classList.add('on');fn();
+  };});
+  const dfc=document.getElementById(prefix+'df');if(dfc)dfc.onchange=fn;
+  const dtc=document.getElementById(prefix+'dt');if(dtc)dtc.onchange=fn;
+}
+function catFilter(catId,selId,fn){
+  const el=document.getElementById(catId);if(!el)return;
+  el.onchange=()=>{
+    const cat=el.value,sel=document.getElementById(selId);
+    Array.from(sel.options).forEach(o=>{
+      const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';
+      o.hidden=(cat!=='all'&&og!==cat&&o.value!=='all');
+    });
+    if(cat!=='all'){const fv=Array.from(sel.options).find(o=>!o.hidden&&o.value!=='all');if(fv)sel.value=fv.value;}
+    else sel.value='all';
+    fn();
+  };
+}
 
 function renderSW(){
   const sel=document.getElementById('swsel').value;
-  const cat=document.getElementById('swcat').value;
-  let srcData, color, title, note;
-
-  // Filter by category first
-  const catFiltered = cat==='all' ? SW : SW.filter(p=>p.tag===cat);
-
+  const cat=document.getElementById('swcat')?document.getElementById('swcat').value:'all';
+  const pool=cat==='all'?SW:SW.filter(p=>p.tag===cat);
+  let gFull,uFull,color='#f5a623',title,note;
   if(sel==='all'){
-    const gmvFull=SW_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    const unitsFull=SW_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.units[i]||0),0));
-    srcData={gmv:gmvFull,units:unitsFull};
-    color='#f5a623'; note=cat==='all'?'All products':cat;
-    title='Daily GMV — '+(cat==='all'?'All Products':cat)+' (Swiggy)';
-  }else{
-    const p=SW.find(x=>x.code==+sel);
-    if(!p)return;
-    srcData={gmv:p.gmv,units:p.units}; color=p.color;
-    note=p.tag+' · '+p.name; title=p.name+' — daily GMV';
-  }
-
-  const {gmv:gmvD,units:unitsD,labels:filtLabels}=getSwFiltered(srcData,SW_L,SW_DATES);
-
-  // Pie (always full data for context)
-  if(sel==='all'){
-    const byTag={};catFiltered.forEach(p=>{byTag[p.tag]=(byTag[p.tag]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    gFull=SW_L.map((_,i)=>pool.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    uFull=SW_L.map((_,i)=>pool.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — '+(cat==='all'?'All Products':cat);note=cat==='all'?'All products':cat;
+    const byTag={};pool.forEach(p=>{byTag[p.tag]=(byTag[p.tag]||0)+p.gmv.reduce((a,b)=>a+b,0);});
     const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
     const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
     donutChart('swP',tl,td,tl.map(t=>tc[t]||'#888'));
-    document.getElementById('swpt').textContent='GMV share by category';
+    document.getElementById('swpt').textContent='GMV share';
   }else{
-    const p=SW.find(x=>x.code==+sel);
-    if(p){const thisT=p.gmv.reduce((a,b)=>a+b,0);const catT=SW.filter(x=>x.tag===p.tag).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('swP',[p.name.slice(0,20),'Rest of '+p.tag],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('swpt').textContent='Share within '+p.tag;}
+    const p=SW.find(x=>x.code==+sel);if(!p)return;
+    gFull=p.gmv;uFull=p.units;color=p.color;title=p.name;note=p.tag;
+    const thisT=p.gmv.reduce((a,b)=>a+b,0),catT=SW.filter(x=>x.tag===p.tag).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart('swP',[p.name.slice(0,18),'Rest'],[thisT,catT-thisT],[color,'#333']);
+    document.getElementById('swpt').textContent='Share in '+p.tag;
   }
-
-  const tot=gmvD.reduce((a,b)=>a+b,0);
-  const uTot=unitsD.reduce((a,b)=>a+b,0);
+  const {g:gmvD,u:unitsD,l:lbl}=sliceD(gFull,uFull,SW_L,SW_DATES,'swdf','swdt');
+  const tot=gmvD.reduce((a,b)=>a+b,0),uTot=unitsD.reduce((a,b)=>a+b,0);
   const bi=gmvD.indexOf(Math.max(...gmvD));
   document.getElementById('swt').textContent=fmt(tot);
   document.getElementById('swu').textContent=fu(uTot);
-  document.getElementById('swbd').textContent=filtLabels[bi]||'—';
+  document.getElementById('swbd').textContent=lbl[bi]||'—';
   document.getElementById('swbg').textContent=fmt(gmvD[bi]);
   document.getElementById('swav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
-  document.getElementById('swGtitle').textContent=title;
+  document.getElementById('swgt').textContent=title;
   document.getElementById('swnote').textContent=note;
-  barChart('swG',filtLabels,[{label:'GMV',data:gmvD,color}],{h:240});
-  barChart('swU',filtLabels,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
+  barChart('swG',lbl,[{label:'GMV',data:gmvD,color}],{h:240});
+  barChart('swU',lbl,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
 }
-
-// Category filter cascades to product dropdown
-document.getElementById('swcat').addEventListener('change',()=>{
-  const cat=document.getElementById('swcat').value;
-  const sel=document.getElementById('swsel');
-  Array.from(sel.options).forEach(o=>{
-    const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';
-    o.style.display=(cat==='all'||og===cat||o.value==='all')?'':'none';
-  });
-  if(cat!=='all'){const firstVisible=Array.from(sel.options).find(o=>o.style.display!=='none'&&o.value!=='all');if(firstVisible)sel.value=firstVisible.value;}
-  else sel.value='all';
-  renderSW();
-});
 document.getElementById('swsel').addEventListener('change',renderSW);
-document.getElementById('swdf').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="sw"]').forEach(b=>b.classList.remove('on'));renderSW();});
-document.getElementById('swdt').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="sw"]').forEach(b=>b.classList.remove('on'));renderSW();});
 
 
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
@@ -620,69 +631,41 @@ const BK=[
   {cat:"Others",name:"Snackible Munchies Gift Pack",color:"#f5a623",gmv:[0,799,0,799,799,0,799,799,799,1598,1598,799,0],units:[0,1,0,1,1,0,1,1,1,2,2,1,0]},
 ];
 
-const BK_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
-
-function getBkFiltered(gmvFull, unitsFull){
-  const f=document.getElementById('bkdf').value;
-  const t=document.getElementById('bkdt').value;
-  if(!f&&!t)return{gmv:gmvFull,units:unitsFull,labels:BK_L};
-  const fi=BK_DATES.findIndex(d=>!f||d>=f);
-  const ti=BK_DATES.reduce((a,d,i)=>(!t||d<=t)?i:a,-1);
-  if(fi<0||ti<0||fi>ti)return{gmv:gmvFull,units:unitsFull,labels:BK_L};
-  return{gmv:gmvFull.slice(fi,ti+1),units:unitsFull.slice(fi,ti+1),labels:BK_L.slice(fi,ti+1)};
-}
-
-function renderBK(){
+function renderBK(){{
   const sel=document.getElementById('bksel').value;
-  const cat=document.getElementById('bkcat').value;
-  let gmvFull,unitsFull,color='#f5a623',title,note;
-  const catFiltered=cat==='all'?BK:BK.filter(p=>p.cat===cat);
-
-  if(sel==='all'){
-    gmvFull=BK_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    unitsFull=BK_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.units[i]||0),0));
-    title='Daily GMV — '+(cat==='all'?'All Products':cat)+' (Blinkit)';
-    note=cat==='all'?'All products':cat;
-    const byTag={};catFiltered.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+  const cat=document.getElementById('bkcat')?document.getElementById('bkcat').value:'all';
+  const pool=cat==='all'?BK:BK.filter(p=>p.cat===cat);
+  let gFull,uFull,color='#f5a623',title,note;
+  if(sel==='all'){{
+    gFull=BK_L.map((_,i)=>pool.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    uFull=BK_L.map((_,i)=>pool.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — '+(cat==='all'?'All':cat)+' (Blinkit)';note=cat==='all'?'All products':cat;
+    const byTag={{}};pool.forEach(p=>{{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);}});
     const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
-    const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Others':'#95a5a6'};
+    const tc={{'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Others':'#95a5a6'}};
     donutChart('bkP',tl,td,tl.map(t=>tc[t]||'#888'));
-    document.getElementById('bkpt').textContent='GMV share by category';
-  }else{
-    const p=BK.find(x=>x.name===sel);
-    if(!p)return;
-    gmvFull=p.gmv;unitsFull=p.units;color=p.color;
-    title=p.name+' — daily GMV (Blinkit)';note=p.cat+' · '+p.name;
-    const thisT=p.gmv.reduce((a,b)=>a+b,0);
-    const catT=BK.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('bkP',[p.name.slice(0,20),'Rest of '+p.cat],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('bkpt').textContent='Share within '+p.cat;
-  }
-
-  const {gmv:gmvD,units:unitsD,labels:filtLabels}=getBkFiltered(gmvFull,unitsFull);
-  const tot=gmvD.reduce((a,b)=>a+b,0);
-  const uTot=unitsD.reduce((a,b)=>a+b,0);
+    document.getElementById('bkpt').textContent='GMV share';
+  }}else{{
+    const p=BK.find(x=>x.name===sel);if(!p)return;
+    gFull=p.gmv;uFull=p.units;color='#e8732a';title=p.name+' (Blinkit)';note=p.cat;
+    const thisT=p.gmv.reduce((a,b)=>a+b,0),catT=BK.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart('bkP',[p.name.slice(0,18),'Rest'],[thisT,catT-thisT],[color,'#333']);
+    document.getElementById('bkpt').textContent='Share in '+p.cat;
+  }}
+  const {{g:gmvD,u:unitsD,l:lbl}}=sliceD(gFull,uFull,BK_L,BK_DATES,'bkdf','bkdt');
+  const tot=gmvD.reduce((a,b)=>a+b,0),uTot=unitsD.reduce((a,b)=>a+b,0);
   const bi=gmvD.indexOf(Math.max(...gmvD));
   document.getElementById('bkt').textContent=fmt(tot);
   document.getElementById('bku').textContent=fu(uTot);
-  document.getElementById('bkbd').textContent=filtLabels[bi]||'—';
+  document.getElementById('bkbd').textContent=lbl[bi]||'—';
   document.getElementById('bkbg').textContent=fmt(gmvD[bi]);
   document.getElementById('bkav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
-  document.getElementById('bkGtitle').textContent=title;
+  document.getElementById('bkgt').textContent=title;
   document.getElementById('bknote').textContent=note;
-  barChart('bkG',filtLabels,[{label:'GMV',data:gmvD,color}],{h:240});
-  barChart('bkU',filtLabels,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
-}
-document.getElementById('bkcat').addEventListener('change',()=>{
-  const cat=document.getElementById('bkcat').value;
-  const sel=document.getElementById('bksel');
-  Array.from(sel.options).forEach(o=>{const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';o.style.display=(cat==='all'||og===cat||o.value==='all')?'':'none';});
-  if(cat!=='all'){const fv=Array.from(sel.options).find(o=>o.style.display!=='none'&&o.value!=='all');if(fv)sel.value=fv.value;}else sel.value='all';
-  renderBK();
-});
+  barChart('bkG',lbl,[{{label:'GMV',data:gmvD,color}}],{{h:240}});
+  barChart('bkU',lbl,[{{label:'Units',data:unitsD,color:color+'99'}}],{{h:210,yFmt:fu,valFmt:fu}});
+}}
 document.getElementById('bksel').addEventListener('change',renderBK);
-document.getElementById('bkdf').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="bk"]').forEach(b=>b.classList.remove('on'));renderBK();});
-document.getElementById('bkdt').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="bk"]').forEach(b=>b.classList.remove('on'));renderBK();});
 
 
 // ── ZEPTO PRODUCT DATA (April 2026) ──────────────────────
@@ -706,90 +689,50 @@ const ZT=[
   {cat:"Others",name:"Other Tomato DK",color:"#95a5a6",gmv:[0,120,240,0,240,0,240,240,120,0,0,0,0],units:[0,1,2,0,2,0,2,2,1,0,0,0,0]},
 ];
 
-const ZT_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
-
-function getZtFiltered(gmvFull, unitsFull){
-  const f=document.getElementById('ztdf').value;
-  const t=document.getElementById('ztdt').value;
-  if(!f&&!t)return{gmv:gmvFull,units:unitsFull,labels:ZT_L};
-  const fi=ZT_DATES.findIndex(d=>!f||d>=f);
-  const ti=ZT_DATES.reduce((a,d,i)=>(!t||d<=t)?i:a,-1);
-  if(fi<0||ti<0||fi>ti)return{gmv:gmvFull,units:unitsFull,labels:ZT_L};
-  return{gmv:gmvFull.slice(fi,ti+1),units:unitsFull.slice(fi,ti+1),labels:ZT_L.slice(fi,ti+1)};
-}
-
-function renderZT(){
+function renderZT(){{
   const sel=document.getElementById('ztsel').value;
-  const cat=document.getElementById('ztcat').value;
-  let gmvFull, unitsFull, color='#4f9cf9', title, note;
-  const catFiltered=cat==='all'?ZT:ZT.filter(p=>p.cat===cat);
-
-  if(sel==='all'){
-    gmvFull=ZT_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    unitsFull=ZT_L.map((_,i)=>catFiltered.reduce((a,p)=>a+(p.units[i]||0),0));
-    title='Daily GMV — '+(cat==='all'?'All Products':cat)+' (Zepto)';
-    note=cat==='all'?'All products':cat;
-    const byTag={};catFiltered.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+  const cat=document.getElementById('ztcat')?document.getElementById('ztcat').value:'all';
+  const pool=cat==='all'?ZT:ZT.filter(p=>p.cat===cat);
+  let gFull,uFull,color='#4f9cf9',title,note;
+  if(sel==='all'){{
+    gFull=ZT_L.map((_,i)=>pool.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    uFull=ZT_L.map((_,i)=>pool.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — '+(cat==='all'?'All':cat)+' (Zepto)';note=cat==='all'?'All products':cat;
+    const byTag={{}};pool.forEach(p=>{{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);}});
     const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
-    const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
+    const tc={{'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'}};
     donutChart('ztP',tl,td,tl.map(t=>tc[t]||'#888'));
-    document.getElementById('ztpt').textContent='GMV share by category';
-  }else{
-    const p=ZT.find(x=>x.name===sel);
-    if(!p)return;
-    gmvFull=p.gmv;unitsFull=p.units;color=p.color;
-    title=p.name+' — daily GMV (Zepto)';note=p.cat+' · '+p.name;
-    const thisT=p.gmv.reduce((a,b)=>a+b,0);
-    const catT=ZT.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('ztP',[p.name.slice(0,20),'Rest of '+p.cat],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('ztpt').textContent='Share within '+p.cat;
-  }
-
-  const {gmv:gmvD,units:unitsD,labels:filtLabels}=getZtFiltered(gmvFull,unitsFull);
-  const tot=gmvD.reduce((a,b)=>a+b,0);
-  const uTot=unitsD.reduce((a,b)=>a+b,0);
+    document.getElementById('ztpt').textContent='GMV share';
+  }}else{{
+    const p=ZT.find(x=>x.name===sel);if(!p)return;
+    gFull=p.gmv;uFull=p.units;color=p.color;title=p.name+' (Zepto)';note=p.cat;
+    const thisT=p.gmv.reduce((a,b)=>a+b,0),catT=ZT.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart('ztP',[p.name.slice(0,18),'Rest'],[thisT,catT-thisT],[color,'#333']);
+    document.getElementById('ztpt').textContent='Share in '+p.cat;
+  }}
+  const {{g:gmvD,u:unitsD,l:lbl}}=sliceD(gFull,uFull,ZT_L,ZT_DATES,'ztdf','ztdt');
+  const tot=gmvD.reduce((a,b)=>a+b,0),uTot=unitsD.reduce((a,b)=>a+b,0);
   const bi=gmvD.indexOf(Math.max(...gmvD));
   document.getElementById('ztt').textContent=fmt(tot);
   document.getElementById('ztu').textContent=fu(uTot);
-  document.getElementById('ztbd').textContent=filtLabels[bi]||'—';
+  document.getElementById('ztbd').textContent=lbl[bi]||'—';
   document.getElementById('ztbg').textContent=fmt(gmvD[bi]);
   document.getElementById('ztav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
-  document.getElementById('ztGtitle').textContent=title;
+  document.getElementById('ztgt').textContent=title;
   document.getElementById('ztnote').textContent=note;
-  barChart('ztG',filtLabels,[{label:'GMV',data:gmvD,color}],{h:240});
-  barChart('ztU',filtLabels,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
-}
-document.getElementById('ztcat').addEventListener('change',()=>{
-  const cat=document.getElementById('ztcat').value;
-  const sel=document.getElementById('ztsel');
-  Array.from(sel.options).forEach(o=>{const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';o.style.display=(cat==='all'||og===cat||o.value==='all')?'':'none';});
-  if(cat!=='all'){const fv=Array.from(sel.options).find(o=>o.style.display!=='none'&&o.value!=='all');if(fv)sel.value=fv.value;}else sel.value='all';
-  renderZT();
-});
+  barChart('ztG',lbl,[{{label:'GMV',data:gmvD,color}}],{{h:240}});
+  barChart('ztU',lbl,[{{label:'Units',data:unitsD,color:color+'99'}}],{{h:210,yFmt:fu,valFmt:fu}});
+}}
 document.getElementById('ztsel').addEventListener('change',renderZT);
-document.getElementById('ztdf').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="zt"]').forEach(b=>b.classList.remove('on'));renderZT();});
-document.getElementById('ztdt').addEventListener('change',()=>{document.querySelectorAll('.qb[data-tab="zt"]').forEach(b=>b.classList.remove('on'));renderZT();});
 
 
-// ── Product tab quick-range buttons ─────────────────────
-document.querySelectorAll('.qb[data-tab]').forEach(b=>{
-  b.addEventListener('click',()=>{
-    const tab=b.dataset.tab;
-    document.querySelectorAll(`.qb[data-tab="${tab}"]`).forEach(x=>x.classList.remove('on'));
-    b.classList.add('on');
-    const rv=b.dataset.r;
-    const dateMap={sw:{dates:SW_DATES,df:'swdf',dt:'swdt',fn:renderSW},zt:{dates:ZT_DATES,df:'ztdf',dt:'ztdt',fn:renderZT},bk:{dates:BK_DATES,df:'bkdf',dt:'bkdt',fn:renderBK}};
-    const m=dateMap[tab];if(!m)return;
-    if(rv==='all'){document.getElementById(m.df).value='';document.getElementById(m.dt).value='';}
-    else{
-      const latest=m.dates.filter(Boolean).pop();
-      const fd=new Date(latest);fd.setDate(fd.getDate()-(+rv-1));
-      document.getElementById(m.df).value=fd.toISOString().slice(0,10);
-      document.getElementById(m.dt).value=latest;
-    }
-    m.fn();
-  });
-});
+// ── Wire product tab controls ────────────────────────────
+setupQb('sw',SW_DATES,renderSW);
+setupQb('zt',ZT_DATES,renderZT);
+setupQb('bk',BK_DATES,renderBK);
+catFilter('swcat','swsel',renderSW);
+catFilter('ztcat','ztsel',renderZT);
+catFilter('bkcat','bksel',renderBK);
 
 // ── Start ─────────────────────────────────────────────────
 go();
