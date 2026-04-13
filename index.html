@@ -93,6 +93,7 @@ select.di{min-width:220px;cursor:pointer;}
     <div class="tab" data-tab="pf">Platform View</div>
     <div class="tab" data-tab="sw">Swiggy / Product</div>
     <div class="tab" data-tab="zt">Zepto / Product</div>
+    <div class="tab" data-tab="bk">Blinkit / Product</div>
   </div>
 
   <!-- OVERVIEW -->
@@ -210,6 +211,48 @@ select.di{min-width:220px;cursor:pointer;}
   </div>
 </div>
 
+  <!-- BLINKIT PRODUCT TAB -->
+  <div class="tp" id="tp-bk">
+    <div class="sw-ctrl">
+      <div class="df">
+        <span class="fl">Product</span>
+        <select class="di" id="bksel">
+          <option value="all">All Products</option>
+          <optgroup label="Ragi Chips">
+            <option value="Snackible Peri Peri Ragi Chips">Peri Peri Ragi Chips ⭐</option>
+            <option value="Snackible Desi Masala Ragi Chips">Desi Masala Ragi Chips</option>
+            <option value="Snackible Chatpata Crunch Ragi Chips">Chatpata Crunch Ragi Chips</option>
+            <option value="Snackible Dipsters Piri Piri Ragi Chips with Chees">Piri Piri Ragi Chips</option>
+          </optgroup>
+          <optgroup label="Dipsters">
+            <option value="Snackible Biscuit Sticks with Chocolatey Dip">Biscuit Sticks Chocolatey ⭐</option>
+            <option value="Snackible Dipsters Vanilla Creme Dip with Biscuit ">Vanilla Creme Dipsters</option>
+            <option value="Snackible Pistachio Dipsters Biscuit Sticks">Pistachio Dipsters</option>
+          </optgroup>
+          <optgroup label="Others">
+            <option value="Snackible Cheese Dosa Khakhra">Cheese Dosa Khakhra ⭐</option>
+            <option value="Snackible Baked Pizza Sticks with Jalapeno Dip">Baked Pizza Sticks</option>
+            <option value="Snackible Salted Banana Chips">Salted Banana Chips</option>
+            <option value="Snackible Munchies Gift Pack">Munchies Gift Pack</option>
+          </optgroup>
+        </select>
+      </div>
+      <div style="font-size:11px;color:var(--m);padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Blinkit · <span id="bknote" style="color:var(--bl)">All products</span></div>
+    </div>
+    <div class="mg" style="grid-template-columns:repeat(4,1fr);">
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total GMV</div><div class="mv" id="bkt">—</div><div class="ms">April 2026</div></div>
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total Units</div><div class="mv" id="bku">—</div><div class="ms">units sold</div></div>
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Best Day</div><div class="mv" id="bkbd">—</div><div class="ms" id="bkbg">—</div></div>
+      <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Daily Avg GMV</div><div class="mv" id="bkav">—</div><div class="ms">per day</div></div>
+    </div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkgt">Daily GMV — All Products (Blinkit)</div></div><div class="chart-wrap" id="bkG"></div></div></div>
+    <div class="g2">
+      <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="bkU"></div></div>
+      <div class="cc"><div class="ch"><div class="ct" id="bkpt">Product GMV share</div></div><div class="chart-wrap" id="bkP"></div></div>
+    </div>
+  </div>
+</div>
+
 <div class="bar-tip" id="tip"></div>
 
 <script>
@@ -240,6 +283,7 @@ const SW=[
 const SW_L=["01 Mar","02 Mar","03 Mar","04 Mar","05 Mar","06 Mar","07 Mar","08 Mar","09 Mar","10 Mar","11 Mar","12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar","18 Mar","19 Mar","20 Mar","21 Mar","22 Mar","23 Mar","24 Mar","25 Mar","26 Mar","27 Mar","28 Mar","29 Mar","30 Mar","31 Mar"];
 const APPS_URL='https://script.google.com/macros/s/AKfycbzpab6rVhrAtfbI-Ys0gKGIisk04WnMDhTrL_J7Dl6IyUoIgwRUIFU0wZW06r6ZrzbY_A/exec';
 const ZEPTO_URL='https://script.google.com/macros/s/AKfycbyc8epyNuC8NIIeJ_tjtAavI9sLxYeE3XNLZ1zDg7G5461JgAJtABLD8Bvc5DhAx4sb/exec';
+const BLINKIT_URL='https://script.google.com/macros/s/AKfycbxKa38-IeAGCivMLdkQkZVP2E4AgOTDwbrhe3sRdVLOIk7qZoyVJqmrVN0eZk7dAGfssA/exec';
 let liveOMS=[...OMS];
 
 // ── Helpers ───────────────────────────────────────────────
@@ -514,8 +558,61 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tp').forEach(x=>x.classList.remove('on'));
   t.classList.add('on');
   document.getElementById('tp-'+t.dataset.tab).classList.add('on');
-  setTimeout(()=>{renderOMS(filtered());if(t.dataset.tab==='sw')renderSW();if(t.dataset.tab==='zt')renderZT();},30);
+  setTimeout(()=>{renderOMS(filtered());if(t.dataset.tab==='sw')renderSW();if(t.dataset.tab==='zt')renderZT();if(t.dataset.tab==='bk')renderBK();},30);
 }));
+
+// ── BLINKIT PRODUCT DATA (April 2026) ────────────────────
+const BK_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
+const BK=[
+  {cat:"Ragi Chips",name:"Snackible Peri Peri Ragi Chips",color:"#f5a623",gmv:[276785,274590,287250,277755,269860,263130,280200,234575,244355,253345,299015,271765,0],units:[5535,5491,5744,5553,5397,5261,5603,4691,4886,5066,5980,5435,0]},
+  {cat:"Ragi Chips",name:"Snackible Desi Masala Ragi Chips",color:"#f5a623",gmv:[42050,43700,39100,36100,36200,34900,36900,31700,31700,32700,38350,33850,0],units:[841,874,782,722,724,698,738,634,634,654,767,677,0]},
+  {cat:"Ragi Chips",name:"Snackible Chatpata Crunch Ragi Chips",color:"#f5a623",gmv:[28500,29850,30450,33150,32350,28500,29400,23150,24150,23350,26350,27350,0],units:[570,597,609,663,647,570,588,463,483,467,527,547,0]},
+  {cat:"Ragi Chips",name:"Snackible Dipsters Piri Piri Ragi Chips with Chees",color:"#f5a623",gmv:[20250,21250,23950,20550,22550,17250,20700,20450,21400,20700,22400,21200,0],units:[405,425,479,411,451,345,414,409,428,414,448,424,0]},
+  {cat:"Dipsters",name:"Snackible Biscuit Sticks with Chocolatey Dip",color:"#f5a623",gmv:[23205,25935,23065,23310,24675,23275,23380,21840,20720,24290,40110,25060,0],units:[663,741,659,666,705,665,668,624,592,694,1146,716,0]},
+  {cat:"Dipsters",name:"Snackible Dipsters Vanilla Creme Dip with Biscuit ",color:"#f5a623",gmv:[5355,4830,4830,5040,5110,4235,4655,5565,3885,4165,5005,4585,0],units:[153,138,138,144,146,121,133,159,111,119,143,131,0]},
+  {cat:"Dipsters",name:"Snackible Pistachio Dipsters Biscuit Sticks",color:"#f5a623",gmv:[0,60,360,240,480,540,600,180,420,720,2820,660,0],units:[0,1,6,4,8,9,10,3,7,12,47,11,0]},
+  {cat:"Others",name:"Snackible Cheese Dosa Khakhra",color:"#f5a623",gmv:[62640,62620,59640,54920,57460,56400,68740,47740,52200,52400,51840,52180,0],units:[522,522,497,458,479,470,573,398,435,438,432,435,0]},
+  {cat:"Others",name:"Snackible Baked Pizza Sticks with Jalapeno Dip",color:"#f5a623",gmv:[19180,20720,19880,18480,19040,15190,21210,16170,19670,15820,18410,17010,0],units:[274,296,284,264,272,217,303,231,281,226,263,243,0]},
+  {cat:"Others",name:"Snackible Salted Banana Chips",color:"#f5a623",gmv:[6060,4680,4800,4320,5820,6480,4860,6060,6000,5880,4980,4200,0],units:[101,78,80,72,97,108,81,101,100,98,83,70,0]},
+  {cat:"Others",name:"Snackible Munchies Gift Pack",color:"#f5a623",gmv:[0,799,0,799,799,0,799,799,799,1598,1598,799,0],units:[0,1,0,1,1,0,1,1,1,2,2,1,0]},
+];
+
+function renderBK(){
+  const sel=document.getElementById('bksel').value;
+  let gmvD,unitsD,color='#f5a623',title,note;
+  if(sel==='all'){
+    gmvD=BK_L.map((_,i)=>BK.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    unitsD=BK_L.map((_,i)=>BK.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — All Products (Blinkit April 2026)';note='All products';
+    const byTag={};BK.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
+    const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Others':'#95a5a6'};
+    donutChart('bkP',tl,td,tl.map(t=>tc[t]||'#888'));
+    document.getElementById('bkpt').textContent='GMV share by category';
+  }else{
+    const p=BK.find(x=>x.name===sel);
+    if(!p)return;
+    gmvD=p.gmv;unitsD=p.units;
+    title=p.name+' — daily GMV (Blinkit)';note=p.cat+' · '+p.name;
+    const thisT=p.gmv.reduce((a,b)=>a+b,0);
+    const catT=BK.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart('bkP',[p.name.slice(0,20),'Rest of '+p.cat],[thisT,catT-thisT],['#f5a623','#333']);
+    document.getElementById('bkpt').textContent='Share within '+p.cat;
+  }
+  const tot=gmvD.reduce((a,b)=>a+b,0);
+  const uTot=unitsD.reduce((a,b)=>a+b,0);
+  const bi=gmvD.indexOf(Math.max(...gmvD));
+  document.getElementById('bkt').textContent=fmt(tot);
+  document.getElementById('bku').textContent=fu(uTot);
+  document.getElementById('bkbd').textContent=BK_L[bi]||'—';
+  document.getElementById('bkbg').textContent=fmt(gmvD[bi]);
+  document.getElementById('bkav').textContent=fmt(Math.round(tot/gmvD.filter(v=>v>0).length));
+  document.getElementById('bkgt').textContent=title;
+  document.getElementById('bknote').textContent=note;
+  barChart('bkG',BK_L,[{label:'GMV',data:gmvD,color:'#f5a623'}],{h:240});
+  barChart('bkU',BK_L,[{label:'Units',data:unitsD,color:'#f5a62399'}],{h:210,yFmt:fu,valFmt:fu});
+}
+document.getElementById('bksel').addEventListener('change',renderBK);
 
 // ── ZEPTO PRODUCT DATA (April 2026) ──────────────────────
 const ZT_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
@@ -579,6 +676,7 @@ document.getElementById('ztsel').addEventListener('change',renderZT);
 go();
 renderSW();
 renderZT();
+renderBK();
 
 // Background live fetch
 (async()=>{
@@ -684,6 +782,61 @@ renderZT();
     console.log('Zepto live data loaded');
   }catch(e){
     console.warn('Zepto live fetch skipped:',e.message);
+  }
+})();
+
+// Background Blinkit live fetch
+(async()=>{
+  try{
+    const ctrl=new AbortController();
+    setTimeout(()=>ctrl.abort(),10000);
+    const res=await fetch(BLINKIT_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+    if(!res.ok)throw new Error('bad');
+    const raw=JSON.parse(await res.text());
+    if(!Array.isArray(raw))throw new Error('not array');
+
+    // Find day row (row 4) - contains day numbers 1,2,3...
+    let dayRow=-1;
+    for(let i=0;i<raw.length;i++){
+      const r=raw[i];
+      const nums=r.filter(v=>typeof v==='number'&&v>=1&&v<=13&&Number.isInteger(v));
+      if(nums.length>=5){dayRow=i;break;}
+    }
+    if(dayRow<0)throw new Error('no day row');
+
+    const dayRowData=raw[dayRow];
+    const dayCols={};
+    dayRowData.forEach((v,i)=>{
+      if(typeof v==='number'&&v>=1&&v<=31&&Number.isInteger(v)) dayCols[v]=i;
+    });
+
+    // Parse products from row 7 onwards (index 6)
+    const skipNames=new Set(['TOTALS','GRAND TOTAL',' TOTALS','']);
+    for(let i=6;i<raw.length;i++){
+      const r=raw[i];
+      const name=String(r[1]||'').trim();
+      if(!name||skipNames.has(name))continue;
+
+      const gmvArr=[], unitsArr=[];
+      let hasData=false;
+      for(let day=1;day<=13;day++){
+        const col=dayCols[day];
+        const units=col!==undefined&&typeof r[col]==='number'?r[col]:0;
+        const gmv=col!==undefined&&typeof r[col+1]==='number'?r[col+1]:0;
+        gmvArr.push(gmv||0);
+        unitsArr.push(units||0);
+        if(gmv>0)hasData=true;
+      }
+      if(!hasData)continue;
+
+      const existing=BK.find(p=>p.name===name||p.name.slice(0,40)===name.slice(0,40));
+      if(existing){existing.gmv=gmvArr;existing.units=unitsArr;}
+    }
+
+    if(document.getElementById('tp-bk').classList.contains('on'))renderBK();
+    console.log('Blinkit live data loaded');
+  }catch(e){
+    console.warn('Blinkit live fetch skipped:',e.message);
   }
 })();
 
