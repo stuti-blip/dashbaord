@@ -2,33 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>OMS Tracker — FY26-27</title>
 <style>
-:root{--bg:#0d0d0d;--s:#161616;--s2:#1e1e1e;--b:rgba(255,255,255,.08);--t:#ffffff;--m:#aaaaaa;--z:#4f9cf9;--bl:#f5a623;--in:#2ecc71;--bb:#e05c5c;--ac:#f5a623;}
+:root{--bg:#0d0d0d;--s:#161616;--s2:#1e1e1e;--b:rgba(255,255,255,.08);--t:#fff;--m:#aaa;--z:#4f9cf9;--bl:#f5a623;--in:#2ecc71;--bb:#e05c5c;--ac:#f5a623;}
 *{box-sizing:border-box;margin:0;padding:0;}
-body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-height:100vh;}
+body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;}
 .bar{border-bottom:1px solid var(--b);padding:12px 24px;display:flex;justify-content:space-between;align-items:center;background:var(--s);position:sticky;top:0;z-index:20;}
 .logo{font-size:14px;font-weight:600;letter-spacing:.05em;}.logo span{color:var(--ac);}
 .stl{font-size:11px;color:var(--m);display:flex;align-items:center;gap:6px;}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--in);}
 .wrap{padding:20px 24px;max-width:1400px;margin:0 auto;}
 .ph{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:18px;flex-wrap:wrap;gap:10px;}
-.pt{font-size:21px;font-weight:500;margin-bottom:2px;}.ps{font-size:11px;color:var(--m);}.ps span{color:var(--ac);}
+.pt{font-size:21px;font-weight:500;margin-bottom:2px;}.ps{font-size:11px;color:var(--m);}
+.ps span{color:var(--ac);}
 .df{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:9px 13px;display:flex;align-items:center;gap:8px;flex-wrap:wrap;}
 .fl{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.06em;}
 .di{background:var(--s2);border:1px solid var(--b);border-radius:6px;color:var(--t);font-size:12px;padding:5px 9px;outline:none;}
 .di:focus{border-color:var(--ac);}
-.qb{background:transparent;border:1px solid var(--b);border-radius:6px;color:var(--m);font-size:11px;padding:5px 9px;cursor:pointer;}
-.qb:hover,.qb.on{background:var(--ac);border-color:var(--ac);color:#000;font-weight:500;}
+.qb{background:transparent;border:1px solid var(--b);border-radius:6px;color:var(--m);font-size:11px;padding:5px 9px;cursor:pointer;font-family:system-ui,sans-serif;}
+.qb:hover,.qb.on{background:var(--ac);border-color:var(--ac);color:#000;font-weight:600;}
 .mg{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:18px;}
 .mc{background:var(--s);border:1px solid var(--b);border-radius:10px;padding:14px;position:relative;overflow:hidden;}
 .mc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;}
-.mc.a::before{background:var(--ac)}.mc.z::before{background:var(--z)}.mc.bl::before{background:var(--bl)}.mc.in::before{background:var(--in)}
+.mc.ca::before{background:var(--ac)}.mc.cz::before{background:var(--z)}.mc.cb::before{background:var(--bl)}.mc.ci::before{background:var(--in)}
 .ml{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.07em;margin-bottom:7px;}
-.mv{font-size:21px;font-weight:500;font-family:monospace;color:#fff;}.ms{font-size:10px;color:var(--m);margin-top:3px;}
+.mv{font-size:21px;font-weight:500;font-family:monospace;color:#fff;}
+.ms{font-size:10px;color:var(--m);margin-top:3px;}
 .tabs{display:flex;border-bottom:1px solid var(--b);margin-bottom:18px;}
-.tab{padding:9px 20px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;}
+.tab{padding:9px 20px;font-size:13px;font-weight:500;color:var(--m);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;user-select:none;}
 .tab.on{color:var(--ac);border-bottom-color:var(--ac);}
 .tp{display:none;}.tp.on{display:block;}
 .pg{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:18px;}
@@ -43,18 +45,15 @@ body{background:var(--bg);color:var(--t);font-family:system-ui,sans-serif;min-he
 .ct{font-size:12px;font-weight:500;}
 .lg{display:flex;gap:9px;flex-wrap:wrap;}
 .li{display:flex;align-items:center;gap:4px;font-size:10px;color:var(--m);}
-.ld{width:8px;height:8px;border-radius:2px;flex-shrink:0;}
-/* SVG chart styles */
-.chart-wrap{width:100%;overflow:hidden;}
-svg text{font-family:system-ui,sans-serif;}
-.bar-tip{position:absolute;background:#222;border:1px solid #444;padding:4px 8px;border-radius:4px;font-size:11px;pointer-events:none;display:none;white-space:nowrap;z-index:100;}
+.ld{width:8px;height:8px;border-radius:2px;}
+.cw{width:100%;overflow:hidden;}
 .pm{display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-bottom:13px;}
 .mm{background:var(--s2);border-radius:8px;padding:11px;}
 .mmv{font-size:17px;font-weight:500;font-family:monospace;color:#fff;}
 .mml{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:4px;}
-.sw-ctrl{display:flex;gap:10px;margin-bottom:15px;flex-wrap:wrap;align-items:center;}
-select.di{min-width:220px;cursor:pointer;}
-.st2{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:8px;margin-top:12px;}
+.ptctrl{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;}
+.tip{position:fixed;background:#222;border:1px solid #555;padding:4px 10px;border-radius:5px;font-size:11px;pointer-events:none;display:none;z-index:999;white-space:nowrap;}
+.st2{font-size:10px;color:var(--m);text-transform:uppercase;letter-spacing:.06em;margin-bottom:6px;}
 @media(max-width:900px){.mg{grid-template-columns:repeat(3,1fr);}.g2{grid-template-columns:1fr;}.pg{grid-template-columns:repeat(2,1fr);}.pm{grid-template-columns:1fr 1fr;}}
 @media(max-width:550px){.mg{grid-template-columns:repeat(2,1fr);}.wrap{padding:12px;}.ph{flex-direction:column;}}
 </style>
@@ -66,28 +65,28 @@ select.di{min-width:220px;cursor:pointer;}
 </div>
 <div class="wrap">
   <div class="ph">
-    <div><p class="pt">Sales Dashboard — FY26-27</p><p class="ps">Live data · Refreshes every <span>5 min</span> · <span id="lu">—</span></p></div>
+    <div><p class="pt">Sales Dashboard — FY26-27</p><p class="ps">Live · every <span>5 min</span> · <span id="lu">—</span></p></div>
     <div class="df">
       <span class="fl">Range</span>
       <input type="date" class="di" id="df">
-      <span style="font-size:11px;color:var(--m)">→</span>
+      <span style="color:var(--m);font-size:11px">→</span>
       <input type="date" class="di" id="dt">
-      <div style="display:flex;gap:5px;">
-        <button class="qb on" data-r="all">All</button>
-        <button class="qb" data-r="7">7d</button>
-        <button class="qb" data-r="3">3d</button>
-        <button class="qb" data-r="1">Today</button>
-      </div>
+      <button class="qb on" data-oms="all">All</button>
+      <button class="qb" data-oms="7">7d</button>
+      <button class="qb" data-oms="3">3d</button>
+      <button class="qb" data-oms="1">Today</button>
       <span style="font-size:11px;color:var(--m);font-family:monospace;" id="fi">—</span>
     </div>
   </div>
+
   <div class="mg">
-    <div class="mc a"><div class="ml">Total Sales</div><div class="mv" id="mts">—</div><div class="ms">All platforms</div></div>
-    <div class="mc a"><div class="ml">Total Spends</div><div class="mv" id="msp">—</div><div class="ms" id="mor">—</div></div>
-    <div class="mc z"><div class="ml">Zepto</div><div class="mv" id="mz">—</div><div class="ms" id="mzr">—</div></div>
-    <div class="mc bl"><div class="ml">Blinkit</div><div class="mv" id="mb">—</div><div class="ms" id="mbr">—</div></div>
-    <div class="mc in"><div class="ml">Instamart</div><div class="mv" id="mi">—</div><div class="ms" id="mir">—</div></div>
+    <div class="mc ca"><div class="ml">Total Sales</div><div class="mv" id="mts">—</div><div class="ms">All platforms</div></div>
+    <div class="mc ca"><div class="ml">Total Spends</div><div class="mv" id="msp">—</div><div class="ms" id="mor">—</div></div>
+    <div class="mc cz"><div class="ml">Zepto</div><div class="mv" id="mz">—</div><div class="ms" id="mzr">—</div></div>
+    <div class="mc cb"><div class="ml">Blinkit</div><div class="mv" id="mb">—</div><div class="ms" id="mbr">—</div></div>
+    <div class="mc ci"><div class="ml">Instamart</div><div class="mv" id="mi">—</div><div class="ms" id="mir">—</div></div>
   </div>
+
   <div class="tabs">
     <div class="tab on" data-tab="ov">Overview</div>
     <div class="tab" data-tab="pf">Platform View</div>
@@ -96,141 +95,83 @@ select.di{min-width:220px;cursor:pointer;}
     <div class="tab" data-tab="bk">Blinkit / Product</div>
   </div>
 
-  <!-- OVERVIEW -->
+  <!-- OVERVIEW TAB -->
   <div class="tp on" id="tp-ov">
     <div class="pg" id="pcards"></div>
     <div class="g1"><div class="cc">
       <div class="ch"><div class="ct">Sales per day (₹)</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div>
-      <div class="chart-wrap" id="cS"></div>
+      <div class="cw" id="cS" style="min-height:250px"></div>
     </div></div>
     <div class="g2">
-      <div class="cc"><div class="ch"><div class="ct">Spends per day (₹)</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div><div class="chart-wrap" id="cSp"></div></div>
-      <div class="cc"><div class="ch"><div class="ct">Units sold per day</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div><div class="chart-wrap" id="cU"></div></div>
+      <div class="cc"><div class="ch"><div class="ct">Spends per day (₹)</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div><div class="cw" id="cSp" style="min-height:210px"></div></div>
+      <div class="cc"><div class="ch"><div class="ct">Units sold per day</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div><div class="cw" id="cU" style="min-height:210px"></div></div>
     </div>
     <div class="g2">
-      <div class="cc"><div class="ch"><div class="ct">ROAS trend</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div><div class="chart-wrap" id="cR"></div></div>
-      <div class="cc"><div class="ch"><div class="ct">Platform share</div></div><div class="chart-wrap" id="cP"></div></div>
+      <div class="cc"><div class="ch"><div class="ct">ROAS trend</div><div class="lg"><div class="li"><div class="ld" style="background:#4f9cf9"></div>Zepto</div><div class="li"><div class="ld" style="background:#f5a623"></div>Blinkit</div><div class="li"><div class="ld" style="background:#2ecc71"></div>Instamart</div></div></div><div class="cw" id="cR" style="min-height:210px"></div></div>
+      <div class="cc"><div class="ch"><div class="ct">Platform share</div></div><div class="cw" id="cP" style="min-height:210px"></div></div>
     </div>
   </div>
 
-  <!-- PLATFORM VIEW -->
-  <div class="tp" id="tp-pf"><div id="pfsections"></div></div>
+  <!-- PLATFORM VIEW TAB -->
+  <div class="tp" id="tp-pf"><div id="pfsec"></div></div>
 
-  <!-- SWIGGY -->
+  <!-- SWIGGY TAB -->
   <div class="tp" id="tp-sw">
-    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+    <div class="ptctrl">
       <div class="df" style="gap:6px;flex-wrap:wrap;">
         <span class="fl">Cat</span>
-        <select class="di" id="swcat">
-          <option value="all">All</option>
-          <option value="Ragi Chips">Ragi Chips</option>
-          <option value="Dipsters">Dipsters</option>
-          <option value="Puffs">Puffs</option>
-          <option value="Others">Others</option>
-        </select>
+        <select class="di" id="swcat"><option value="all">All</option><option value="Ragi Chips">Ragi Chips</option><option value="Dipsters">Dipsters</option><option value="Puffs">Puffs</option><option value="Others">Others</option></select>
         <span class="fl">Product</span>
         <select class="di" id="swsel" style="min-width:170px;">
           <option value="all">All Products</option>
-          <optgroup label="Ragi Chips">
-            <option value="10684">peri peri ragi chips ⭐</option>
-            <option value="200141">desi masala ragi chips</option>
-            <option value="25000">piri piri ragi chips</option>
-            <option value="25001">jalepeno ragi chips</option>
-          </optgroup>
-          <optgroup label="Dipsters">
-            <option value="10685">biscuit sticks chocolatey</option>
-            <option value="25745">biscuit sticks crispies</option>
-            <option value="21280">biscuit sticks caramel</option>
-          </optgroup>
-          <optgroup label="Puffs">
-            <option value="30888">nacho cheese jowar puffs ⭐</option>
-            <option value="31250">dahi papdi quinoa puffs</option>
-            <option value="31249">tangy tomato chickpea</option>
-            <option value="924774">korean bbq jowar</option>
-          </optgroup>
-          <optgroup label="Others">
-            <option value="64817">cheese dosa khakra ⭐</option>
-            <option value="330874">chatpata masala millet</option>
-            <option value="10683">baked pizza sticks</option>
-            <option value="42604">garlic bread chickpea</option>
-            <option value="383795">korean barbeque chickpea</option>
-            <option value="161918">salted banana chips</option>
-          </optgroup>
+          <optgroup label="Ragi Chips"><option value="10684">peri peri ragi chips ⭐</option><option value="200141">desi masala</option><option value="25000">piri piri</option><option value="25001">jalepeno</option></optgroup>
+          <optgroup label="Dipsters"><option value="10685">biscuit sticks chocolatey</option><option value="25745">biscuit sticks crispies</option><option value="21280">biscuit sticks caramel</option></optgroup>
+          <optgroup label="Puffs"><option value="30888">nacho cheese jowar ⭐</option><option value="31250">dahi papdi quinoa</option><option value="31249">tangy tomato chickpea</option><option value="924774">korean bbq jowar</option></optgroup>
+          <optgroup label="Others"><option value="64817">cheese dosa khakra ⭐</option><option value="330874">chatpata masala millet</option><option value="10683">baked pizza sticks</option><option value="42604">garlic bread chickpea</option><option value="383795">korean barbeque chickpea</option><option value="161918">salted banana chips</option></optgroup>
         </select>
       </div>
       <div class="df" style="gap:6px;">
         <span class="fl">Date</span>
         <input type="date" class="di" id="swdf" min="2026-03-01" max="2026-03-31">
-        <span style="color:#aaa;font-size:11px">→</span>
+        <span style="color:var(--m);font-size:11px">→</span>
         <input type="date" class="di" id="swdt" min="2026-03-01" max="2026-03-31">
-        <button class="qb on" id="swAll">All</button>
-        <button class="qb" id="sw7d">7d</button>
-        <button class="qb" id="sw3d">3d</button>
+        <button class="qb on" id="swQall">All</button><button class="qb" id="swQ7">7d</button><button class="qb" id="swQ3">3d</button>
       </div>
-      <span style="font-size:11px;color:#aaa;padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Swiggy Mar · <span id="swnote" style="color:var(--ac)">All</span></span>
+      <span style="font-size:11px;color:var(--m);padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Swiggy Mar · <span id="swnote" style="color:var(--ac)">All</span></span>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
-      <div class="mc a"><div class="ml">Total GMV</div><div class="mv" id="swt">—</div><div class="ms">filtered</div></div>
-      <div class="mc a"><div class="ml">Total Units</div><div class="mv" id="swu">—</div><div class="ms">units sold</div></div>
-      <div class="mc a"><div class="ml">Best Day</div><div class="mv" id="swbd">—</div><div class="ms" id="swbg">—</div></div>
-      <div class="mc a"><div class="ml">Daily Avg</div><div class="mv" id="swav">—</div><div class="ms">per day</div></div>
+      <div class="mc ca"><div class="ml">Total GMV</div><div class="mv" id="swt">—</div><div class="ms">filtered</div></div>
+      <div class="mc ca"><div class="ml">Total Units</div><div class="mv" id="swu">—</div><div class="ms">units sold</div></div>
+      <div class="mc ca"><div class="ml">Best Day</div><div class="mv" id="swbd">—</div><div class="ms" id="swbg">—</div></div>
+      <div class="mc ca"><div class="ml">Daily Avg</div><div class="mv" id="swav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="swgt">Daily GMV</div></div><div class="chart-wrap" id="swG"></div></div></div>
-    <div class="g2">
-      <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="swU"></div></div>
-      <div class="cc"><div class="ch"><div class="ct" id="swpt">Product share</div></div><div class="chart-wrap" id="swP"></div></div>
-    </div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="swgt">Daily GMV</div></div><div class="cw" id="swG" style="min-height:240px"></div></div></div>
+    <div class="g2"><div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="cw" id="swU" style="min-height:210px"></div></div><div class="cc"><div class="ch"><div class="ct" id="swpt">GMV share</div></div><div class="cw" id="swP" style="min-height:210px"></div></div></div>
   </div>
-    <!-- ZEPTO PRODUCT TAB -->
+
+  <!-- ZEPTO TAB -->
   <div class="tp" id="tp-zt">
-    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+    <div class="ptctrl">
       <div class="df" style="gap:6px;flex-wrap:wrap;">
         <span class="fl">Cat</span>
-        <select class="di" id="ztcat">
-          <option value="all">All</option>
-          <option value="Ragi Chips">Ragi Chips</option>
-          <option value="Dipsters">Dipsters</option>
-          <option value="Puffs">Puffs</option>
-          <option value="Others">Others</option>
-        </select>
+        <select class="di" id="ztcat"><option value="all">All</option><option value="Ragi Chips">Ragi Chips</option><option value="Dipsters">Dipsters</option><option value="Puffs">Puffs</option><option value="Others">Others</option></select>
         <span class="fl">Product</span>
-        <select class="di" id="ztsel" style="min-width:180px;">
+        <select class="di" id="ztsel" style="min-width:170px;">
           <option value="all">All Products</option>
-          <optgroup label="Ragi Chips">
-            <option value="RC Peri Peri">RC Peri Peri ⭐</option>
-            <option value="RC Cheesy Jalapeno Dip">RC Cheesy Jalapeno Dip</option>
-            <option value="RC desi masala">RC desi masala</option>
-            <option value="Snackible Chatpata Crunch Ragi Chips- No">Chatpata Crunch</option>
-            <option value="RC jalapeno">RC jalapeno</option>
-          </optgroup>
-          <optgroup label="Dipsters">
-            <option value="dip choco BS">Biscuit Sticks Chocolatey</option>
-          </optgroup>
-          <optgroup label="Puffs">
-            <option value="puff nacho jowar">Nacho Jowar Puffs ⭐</option>
-            <option value="Puff sriracha quinoa">Sriracha Quinoa Puffs</option>
-          </optgroup>
-          <optgroup label="Others">
-            <option value="holi box">Holi Box ⭐</option>
-            <option value="other dosa khakra">Dosa Khakra</option>
-            <option value="Snackible Kunafa Chocolate Bites 1.0 PIE">Kunafa Bites</option>
-            <option value="dip baked pizza">Baked Pizza Sticks</option>
-            <option value="other salted banana">Salted Banana Chips</option>
-            <option value="Other Millet Bhujia">Millet Bhujia</option>
-            <option value="fSnackible Peanuts | Roasted - High Prot">Roasted Peanuts</option>
-          </optgroup>
+          <optgroup label="Ragi Chips"><option value="RC Peri Peri">RC Peri Peri ⭐</option><option value="RC Cheesy Jalapeno Dip">RC Cheesy Jalapeno</option><option value="RC desi masala">RC desi masala</option><option value="Snackible Chatpata Crunch Ragi Chips- No">Chatpata Crunch</option><option value="RC jalapeno">RC jalapeno</option></optgroup>
+          <optgroup label="Dipsters"><option value="dip choco BS">Biscuit Sticks Chocolatey</option></optgroup>
+          <optgroup label="Puffs"><option value="puff nacho jowar">Nacho Jowar Puffs ⭐</option><option value="Puff sriracha quinoa">Sriracha Quinoa</option></optgroup>
+          <optgroup label="Others"><option value="holi box">Holi Box ⭐</option><option value="other dosa khakra">Dosa Khakra</option><option value="Snackible Kunafa Chocolate Bites 1.0 PIE">Kunafa Bites</option><option value="dip baked pizza">Baked Pizza Sticks</option><option value="other salted banana">Salted Banana</option><option value="Other Millet Bhujia">Millet Bhujia</option><option value="fSnackible Peanuts | Roasted - High Prot">Roasted Peanuts</option></optgroup>
         </select>
       </div>
       <div class="df" style="gap:6px;">
         <span class="fl">Date</span>
         <input type="date" class="di" id="ztdf" min="2026-04-01" max="2026-04-13">
-        <span style="color:#aaa;font-size:11px">→</span>
+        <span style="color:var(--m);font-size:11px">→</span>
         <input type="date" class="di" id="ztdt" min="2026-04-01" max="2026-04-13">
-        <button class="qb on" id="ztAll">All</button>
-        <button class="qb" id="zt7d">7d</button>
-        <button class="qb" id="zt3d">3d</button>
+        <button class="qb on" id="ztQall">All</button><button class="qb" id="ztQ7">7d</button><button class="qb" id="ztQ3">3d</button>
       </div>
-      <span style="font-size:11px;color:#aaa;padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Zepto Apr · <span id="ztnote" style="color:var(--z)">All</span></span>
+      <span style="font-size:11px;color:var(--m);padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Zepto Apr · <span id="ztnote" style="color:var(--z)">All</span></span>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
       <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Total GMV</div><div class="mv" id="ztt">—</div><div class="ms">filtered</div></div>
@@ -238,55 +179,32 @@ select.di{min-width:220px;cursor:pointer;}
       <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Best Day</div><div class="mv" id="ztbd">—</div><div class="ms" id="ztbg">—</div></div>
       <div class="mc" style="border-top:2px solid var(--z)"><div class="ml">Daily Avg</div><div class="mv" id="ztav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztgt">Daily GMV (Zepto)</div></div><div class="chart-wrap" id="ztG"></div></div></div>
-    <div class="g2">
-      <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="ztU"></div></div>
-      <div class="cc"><div class="ch"><div class="ct" id="ztpt">GMV share</div></div><div class="chart-wrap" id="ztP"></div></div>
-    </div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztgt">Daily GMV (Zepto)</div></div><div class="cw" id="ztG" style="min-height:240px"></div></div></div>
+    <div class="g2"><div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="cw" id="ztU" style="min-height:210px"></div></div><div class="cc"><div class="ch"><div class="ct" id="ztpt">GMV share</div></div><div class="cw" id="ztP" style="min-height:210px"></div></div></div>
   </div>
-    <!-- BLINKIT PRODUCT TAB -->
+
+  <!-- BLINKIT TAB -->
   <div class="tp" id="tp-bk">
-    <div style="display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap;align-items:center;">
+    <div class="ptctrl">
       <div class="df" style="gap:6px;flex-wrap:wrap;">
         <span class="fl">Cat</span>
-        <select class="di" id="bkcat">
-          <option value="all">All</option>
-          <option value="Ragi Chips">Ragi Chips</option>
-          <option value="Dipsters">Dipsters</option>
-          <option value="Others">Others</option>
-        </select>
+        <select class="di" id="bkcat"><option value="all">All</option><option value="Ragi Chips">Ragi Chips</option><option value="Dipsters">Dipsters</option><option value="Others">Others</option></select>
         <span class="fl">Product</span>
-        <select class="di" id="bksel" style="min-width:180px;">
+        <select class="di" id="bksel" style="min-width:170px;">
           <option value="all">All Products</option>
-          <optgroup label="Ragi Chips">
-            <option value="Snackible Peri Peri Ragi Chips">Peri Peri Ragi Chips ⭐</option>
-            <option value="Snackible Desi Masala Ragi Chips">Desi Masala Ragi Chips</option>
-            <option value="Snackible Chatpata Crunch Ragi Chips">Chatpata Crunch</option>
-            <option value="Snackible Dipsters Piri Piri Ragi Chips with Chees">Piri Piri Ragi Chips</option>
-          </optgroup>
-          <optgroup label="Dipsters">
-            <option value="Snackible Biscuit Sticks with Chocolatey Dip">Biscuit Sticks Chocolatey ⭐</option>
-            <option value="Snackible Dipsters Vanilla Creme Dip with Biscuit ">Vanilla Creme Dipsters</option>
-            <option value="Snackible Pistachio Dipsters Biscuit Sticks">Pistachio Dipsters</option>
-          </optgroup>
-          <optgroup label="Others">
-            <option value="Snackible Cheese Dosa Khakhra">Cheese Dosa Khakhra ⭐</option>
-            <option value="Snackible Baked Pizza Sticks with Jalapeno Dip">Baked Pizza Sticks</option>
-            <option value="Snackible Salted Banana Chips">Salted Banana Chips</option>
-            <option value="Snackible Munchies Gift Pack">Munchies Gift Pack</option>
-          </optgroup>
+          <optgroup label="Ragi Chips"><option value="Snackible Peri Peri Ragi Chips">Peri Peri ⭐</option><option value="Snackible Desi Masala Ragi Chips">Desi Masala</option><option value="Snackible Chatpata Crunch Ragi Chips">Chatpata Crunch</option><option value="Snackible Dipsters Piri Piri Ragi Chips with Chees">Piri Piri</option></optgroup>
+          <optgroup label="Dipsters"><option value="Snackible Biscuit Sticks with Chocolatey Dip">Biscuit Sticks Chocolatey ⭐</option><option value="Snackible Dipsters Vanilla Creme Dip with Biscuit ">Vanilla Creme</option><option value="Snackible Pistachio Dipsters Biscuit Sticks">Pistachio Dipsters</option></optgroup>
+          <optgroup label="Others"><option value="Snackible Cheese Dosa Khakhra">Cheese Dosa Khakhra ⭐</option><option value="Snackible Baked Pizza Sticks with Jalapeno Dip">Baked Pizza Sticks</option><option value="Snackible Salted Banana Chips">Salted Banana Chips</option><option value="Snackible Munchies Gift Pack">Munchies Gift Pack</option></optgroup>
         </select>
       </div>
       <div class="df" style="gap:6px;">
         <span class="fl">Date</span>
         <input type="date" class="di" id="bkdf" min="2026-04-01" max="2026-04-13">
-        <span style="color:#aaa;font-size:11px">→</span>
+        <span style="color:var(--m);font-size:11px">→</span>
         <input type="date" class="di" id="bkdt" min="2026-04-01" max="2026-04-13">
-        <button class="qb on" id="bkAll">All</button>
-        <button class="qb" id="bk7d">7d</button>
-        <button class="qb" id="bk3d">3d</button>
+        <button class="qb on" id="bkQall">All</button><button class="qb" id="bkQ7">7d</button><button class="qb" id="bkQ3">3d</button>
       </div>
-      <span style="font-size:11px;color:#aaa;padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Blinkit Apr · <span id="bknote" style="color:var(--bl)">All</span></span>
+      <span style="font-size:11px;color:var(--m);padding:8px 12px;background:var(--s);border:1px solid var(--b);border-radius:8px;">Blinkit Apr · <span id="bknote" style="color:var(--bl)">All</span></span>
     </div>
     <div class="mg" style="grid-template-columns:repeat(4,1fr);">
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Total GMV</div><div class="mv" id="bkt">—</div><div class="ms">filtered</div></div>
@@ -294,27 +212,30 @@ select.di{min-width:220px;cursor:pointer;}
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Best Day</div><div class="mv" id="bkbd">—</div><div class="ms" id="bkbg">—</div></div>
       <div class="mc" style="border-top:2px solid var(--bl)"><div class="ml">Daily Avg</div><div class="mv" id="bkav">—</div><div class="ms">per day</div></div>
     </div>
-    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkgt">Daily GMV (Blinkit)</div></div><div class="chart-wrap" id="bkG"></div></div></div>
-    <div class="g2">
-      <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="bkU"></div></div>
-      <div class="cc"><div class="ch"><div class="ct" id="bkpt">GMV share</div></div><div class="chart-wrap" id="bkP"></div></div>
-    </div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="bkgt">Daily GMV (Blinkit)</div></div><div class="cw" id="bkG" style="min-height:240px"></div></div></div>
+    <div class="g2"><div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="cw" id="bkU" style="min-height:210px"></div></div><div class="cc"><div class="ch"><div class="ct" id="bkpt">GMV share</div></div><div class="cw" id="bkP" style="min-height:210px"></div></div></div>
   </div>
 </div>
-<div class="bar-tip" id="tip"></div>
+<div class="tip" id="tip"></div>
 
 <script>
-// ── DATA ──────────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// DATA
+// ═══════════════════════════════════════════════════════════
 const OMS=[
-  {date:'2026-04-01',label:'01 Apr',day:'Wed',z:{s:210535,sp:82300,roas:2.56,u:3770},b:{s:484025,sp:44594,roas:10.85,u:9064},i:{s:260140,sp:40033,roas:6.50,u:4982},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-02',label:'02 Apr',day:'Thu',z:{s:214808,sp:81300,roas:2.64,u:3803},b:{s:489034,sp:44224,roas:11.06,u:9164},i:{s:276850,sp:40264,roas:6.88,u:5268},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-03',label:'03 Apr',day:'Fri',z:{s:233064,sp:81500,roas:2.86,u:3648},b:{s:493325,sp:37244,roas:13.25,u:9278},i:{s:286205,sp:40196,roas:7.12,u:5582},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-04',label:'04 Apr',day:'Sat',z:{s:357424,sp:71300,roas:5.01,u:3808},b:{s:474664,sp:35326,roas:13.44,u:8958},i:{s:268045,sp:41668,roas:6.43,u:5165},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-05',label:'05 Apr',day:'Sun',z:{s:292490,sp:71100,roas:4.11,u:3259},b:{s:474344,sp:36314,roas:13.06,u:8927},i:{s:295615,sp:41578,roas:7.11,u:5680},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-06',label:'06 Apr',day:'Mon',z:{s:219712,sp:72078,roas:3.05,u:3147},b:{s:449900,sp:33505,roas:13.43,u:8464},i:{s:257499,sp:38823,roas:6.63,u:4876},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-07',label:'07 Apr',day:'Tue',z:{s:180386,sp:71000,roas:2.54,u:3102},b:{s:491444,sp:37428,roas:13.13,u:9112},i:{s:260340,sp:40034,roas:6.50,u:5023},bb:{s:0,sp:0,roas:0,u:0}},
-  {date:'2026-04-08',label:'08 Apr',day:'Wed',z:{s:0,sp:71100,roas:0,u:0},b:{s:408229,sp:36044,roas:11.33,u:7714},i:{s:240375,sp:38285,roas:6.28,u:4629},bb:{s:0,sp:0,roas:0,u:0}},
+  {date:'2026-04-01',label:'01 Apr',z:{s:210535,sp:82300,roas:2.56,u:3770},b:{s:484025,sp:44594,roas:10.85,u:9064},i:{s:260140,sp:40033,roas:6.50,u:4982}},
+  {date:'2026-04-02',label:'02 Apr',z:{s:214808,sp:81300,roas:2.64,u:3803},b:{s:489034,sp:44224,roas:11.06,u:9164},i:{s:276850,sp:40264,roas:6.88,u:5268}},
+  {date:'2026-04-03',label:'03 Apr',z:{s:233064,sp:81500,roas:2.86,u:3648},b:{s:493325,sp:37244,roas:13.25,u:9278},i:{s:286205,sp:40196,roas:7.12,u:5582}},
+  {date:'2026-04-04',label:'04 Apr',z:{s:357424,sp:71300,roas:5.01,u:3808},b:{s:474664,sp:35326,roas:13.44,u:8958},i:{s:268045,sp:41668,roas:6.43,u:5165}},
+  {date:'2026-04-05',label:'05 Apr',z:{s:292490,sp:71100,roas:4.11,u:3259},b:{s:474344,sp:36314,roas:13.06,u:8927},i:{s:295615,sp:41578,roas:7.11,u:5680}},
+  {date:'2026-04-06',label:'06 Apr',z:{s:219712,sp:72078,roas:3.05,u:3147},b:{s:449900,sp:33505,roas:13.43,u:8464},i:{s:257499,sp:38823,roas:6.63,u:4876}},
+  {date:'2026-04-07',label:'07 Apr',z:{s:180386,sp:71000,roas:2.54,u:3102},b:{s:491444,sp:37428,roas:13.13,u:9112},i:{s:260340,sp:40034,roas:6.50,u:5023}},
+  {date:'2026-04-08',label:'08 Apr',z:{s:0,sp:71100,roas:0,u:0},b:{s:408229,sp:36044,roas:11.33,u:7714},i:{s:240375,sp:38285,roas:6.28,u:4629}},
 ];
+let liveOMS=[...OMS];
+
+const SW_L=["01 Mar","02 Mar","03 Mar","04 Mar","05 Mar","06 Mar","07 Mar","08 Mar","09 Mar","10 Mar","11 Mar","12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar","18 Mar","19 Mar","20 Mar","21 Mar","22 Mar","23 Mar","24 Mar","25 Mar","26 Mar","27 Mar","28 Mar","29 Mar","30 Mar","31 Mar"];
+const SW_D=["2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31"];
 const SW=[
   {code:10684,tag:'Ragi Chips',name:'peri peri ragi chips',color:'#e8732a',gmv:[172565,145575,174890,175170,163060,148675,168985,193270,113460,127720,143230,164490,160540,170570,157225,144555,150725,142805,152560,151935,154730,148525,134690,144645,145621,150278,146285,160735,143688,131595,144315],units:[3419,2883,3418,3473,3227,2926,3298,3797,2216,2524,2819,3267,3188,3362,3097,2836,2986,2820,2998,3014,3049,2942,2652,2834,2855,2937,2863,3171,2809,2592,2835]},
   {code:200141,tag:'Ragi Chips',name:'desi masala ragi chips',color:'#e8732a',gmv:[12700,9700,11600,10900,10800,10200,11700,13250,8850,12500,12050,11450,11750,10000,11550,9900,9650,9700,8600,10750,14050,12150,9300,9000,9750,12500,12800,12400,12650,10700,11850],units:[254,194,232,218,216,204,234,265,177,250,241,229,235,200,231,198,193,194,172,215,281,243,186,180,195,250,256,248,253,214,237]},
@@ -325,159 +246,203 @@ const SW=[
   {code:21280,tag:'Dipsters',name:'biscuit sticks caramel',color:'#9b59b6',gmv:[2345,1925,1715,1820,1680,2100,2450,2485,2555,2345,2450,2310,1820,2831,2135,1715,1995,1645,1575,1680,2341,2415,1680,2380,2310,2380,2345,2870,2415,1925,2345],units:[67,55,49,52,48,60,70,71,73,67,70,66,52,81,61,49,57,47,45,48,67,69,48,68,66,68,67,82,69,55,67]},
   {code:30888,tag:'Puffs',name:'nacho cheese jowar puffs',color:'#1abc9c',gmv:[15400,17520,18360,15480,16330,17600,16450,21720,14760,16560,16600,15040,14440,16240,15720,13600,16280,13680,13560,14720,16360,16360,14280,15320,16120,19320,16200,17960,17920,16840,18120],units:[385,438,459,387,408,440,411,543,369,414,415,376,361,406,393,340,407,342,339,368,409,409,357,383,403,483,405,449,448,421,453]},
   {code:31250,tag:'Puffs',name:'dahi papdi quinoa puffs',color:'#1abc9c',gmv:[1880,1250,1760,1690,1990,1750,2280,2320,1390,1740,1390,2350,1450,1510,2020,1850,2250,1880,1210,1390,1710,1540,2190,2480,2610,2750,2220,2110,1640,2540,2060],units:[33,22,31,29,35,30,39,41,24,30,24,40,25,27,35,32,39,33,21,25,30,27,38,42,45,49,38,36,28,44,35]},
+  {code:31249,tag:'Puffs',name:'tangy tomato chickpea',color:'#1abc9c',gmv:[450,450,400,450,650,700,800,1400,900,700,550,850,450,450,450,700,300,400,550,900,1150,600,1050,700,700,1900,1050,850,1300,450,750],units:[9,9,8,9,13,14,16,28,18,14,11,17,9,9,9,14,6,8,11,18,23,12,21,14,14,38,21,17,26,9,15]},
+  {code:924774,tag:'Puffs',name:'korean bbq jowar',color:'#1abc9c',gmv:[650,100,300,250,50,250,400,250,400,550,250,550,150,350,200,300,350,400,200,350,250,350,150,400,300,450,450,350,150,450,300],units:[13,2,6,5,1,5,8,5,8,11,5,11,3,7,4,6,7,8,4,7,5,7,3,8,6,9,9,7,3,9,6]},
   {code:64817,tag:'Others',name:'cheese dosa khakra',color:'#95a5a6',gmv:[35176,34216,34120,29440,25920,25976,26664,30248,24136,23760,27720,25800,24968,27128,24600,28328,27376,25920,26888,29640,30720,31088,32040,29520,35880,28920,31560,31680,37940,31440,35765],units:[293,285,284,245,216,216,222,252,201,198,231,215,208,226,205,236,228,216,224,247,256,259,267,246,299,241,263,264,316,262,298]},
-  {code:330874,tag:'Others',name:'chatpata masala millet fingers',color:'#95a5a6',gmv:[8700,8500,8500,8050,7250,7850,7450,7550,6550,8150,8800,10250,8100,9400,7450,8950,11150,7800,8800,9500,9650,9050,9750,9750,9250,10200,10500,11150,11600,10500,11100],units:[174,170,170,161,145,157,149,151,131,163,176,205,162,188,149,179,223,156,176,190,193,181,195,195,185,204,210,223,232,210,222]},
+  {code:330874,tag:'Others',name:'chatpata masala millet',color:'#95a5a6',gmv:[8700,8500,8500,8050,7250,7850,7450,7550,6550,8150,8800,10250,8100,9400,7450,8950,11150,7800,8800,9500,9650,9050,9750,9750,9250,10200,10500,11150,11600,10500,11100],units:[174,170,170,161,145,157,149,151,131,163,176,205,162,188,149,179,223,156,176,190,193,181,195,195,185,204,210,223,232,210,222]},
+  {code:10683,tag:'Others',name:'baked pizza sticks',color:'#95a5a6',gmv:[1050,770,975,970,1180,1940,630,1255,905,1110,905,1390,555,1400,1190,1330,1260,1120,770,1120,1820,1680,1050,1190,2575,2420,1330,2560,1865,2570,2450],units:[15,11,14,14,17,28,9,18,13,16,13,20,8,20,17,19,18,16,11,16,26,24,15,17,37,35,19,37,27,37,35]},
+  {code:42604,tag:'Others',name:'garlic bread chickpea',color:'#95a5a6',gmv:[1050,800,1600,1100,1450,1350,1500,1550,1250,1550,1150,1500,1250,1550,1200,1000,1550,1150,850,1350,1600,1800,1700,1900,1050,1900,1650,1650,1450,1650,1250],units:[21,16,32,22,29,27,30,31,25,31,23,30,25,31,24,20,31,23,17,27,32,36,34,38,21,38,33,33,29,33,25]},
+  {code:383795,tag:'Others',name:'korean barbeque chickpea',color:'#95a5a6',gmv:[1210,990,1100,770,935,770,440,715,825,825,1100,935,440,605,990,660,825,825,385,935,935,880,880,770,825,715,495,1430,770,1045,1155],units:[22,18,20,14,17,14,8,13,15,15,20,17,8,11,18,12,15,15,7,17,17,16,16,14,15,13,9,26,14,19,21]},
+  {code:161918,tag:'Others',name:'salted banana chips',color:'#95a5a6',gmv:[1980,1680,1500,1440,1800,1320,1200,1560,1080,1560,1740,1740,1020,1320,1260,1740,960,1560,1920,1200,1380,900,1140,1080,1080,960,960,1380,900,1020,1260],units:[33,28,25,24,30,22,20,26,18,26,29,29,17,22,21,29,16,26,32,20,23,15,19,18,18,16,16,23,15,17,21]},
 ];
-const SW_L=["01 Mar","02 Mar","03 Mar","04 Mar","05 Mar","06 Mar","07 Mar","08 Mar","09 Mar","10 Mar","11 Mar","12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar","18 Mar","19 Mar","20 Mar","21 Mar","22 Mar","23 Mar","24 Mar","25 Mar","26 Mar","27 Mar","28 Mar","29 Mar","30 Mar","31 Mar"];
+
+const ZT_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
+const ZT_D=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
+const ZT=[
+  {cat:'Ragi Chips',name:'RC Peri Peri',color:'#e8732a',gmv:[98950,101800,94650,91050,72300,67000,64750,44700,43050,0,0,0,0],units:[1979,2036,1893,1821,1446,1340,1295,894,861,0,0,0,0]},
+  {cat:'Ragi Chips',name:'RC Cheesy Jalapeno Dip',color:'#e8732a',gmv:[11750,11200,11950,10550,10800,10950,13350,9050,9400,0,0,0,0],units:[235,224,239,211,216,219,267,181,188,0,0,0,0]},
+  {cat:'Ragi Chips',name:'RC desi masala',color:'#e8732a',gmv:[20000,19050,17300,19350,17050,24500,25450,19500,17450,0,0,0,0],units:[400,381,346,387,341,490,509,390,349,0,0,0,0]},
+  {cat:'Ragi Chips',name:'Snackible Chatpata Crunch Ragi Chips- No',color:'#e8732a',gmv:[5700,6250,5100,5850,5500,6150,5600,6100,3350,0,0,0,0],units:[114,125,102,117,110,123,112,122,67,0,0,0,0]},
+  {cat:'Ragi Chips',name:'RC jalapeno',color:'#e8732a',gmv:[4500,4100,4450,4450,5450,4650,5400,4800,3100,0,0,0,0],units:[90,82,89,89,109,93,108,96,62,0,0,0,0]},
+  {cat:'Dipsters',name:'dip choco BS',color:'#9b59b6',gmv:[10360,10465,10850,11515,10010,8575,9380,8575,6965,0,0,0,0],units:[296,299,310,329,286,245,268,245,199,0,0,0,0]},
+  {cat:'Puffs',name:'puff nacho jowar',color:'#1abc9c',gmv:[5680,4960,5240,4960,4660,4780,3680,4400,3680,0,0,0,0],units:[142,124,131,124,116,119,92,110,92,0,0,0,0]},
+  {cat:'Puffs',name:'Puff sriracha quinoa',color:'#1abc9c',gmv:[180,600,120,420,360,240,180,60,0,0,0,0,0],units:[3,10,2,7,6,4,3,1,0,0,0,0,0]},
+  {cat:'Others',name:'holi box',color:'#95a5a6',gmv:[0,1398,31954,156974,76690,33152,2396,6889,2596,0,0,0,0],units:[0,2,46,226,110,48,4,11,4,0,0,0,0]},
+  {cat:'Others',name:'other dosa khakra',color:'#95a5a6',gmv:[26880,28420,26020,25320,20560,24720,21580,23280,16800,0,0,0,0],units:[224,237,217,211,172,206,180,194,140,0,0,0,0]},
+  {cat:'Others',name:'Snackible Kunafa Chocolate Bites 1.0 PIE',color:'#95a5a6',gmv:[6700,8040,6700,7370,56615,21440,12060,9715,8375,0,0,0,0],units:[20,24,20,22,169,64,36,29,25,0,0,0,0]},
+  {cat:'Others',name:'dip baked pizza',color:'#95a5a6',gmv:[10010,10710,11690,9730,7630,7630,7350,6720,4830,0,0,0,0],units:[143,153,167,139,109,109,105,96,69,0,0,0,0]},
+  {cat:'Others',name:'other salted banana',color:'#95a5a6',gmv:[4440,4680,3720,4800,3060,4440,5280,3600,3360,0,0,0,0],units:[74,78,62,80,51,74,88,60,56,0,0,0,0]},
+  {cat:'Others',name:'Other Millet Bhujia',color:'#95a5a6',gmv:[1080,1440,2160,2880,1440,960,1800,720,1080,0,0,0,0],units:[9,12,18,24,12,8,15,6,9,0,0,0,0]},
+  {cat:'Others',name:'fSnackible Peanuts | Roasted - High Prot',color:'#95a5a6',gmv:[4305,1575,1470,2205,945,525,1890,525,525,0,0,0,0],units:[41,15,14,21,9,5,18,5,5,0,0,0,0]},
+];
+
+const BK_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
+const BK_D=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
+const BK=[
+  {cat:'Ragi Chips',name:'Snackible Peri Peri Ragi Chips',color:'#e8732a',gmv:[276785,274590,287250,277755,269860,263130,280200,234575,244355,253345,299015,271765,0],units:[5535,5491,5744,5553,5397,5261,5603,4691,4886,5066,5980,5435,0]},
+  {cat:'Ragi Chips',name:'Snackible Desi Masala Ragi Chips',color:'#e8732a',gmv:[42050,43700,39100,36100,36200,34900,36900,31700,31700,32700,38350,33850,0],units:[841,874,782,722,724,698,738,634,634,654,767,677,0]},
+  {cat:'Ragi Chips',name:'Snackible Chatpata Crunch Ragi Chips',color:'#e8732a',gmv:[28500,29850,30450,33150,32350,28500,29400,23150,24150,23350,26350,27350,0],units:[570,597,609,663,647,570,588,463,483,467,527,547,0]},
+  {cat:'Ragi Chips',name:'Snackible Dipsters Piri Piri Ragi Chips with Chees',color:'#e8732a',gmv:[20250,21250,23950,20550,22550,17250,20700,20450,21400,20700,22400,21200,0],units:[405,425,479,411,451,345,414,409,428,414,448,424,0]},
+  {cat:'Dipsters',name:'Snackible Biscuit Sticks with Chocolatey Dip',color:'#9b59b6',gmv:[23205,25935,23065,23310,24675,23275,23380,21840,20720,24290,40110,25060,0],units:[663,741,659,666,705,665,668,624,592,694,1146,716,0]},
+  {cat:'Dipsters',name:'Snackible Dipsters Vanilla Creme Dip with Biscuit ',color:'#9b59b6',gmv:[5355,4830,4830,5040,5110,4235,4655,5565,3885,4165,5005,4585,0],units:[153,138,138,144,146,121,133,159,111,119,143,131,0]},
+  {cat:'Dipsters',name:'Snackible Pistachio Dipsters Biscuit Sticks',color:'#9b59b6',gmv:[0,60,360,240,480,540,600,180,420,720,2820,660,0],units:[0,1,6,4,8,9,10,3,7,12,47,11,0]},
+  {cat:'Others',name:'Snackible Cheese Dosa Khakhra',color:'#95a5a6',gmv:[62640,62620,59640,54920,57460,56400,68740,47740,52200,52400,51840,52180,0],units:[522,522,497,458,479,470,573,398,435,438,432,435,0]},
+  {cat:'Others',name:'Snackible Baked Pizza Sticks with Jalapeno Dip',color:'#95a5a6',gmv:[19180,20720,19880,18480,19040,15190,21210,16170,19670,15820,18410,17010,0],units:[274,296,284,264,272,217,303,231,281,226,263,243,0]},
+  {cat:'Others',name:'Snackible Salted Banana Chips',color:'#95a5a6',gmv:[6060,4680,4800,4320,5820,6480,4860,6060,6000,5880,4980,4200,0],units:[101,78,80,72,97,108,81,101,100,98,83,70,0]},
+  {cat:'Others',name:'Snackible Munchies Gift Pack',color:'#95a5a6',gmv:[0,799,0,799,799,0,799,799,799,1598,1598,799,0],units:[0,1,0,1,1,0,1,1,1,2,2,1,0]},
+];
+
 const APPS_URL='https://script.google.com/macros/s/AKfycbzpab6rVhrAtfbI-Ys0gKGIisk04WnMDhTrL_J7Dl6IyUoIgwRUIFU0wZW06r6ZrzbY_A/exec';
 const ZEPTO_URL='https://script.google.com/macros/s/AKfycbyc8epyNuC8NIIeJ_tjtAavI9sLxYeE3XNLZ1zDg7G5461JgAJtABLD8Bvc5DhAx4sb/exec';
 const BLINKIT_URL='https://script.google.com/macros/s/AKfycbxKa38-IeAGCivMLdkQkZVP2E4AgOTDwbrhe3sRdVLOIk7qZoyVJqmrVN0eZk7dAGfssA/exec';
-let liveOMS=[...OMS];
 
-// ── Helpers ───────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// HELPERS
+// ═══════════════════════════════════════════════════════════
 function fmt(n){if(!n||isNaN(n)||n===0)return'—';if(n>=10000000)return'₹'+(n/10000000).toFixed(1)+'Cr';if(n>=100000)return'₹'+(n/100000).toFixed(1)+'L';if(n>=1000)return'₹'+(n/1000).toFixed(0)+'K';return'₹'+Math.round(n);}
 function fu(n){if(!n||isNaN(n)||n===0)return'—';return n>=1000?(n/1000).toFixed(1)+'K':''+Math.round(n);}
-function sm(rows,p,k){return rows.reduce((a,r)=>a+(r[p]?.[k]||0),0);}
-function ar(rows,p){const v=rows.filter(r=>r[p].roas>0).map(r=>r[p].roas);return v.length?(v.reduce((a,b)=>a+b)/v.length).toFixed(1)+'x avg':'No data';}
+function sm(rows,p,k){return rows.reduce((a,r)=>a+(r[p]&&r[p][k]?r[p][k]:0),0);}
+function ar(rows,p){const v=rows.filter(r=>r[p]&&r[p].roas>0).map(r=>r[p].roas);return v.length?(v.reduce((a,b)=>a+b)/v.length).toFixed(1)+'x avg':'—';}
+function sliceByDate(gmv,units,labels,dates,fId,tId){
+  const f=document.getElementById(fId).value,t=document.getElementById(tId).value;
+  if(!f&&!t)return{g:gmv,u:units,l:labels};
+  let fi=0,ti=dates.length-1;
+  if(f){const i=dates.findIndex(d=>d>=f);if(i>=0)fi=i;}
+  if(t){let i=dates.length-1;while(i>=0&&dates[i]>t)i--;if(i>=0)ti=i;}
+  if(fi>ti)return{g:gmv,u:units,l:labels};
+  return{g:gmv.slice(fi,ti+1),u:units.slice(fi,ti+1),l:labels.slice(fi,ti+1)};
+}
 
-// ── SVG Chart Engine ──────────────────────────────────────
-const tip=document.getElementById('tip');
-function showTip(e,html){tip.innerHTML=html;tip.style.display='block';tip.style.left=(e.pageX+10)+'px';tip.style.top=(e.pageY-30)+'px';}
-function hideTip(){tip.style.display='none';}
+// ═══════════════════════════════════════════════════════════
+// SVG CHARTS
+// ═══════════════════════════════════════════════════════════
+const tipEl=document.getElementById('tip');
+function showTip(e,html){tipEl.innerHTML=html;tipEl.style.display='block';tipEl.style.left=(e.clientX+12)+'px';tipEl.style.top=(e.clientY-30)+'px';}
+function hideTip(){tipEl.style.display='none';}
 
-function barChart(containerId,labels,datasets,opts={}){
-  const el=document.getElementById(containerId);
+function barChart(id,labels,datasets,h){
+  h=h||220;
+  const el=document.getElementById(id);
   if(!el)return;
-  // Force layout reflow to get real width
-  el.style.minHeight=(opts.h||220)+'px';
-  const W=Math.max(el.getBoundingClientRect().width||0,el.offsetWidth||0)||700;
-  const H=opts.h||220;
-  const PAD={t:10,r:10,b:50,l:60};
-  const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
+  const W=el.clientWidth||700;
+  const PAD={t:8,r:10,b:52,l:58};
+  const cW=W-PAD.l-PAD.r,cH=h-PAD.t-PAD.b;
   const n=labels.length,ds=datasets.length;
-  const grpW=cW/n,bW=Math.min(grpW*0.8/ds,30);
-  const allVals=datasets.flatMap(d=>d.data).filter(v=>v>0);
-  const maxV=allVals.length?Math.max(...allVals):1;
-  const yTicks=5;
-
-  let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display:block">`;
-  // grid lines
+  if(n===0){el.innerHTML='<p style="color:#555;font-size:12px;padding:20px">No data</p>';return;}
+  const allV=datasets.flatMap(d=>d.data).filter(v=>v>0);
+  const maxV=allV.length?Math.max(...allV):1;
+  const bW=Math.min((cW/n)*0.8/ds,28);
+  const yTicks=4;
+  let svg=`<svg width="${W}" height="${h}" xmlns="http://www.w3.org/2000/svg">`;
   for(let i=0;i<=yTicks;i++){
     const y=PAD.t+cH-(i/yTicks)*cH;
     const val=maxV*i/yTicks;
-    const label=opts.yFmt?opts.yFmt(val):fmt(val);
-    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
-    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#555" font-size="9">${label}</text>`;
+    svg+=`<line x1="${PAD.l}" y1="${y.toFixed(0)}" x2="${PAD.l+cW}" y2="${y.toFixed(0)}" stroke="rgba(255,255,255,.07)" stroke-width="1"/>`;
+    svg+=`<text x="${PAD.l-4}" y="${(y+4).toFixed(0)}" text-anchor="end" fill="#ccc" font-size="9" font-family="system-ui">${fmt(val)==='—'?'0':fmt(val)}</text>`;
   }
-  // bars
   datasets.forEach((d,di)=>{
     labels.forEach((lbl,i)=>{
       const v=d.data[i]||0;
       const bH=maxV>0?(v/maxV)*cH:0;
-      const x=PAD.l+i*grpW+(grpW-ds*bW)/2+di*bW;
+      const x=PAD.l+i*(cW/n)+(cW/n-ds*bW)/2+di*bW;
       const y=PAD.t+cH-bH;
-      const tipTxt=`${d.label}: ${opts.valFmt?opts.valFmt(v):fmt(v)}`;
-      svg+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bW.toFixed(1)}" height="${Math.max(bH,0).toFixed(1)}" fill="${d.color}" rx="2" opacity=".85"
-        onmouseenter="showTip(event,'<b>${lbl}</b><br>${tipTxt}')" onmouseleave="hideTip()"/>`;
+      const tv=d.yFmt?d.yFmt(v):fmt(v);
+      svg+=`<rect x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${bW.toFixed(1)}" height="${Math.max(bH,0).toFixed(1)}"
+        fill="${d.color}" rx="2" opacity=".85" style="cursor:pointer"
+        onmouseenter="showTip(event,'<b>${lbl}</b><br>${d.label}: ${tv}')"
+        onmouseleave="hideTip()"/>`;
     });
   });
-  // x labels
   labels.forEach((lbl,i)=>{
-    const x=PAD.l+i*grpW+grpW/2;
-    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#555" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
+    const x=PAD.l+i*(cW/n)+(cW/n)/2;
+    svg+=`<text x="${x.toFixed(0)}" y="${h-6}" text-anchor="end" fill="#bbb" font-size="9" font-family="system-ui" transform="rotate(-35,${x.toFixed(0)},${h-6})">${lbl}</text>`;
   });
-  // axes
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
   svg+='</svg>';
   el.innerHTML=svg;
 }
 
-function lineChart(containerId,labels,datasets,opts={}){
-  const el=document.getElementById(containerId);
+function lineChart(id,labels,datasets,h){
+  h=h||200;
+  const el=document.getElementById(id);
   if(!el)return;
-  el.style.minHeight=(opts.h||200)+'px';
-  const W=Math.max(el.getBoundingClientRect().width||0,el.offsetWidth||0)||700;
-  const H=opts.h||200;
-  const PAD={t:10,r:10,b:50,l:60};
-  const cW=W-PAD.l-PAD.r,cH=H-PAD.t-PAD.b;
-  const allVals=datasets.flatMap(d=>d.data).filter(v=>v>0);
-  const maxV=allVals.length?Math.max(...allVals):1;
-  const minV=0;
+  const W=el.clientWidth||700;
+  const PAD={t:8,r:10,b:52,l:58};
+  const cW=W-PAD.l-PAD.r,cH=h-PAD.t-PAD.b;
   const n=labels.length;
-  const yTicks=5;
-
-  let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display:block">`;
+  if(n<2){el.innerHTML='<p style="color:#555;font-size:12px;padding:20px">No data</p>';return;}
+  const allV=datasets.flatMap(d=>d.data).filter(v=>v>0);
+  const maxV=allV.length?Math.max(...allV):1;
+  const yTicks=4;
+  let svg=`<svg width="${W}" height="${h}" xmlns="http://www.w3.org/2000/svg">`;
   for(let i=0;i<=yTicks;i++){
     const y=PAD.t+cH-(i/yTicks)*cH;
     const val=maxV*i/yTicks;
-    const label=opts.yFmt?opts.yFmt(val):fmt(val);
-    svg+=`<line x1="${PAD.l}" y1="${y}" x2="${PAD.l+cW}" y2="${y}" stroke="rgba(255,255,255,.05)" stroke-width="1"/>`;
-    svg+=`<text x="${PAD.l-5}" y="${y+4}" text-anchor="end" fill="#555" font-size="9">${label}</text>`;
+    const lbl=datasets[0]&&datasets[0].yFmt?datasets[0].yFmt(val):fmt(val);
+    svg+=`<line x1="${PAD.l}" y1="${y.toFixed(0)}" x2="${PAD.l+cW}" y2="${y.toFixed(0)}" stroke="rgba(255,255,255,.07)" stroke-width="1"/>`;
+    svg+=`<text x="${PAD.l-4}" y="${(y+4).toFixed(0)}" text-anchor="end" fill="#ccc" font-size="9" font-family="system-ui">${lbl}</text>`;
   }
   datasets.forEach(d=>{
-    const pts=d.data.map((v,i)=>{
-      const x=PAD.l+i*(cW/(n-1||1));
-      const y=PAD.t+cH-((v||0)/maxV)*cH;
-      return{x,y,v};
-    });
-    // line
+    const pts=d.data.map((v,i)=>({x:PAD.l+i*(cW/(n-1)),y:PAD.t+cH-((v||0)/maxV)*cH,v}));
     const path=pts.map((p,i)=>`${i===0?'M':'L'}${p.x.toFixed(1)},${p.y.toFixed(1)}`).join(' ');
     svg+=`<path d="${path}" fill="none" stroke="${d.color}" stroke-width="2" stroke-linejoin="round"/>`;
-    // dots
     pts.forEach((p,i)=>{
       if(p.v>0){
-        const tipTxt=`${d.label}: ${opts.valFmt?opts.valFmt(p.v):p.v.toFixed(2)}`;
-        svg+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="${d.color}"
-          onmouseenter="showTip(event,'<b>${labels[i]}</b><br>${tipTxt}')" onmouseleave="hideTip()"/>`;
+        const tv=d.valFmt?d.valFmt(p.v):p.v.toFixed(2);
+        svg+=`<circle cx="${p.x.toFixed(1)}" cy="${p.y.toFixed(1)}" r="4" fill="${d.color}" style="cursor:pointer"
+          onmouseenter="showTip(event,'<b>${labels[i]}</b><br>${d.label}: ${tv}')"
+          onmouseleave="hideTip()"/>`;
       }
     });
   });
   labels.forEach((lbl,i)=>{
-    const x=PAD.l+i*(cW/(n-1||1));
-    svg+=`<text x="${x.toFixed(1)}" y="${H-5}" text-anchor="middle" fill="#555" font-size="9" transform="rotate(-40,${x.toFixed(1)},${H-5})">${lbl}</text>`;
+    const x=PAD.l+i*(cW/(n-1));
+    svg+=`<text x="${x.toFixed(0)}" y="${h-6}" text-anchor="end" fill="#bbb" font-size="9" font-family="system-ui" transform="rotate(-35,${x.toFixed(0)},${h-6})">${lbl}</text>`;
   });
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
-  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#333" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t}" x2="${PAD.l}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
+  svg+=`<line x1="${PAD.l}" y1="${PAD.t+cH}" x2="${PAD.l+cW}" y2="${PAD.t+cH}" stroke="#444" stroke-width="1"/>`;
   svg+='</svg>';
   el.innerHTML=svg;
 }
 
-function donutChart(containerId,labels,data,colors){
-  const el=document.getElementById(containerId);
+function donutChart(id,labels,data,colors){
+  const el=document.getElementById(id);
   if(!el)return;
-  el.style.minHeight='200px';
-  const W=Math.max(el.getBoundingClientRect().width||0,el.offsetWidth||0)||400;
-  const H=200,cx=W/2,cy=H/2-10,R=70,r=42;
+  const W=el.clientWidth||400,H=200;
   const total=data.reduce((a,b)=>a+b,0);
-  let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg" style="display:block">`;
+  if(total===0){el.innerHTML='<p style="color:#555;font-size:12px;padding:20px">No data</p>';return;}
+  const cx=W/2,cy=90,R=65,r=38;
+  let svg=`<svg width="${W}" height="${H}" xmlns="http://www.w3.org/2000/svg">`;
   let angle=-Math.PI/2;
   data.forEach((v,i)=>{
     if(v<=0)return;
-    const slice=(v/total)*Math.PI*2;
+    const sl=(v/total)*Math.PI*2;
     const x1=cx+R*Math.cos(angle),y1=cy+R*Math.sin(angle);
-    const x2=cx+R*Math.cos(angle+slice),y2=cy+R*Math.sin(angle+slice);
+    const x2=cx+R*Math.cos(angle+sl),y2=cy+R*Math.sin(angle+sl);
     const xi1=cx+r*Math.cos(angle),yi1=cy+r*Math.sin(angle);
-    const xi2=cx+r*Math.cos(angle+slice),yi2=cy+r*Math.sin(angle+slice);
-    const lg=slice>Math.PI?1:0;
+    const xi2=cx+r*Math.cos(angle+sl),yi2=cy+r*Math.sin(angle+sl);
+    const lg=sl>Math.PI?1:0;
     const pct=Math.round(v/total*100);
     svg+=`<path d="M${xi1.toFixed(1)},${yi1.toFixed(1)} L${x1.toFixed(1)},${y1.toFixed(1)} A${R},${R} 0 ${lg},1 ${x2.toFixed(1)},${y2.toFixed(1)} L${xi2.toFixed(1)},${yi2.toFixed(1)} A${r},${r} 0 ${lg},0 ${xi1.toFixed(1)},${yi1.toFixed(1)} Z"
-      fill="${colors[i]}" opacity=".9"
-      onmouseenter="showTip(event,'${labels[i]}: ${fmt(v)} (${pct}%)')" onmouseleave="hideTip()"/>`;
-    angle+=slice;
+      fill="${colors[i]}" opacity=".9" style="cursor:pointer"
+      onmouseenter="showTip(event,'${labels[i]}: ${fmt(v)} (${pct}%)')"
+      onmouseleave="hideTip()"/>`;
+    angle+=sl;
   });
-  // legend
-  const lx=10,ly=H-labels.length*16-5;
+  const lx=8,lyBase=H-labels.length*15-2;
   labels.forEach((l,i)=>{
-    const y=ly+i*16;
+    const y=lyBase+i*15;
     svg+=`<rect x="${lx}" y="${y}" width="8" height="8" fill="${colors[i]}" rx="1"/>`;
-    svg+=`<text x="${lx+12}" y="${y+8}" fill="#666" font-size="9">${l} ${Math.round(data[i]/total*100)}%</text>`;
+    svg+=`<text x="${lx+12}" y="${y+8}" fill="#ccc" font-size="9" font-family="system-ui">${l} ${Math.round(data[i]/total*100)}%</text>`;
   });
   svg+='</svg>';
   el.innerHTML=svg;
 }
 
-// ── Render OMS ────────────────────────────────────────────
+// ═══════════════════════════════════════════════════════════
+// RENDER OMS
+// ═══════════════════════════════════════════════════════════
 function renderOMS(rows){
   const L=rows.map(r=>r.label);
   const tS=sm(rows,'z','s')+sm(rows,'b','s')+sm(rows,'i','s');
@@ -492,7 +457,6 @@ function renderOMS(rows){
   document.getElementById('mbr').textContent=ar(rows,'b');
   document.getElementById('mir').textContent=ar(rows,'i');
 
-  // Platform cards
   const pls=[{n:'Zepto',k:'z',c:'var(--z)'},{n:'Blinkit',k:'b',c:'var(--bl)'},{n:'Instamart',k:'i',c:'var(--in)'},{n:'Big Basket',k:'bb',c:'var(--bb)'}];
   document.getElementById('pcards').innerHTML=pls.map(p=>`<div class="pc">
     <div class="pn" style="color:${p.c}">${p.n}</div>
@@ -500,47 +464,122 @@ function renderOMS(rows){
     <div class="pr"><span class="pl">Spends</span><span class="pv">${fmt(sm(rows,p.k,'sp'))}</span></div>
     <div class="pr"><span class="pl">Avg ROAS</span><span class="pv">${ar(rows,p.k)}</span></div>
     <div class="pr"><span class="pl">Units</span><span class="pv">${fu(sm(rows,p.k,'u'))}</span></div>
-    <div class="pr"><span class="pl">Active days</span><span class="pv">${rows.filter(r=>r[p.k].s>0).length}/${rows.length}</span></div>
+    <div class="pr"><span class="pl">Active days</span><span class="pv">${rows.filter(r=>r[p.k]&&r[p.k].s>0).length}/${rows.length}</span></div>
   </div>`).join('');
 
-  // Charts
-  barChart('cS',L,[{label:'Zepto',data:rows.map(r=>r.z.s),color:'#4f9cf9'},{label:'Blinkit',data:rows.map(r=>r.b.s),color:'#f5a623'},{label:'Instamart',data:rows.map(r=>r.i.s),color:'#2ecc71'}],{h:240});
-  barChart('cSp',L,[{label:'Zepto',data:rows.map(r=>r.z.sp),color:'#4f9cf9'},{label:'Blinkit',data:rows.map(r=>r.b.sp),color:'#f5a623'},{label:'Instamart',data:rows.map(r=>r.i.sp),color:'#2ecc71'}],{h:210});
-  barChart('cU',L,[{label:'Zepto',data:rows.map(r=>r.z.u),color:'#4f9cf9'},{label:'Blinkit',data:rows.map(r=>r.b.u),color:'#f5a623'},{label:'Instamart',data:rows.map(r=>r.i.u),color:'#2ecc71'}],{h:210,yFmt:fu,valFmt:fu});
-  lineChart('cR',L,[{label:'Zepto',data:rows.map(r=>r.z.roas),color:'#4f9cf9'},{label:'Blinkit',data:rows.map(r=>r.b.roas),color:'#f5a623'},{label:'Instamart',data:rows.map(r=>r.i.roas),color:'#2ecc71'}],{h:210,yFmt:v=>v.toFixed(1)+'x',valFmt:v=>v.toFixed(2)+'x'});
-  const zT=sm(rows,'z','s'),bT=sm(rows,'b','s'),iT=sm(rows,'i','s'),bbT=sm(rows,'bb','s');
-  donutChart('cP',['Zepto','Blinkit','Instamart','Big Basket'],[zT,bT,iT,bbT],['#4f9cf9','#f5a623','#2ecc71','#e05c5c']);
+  const bp={barPercentage:.75,categoryPercentage:.65};
+  barChart('cS',L,[{label:'Zepto',data:rows.map(r=>r.z.s),color:'#4f9cf9'},{label:'Blinkit',data:rows.map(r=>r.b.s),color:'#f5a623'},{label:'Instamart',data:rows.map(r=>r.i.s),color:'#2ecc71'}],250);
+  barChart('cSp',L,[{label:'Zepto',data:rows.map(r=>r.z.sp),color:'#4f9cf9'},{label:'Blinkit',data:rows.map(r=>r.b.sp),color:'#f5a623'},{label:'Instamart',data:rows.map(r=>r.i.sp),color:'#2ecc71'}],210);
+  barChart('cU',L,[{label:'Zepto',data:rows.map(r=>r.z.u),color:'#4f9cf9',yFmt:fu},{label:'Blinkit',data:rows.map(r=>r.b.u),color:'#f5a623',yFmt:fu},{label:'Instamart',data:rows.map(r=>r.i.u),color:'#2ecc71',yFmt:fu}],210);
+  lineChart('cR',L,[{label:'Zepto',data:rows.map(r=>r.z.roas),color:'#4f9cf9',yFmt:v=>v.toFixed(1)+'x',valFmt:v=>v.toFixed(2)+'x'},{label:'Blinkit',data:rows.map(r=>r.b.roas),color:'#f5a623',yFmt:v=>v.toFixed(1)+'x',valFmt:v=>v.toFixed(2)+'x'},{label:'Instamart',data:rows.map(r=>r.i.roas),color:'#2ecc71',yFmt:v=>v.toFixed(1)+'x',valFmt:v=>v.toFixed(2)+'x'}],210);
+  const zT=sm(rows,'z','s'),bT=sm(rows,'b','s'),iT=sm(rows,'i','s');
+  donutChart('cP',['Zepto','Blinkit','Instamart'],[zT,bT,iT],['#4f9cf9','#f5a623','#2ecc71']);
 
-  // Platform tab
   const pfD=[{n:'Zepto',k:'z',c:'#4f9cf9'},{n:'Blinkit',k:'b',c:'#f5a623'},{n:'Instamart',k:'i',c:'#2ecc71'},{n:'Big Basket',k:'bb',c:'#e05c5c'}];
-  document.getElementById('pfsections').innerHTML=pfD.map(p=>`<div style="margin-bottom:24px;">
-    <div style="background:${p.c}15;color:${p.c};font-size:13px;font-weight:600;padding:8px 13px;border:1px solid var(--b);border-bottom:none;border-radius:10px 10px 0 0;">${p.n}</div>
-    <div style="border:1px solid var(--b);border-radius:0 0 10px 10px;padding:15px;background:var(--s);">
+  document.getElementById('pfsec').innerHTML=pfD.map(p=>`<div style="margin-bottom:24px;">
+    <div style="background:${p.c}18;color:${p.c};font-size:13px;font-weight:600;padding:8px 14px;border:1px solid var(--b);border-bottom:none;border-radius:10px 10px 0 0;">${p.n}</div>
+    <div style="border:1px solid var(--b);border-radius:0 0 10px 10px;padding:14px;background:var(--s);">
       <div class="pm">
-        <div class="mm"><div class="mml">Total Sales</div><div class="mmv">${fmt(sm(rows,p.k,'s'))}</div></div>
-        <div class="mm"><div class="mml">Total Spends</div><div class="mmv">${fmt(sm(rows,p.k,'sp'))}</div></div>
+        <div class="mm"><div class="mml">Sales</div><div class="mmv">${fmt(sm(rows,p.k,'s'))}</div></div>
+        <div class="mm"><div class="mml">Spends</div><div class="mmv">${fmt(sm(rows,p.k,'sp'))}</div></div>
         <div class="mm"><div class="mml">Avg ROAS</div><div class="mmv">${ar(rows,p.k)}</div></div>
       </div>
       <div class="g2">
-        <div><p class="st2">Sales (₹)</p><div id="pfS_${p.k}"></div></div>
-        <div><p class="st2">ROAS</p><div id="pfR_${p.k}"></div></div>
+        <div><p class="st2">Sales (₹)</p><div class="cw" id="pfS_${p.k}" style="min-height:160px"></div></div>
+        <div><p class="st2">ROAS</p><div class="cw" id="pfR_${p.k}" style="min-height:160px"></div></div>
       </div>
       <div class="g2">
-        <div><p class="st2">Spends (₹)</p><div id="pfSp_${p.k}"></div></div>
-        <div><p class="st2">Units Sold</p><div id="pfU_${p.k}"></div></div>
+        <div><p class="st2">Spends (₹)</p><div class="cw" id="pfSp_${p.k}" style="min-height:150px"></div></div>
+        <div><p class="st2">Units Sold</p><div class="cw" id="pfU_${p.k}" style="min-height:150px"></div></div>
       </div>
     </div>
   </div>`).join('');
   pfD.forEach(p=>{
-    barChart(`pfS_${p.k}`,L,[{label:'Sales',data:rows.map(r=>r[p.k].s),color:p.c}],{h:170});
-    lineChart(`pfR_${p.k}`,L,[{label:'ROAS',data:rows.map(r=>r[p.k].roas),color:p.c}],{h:170,yFmt:v=>v.toFixed(1)+'x',valFmt:v=>v.toFixed(2)+'x'});
-    barChart(`pfSp_${p.k}`,L,[{label:'Spends',data:rows.map(r=>r[p.k].sp),color:p.c+'99'}],{h:150});
-    barChart(`pfU_${p.k}`,L,[{label:'Units',data:rows.map(r=>r[p.k].u),color:p.c+'99'}],{h:150,yFmt:fu,valFmt:fu});
+    barChart(`pfS_${p.k}`,L,[{label:'Sales',data:rows.map(r=>r[p.k]?r[p.k].s:0),color:p.c}],160);
+    lineChart(`pfR_${p.k}`,L,[{label:'ROAS',data:rows.map(r=>r[p.k]?r[p.k].roas:0),color:p.c,yFmt:v=>v.toFixed(1)+'x',valFmt:v=>v.toFixed(2)+'x'}],160);
+    barChart(`pfSp_${p.k}`,L,[{label:'Spends',data:rows.map(r=>r[p.k]?r[p.k].sp:0),color:p.c+'99'}],150);
+    barChart(`pfU_${p.k}`,L,[{label:'Units',data:rows.map(r=>r[p.k]?r[p.k].u:0),color:p.c+'99',yFmt:fu}],150);
   });
 }
 
-// ── OMS Filter & render ───────────────────────────────────
-function filtered(){
+// ═══════════════════════════════════════════════════════════
+// RENDER PRODUCT TABS
+// ═══════════════════════════════════════════════════════════
+function renderProductTab(cfg){
+  const {sel,cat,pool,allData,labels,dates,dfId,dtId,ids,colors}=cfg;
+  let gFull,uFull,color=colors.main,title,note;
+  const filtered=cat==='all'?pool:pool.filter(p=>(p.tag||p.cat)===cat);
+
+  if(sel==='all'){
+    gFull=labels.map((_,i)=>filtered.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    uFull=labels.map((_,i)=>filtered.reduce((a,p)=>a+(p.units[i]||0),0));
+    title='Daily GMV — '+(cat==='all'?'All Products':cat);
+    note=cat==='all'?'All products':cat;
+    const byTag={};filtered.forEach(p=>{const k=p.tag||p.cat;byTag[k]=(byTag[k]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
+    const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
+    donutChart(ids.pie,tl,td,tl.map(t=>tc[t]||'#888'));
+    document.getElementById(ids.pt).textContent='GMV share';
+  } else {
+    const p=allData.find(x=>(x.code==+sel||x.name===sel));
+    if(!p)return;
+    gFull=p.gmv;uFull=p.units;color=p.color;
+    title=p.name+(cfg.suffix?' ('+cfg.suffix+')':'');
+    note=(p.tag||p.cat);
+    const thisT=p.gmv.reduce((a,b)=>a+b,0);
+    const catT=allData.filter(x=>(x.tag||x.cat)===(p.tag||p.cat)).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart(ids.pie,[p.name.slice(0,16),'Rest'],[thisT,catT-thisT],[color,'#333']);
+    document.getElementById(ids.pt).textContent='Share in '+(p.tag||p.cat);
+  }
+  const {g:gD,u:uD,l:lbl}=sliceByDate(gFull,uFull,labels,dates,dfId,dtId);
+  const tot=gD.reduce((a,b)=>a+b,0),uTot=uD.reduce((a,b)=>a+b,0);
+  const bi=gD.indexOf(Math.max(...gD));
+  document.getElementById(ids.t).textContent=fmt(tot);
+  document.getElementById(ids.u).textContent=fu(uTot);
+  document.getElementById(ids.bd).textContent=lbl[bi]||'—';
+  document.getElementById(ids.bg).textContent=fmt(gD[bi]);
+  document.getElementById(ids.av).textContent=fmt(Math.round(tot/Math.max(1,gD.filter(v=>v>0).length)));
+  document.getElementById(ids.gt).textContent=title;
+  document.getElementById(ids.note).textContent=note;
+  barChart(ids.g,lbl,[{label:'GMV',data:gD,color}],240);
+  barChart(ids.uChart,lbl,[{label:'Units',data:uD,color:color+'99',yFmt:fu}],210);
+}
+
+function renderSW(){
+  renderProductTab({
+    sel:document.getElementById('swsel').value,
+    cat:document.getElementById('swcat').value,
+    pool:SW,allData:SW,labels:SW_L,dates:SW_D,
+    dfId:'swdf',dtId:'swdt',suffix:'Swiggy',
+    colors:{main:'#f5a623'},
+    ids:{t:'swt',u:'swu',bd:'swbd',bg:'swbg',av:'swav',gt:'swgt',note:'swnote',g:'swG',uChart:'swU',pie:'swP',pt:'swpt'}
+  });
+}
+function renderZT(){
+  renderProductTab({
+    sel:document.getElementById('ztsel').value,
+    cat:document.getElementById('ztcat').value,
+    pool:ZT,allData:ZT,labels:ZT_L,dates:ZT_D,
+    dfId:'ztdf',dtId:'ztdt',suffix:'Zepto',
+    colors:{main:'#4f9cf9'},
+    ids:{t:'ztt',u:'ztu',bd:'ztbd',bg:'ztbg',av:'ztav',gt:'ztgt',note:'ztnote',g:'ztG',uChart:'ztU',pie:'ztP',pt:'ztpt'}
+  });
+}
+function renderBK(){
+  renderProductTab({
+    sel:document.getElementById('bksel').value,
+    cat:document.getElementById('bkcat').value,
+    pool:BK,allData:BK,labels:BK_L,dates:BK_D,
+    dfId:'bkdf',dtId:'bkdt',suffix:'Blinkit',
+    colors:{main:'#f5a623'},
+    ids:{t:'bkt',u:'bku',bd:'bkbd',bg:'bkbg',av:'bkav',gt:'bkgt',note:'bknote',g:'bkG',uChart:'bkU',pie:'bkP',pt:'bkpt'}
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// OMS FILTER
+// ═══════════════════════════════════════════════════════════
+function getFiltered(){
   const f=document.getElementById('df').value,t=document.getElementById('dt').value;
   let r=liveOMS;
   if(f)r=r.filter(x=>x.date>=f);
@@ -548,16 +587,17 @@ function filtered(){
   return r.length?r:liveOMS;
 }
 function go(){
-  const r=filtered();
+  const r=getFiltered();
   document.getElementById('fi').textContent=r.length+' day'+(r.length===1?'':'s');
   document.getElementById('lu').textContent='Updated '+new Date().toLocaleTimeString();
   renderOMS(r);
 }
 
-document.querySelectorAll('.qb:not([id])').forEach(b=>b.addEventListener('click',()=>{
-  document.querySelectorAll('.qb:not([id])').forEach(x=>x.classList.remove('on'));
+// OMS range buttons
+document.querySelectorAll('[data-oms]').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('[data-oms]').forEach(x=>x.classList.remove('on'));
   b.classList.add('on');
-  const rv=b.dataset.r;
+  const rv=b.dataset.oms;
   if(rv==='all'){document.getElementById('df').value='';document.getElementById('dt').value='';}
   else{
     const sorted=[...liveOMS].sort((a,b2)=>b2.date.localeCompare(a.date));
@@ -566,9 +606,45 @@ document.querySelectorAll('.qb:not([id])').forEach(b=>b.addEventListener('click'
   }
   go();
 }));
-document.getElementById('df').addEventListener('change',()=>{document.querySelectorAll('.qb:not([id])').forEach(x=>x.classList.remove('on'));go();});
-document.getElementById('dt').addEventListener('change',()=>{document.querySelectorAll('.qb:not([id])').forEach(x=>x.classList.remove('on'));go();});
+document.getElementById('df').addEventListener('change',()=>{document.querySelectorAll('[data-oms]').forEach(x=>x.classList.remove('on'));go();});
+document.getElementById('dt').addEventListener('change',()=>{document.querySelectorAll('[data-oms]').forEach(x=>x.classList.remove('on'));go();});
 
+// Product tab range buttons
+function setupPtab(prefix,dates,renderFn){
+  const setRange=(days)=>{
+    const lat=dates[dates.length-1];
+    if(!days){document.getElementById(prefix+'df').value='';document.getElementById(prefix+'dt').value='';}
+    else{const fd=new Date(lat);fd.setDate(fd.getDate()-(days-1));document.getElementById(prefix+'df').value=fd.toISOString().slice(0,10);document.getElementById(prefix+'dt').value=lat;}
+    [prefix+'Qall',prefix+'Q7',prefix+'Q3'].forEach(id=>{const el=document.getElementById(id);if(el)el.classList.remove('on');});
+  };
+  const qa=document.getElementById(prefix+'Qall'),q7=document.getElementById(prefix+'Q7'),q3=document.getElementById(prefix+'Q3');
+  if(qa)qa.onclick=()=>{setRange(0);qa.classList.add('on');renderFn();};
+  if(q7)q7.onclick=()=>{setRange(7);q7.classList.add('on');renderFn();};
+  if(q3)q3.onclick=()=>{setRange(3);q3.classList.add('on');renderFn();};
+  const dfe=document.getElementById(prefix+'df'),dte=document.getElementById(prefix+'dt');
+  if(dfe)dfe.onchange=renderFn;
+  if(dte)dte.onchange=renderFn;
+  // Category cascades to product
+  const catEl=document.getElementById(prefix+'cat'),selEl=document.getElementById(prefix+'sel');
+  if(catEl&&selEl){
+    catEl.onchange=()=>{
+      const cat=catEl.value;
+      Array.from(selEl.options).forEach(o=>{
+        const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';
+        o.hidden=(cat!=='all'&&og!==cat&&o.value!=='all');
+      });
+      if(cat!=='all'){const fv=Array.from(selEl.options).find(o=>!o.hidden&&o.value!=='all');if(fv)selEl.value=fv.value;}
+      else selEl.value='all';
+      renderFn();
+    };
+  }
+  if(selEl)selEl.onchange=renderFn;
+}
+setupPtab('sw',SW_D,renderSW);
+setupPtab('zt',ZT_D,renderZT);
+setupPtab('bk',BK_D,renderBK);
+
+// Tabs
 document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
   document.querySelectorAll('.tp').forEach(x=>x.classList.remove('on'));
@@ -579,392 +655,47 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
     if(t.dataset.tab==='sw')renderSW();
     if(t.dataset.tab==='zt')renderZT();
     if(t.dataset.tab==='bk')renderBK();
-  },30);
+  },50);
 }));
 
-
-// ── Render Swiggy ─────────────────────────────────────────
-// ── Date/cat helpers ─────────────────────────────────────
-const SW_DATES=["2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31"];
-const ZT_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
-const BK_DATES=["2026-04-01","2026-04-02","2026-04-03","2026-04-04","2026-04-05","2026-04-06","2026-04-07","2026-04-08","2026-04-09","2026-04-10","2026-04-11","2026-04-12","2026-04-13"];
-function sliceD(gmv,units,labels,dates,fid,tid){
-  const f=document.getElementById(fid).value,t=document.getElementById(tid).value;
-  if(!f&&!t)return{g:gmv,u:units,l:labels};
-  let fi=0,ti=dates.length-1;
-  if(f){const i=dates.findIndex(d=>d>=f);if(i>=0)fi=i;}
-  if(t){let i=dates.length-1;while(i>=0&&dates[i]>t)i--;ti=i;}
-  if(fi>ti||ti<0)return{g:gmv,u:units,l:labels};
-  return{g:gmv.slice(fi,ti+1),u:units.slice(fi,ti+1),l:labels.slice(fi,ti+1)};
-}
-function setupQb(prefix,dates,fn){
-  ['All','7d','3d'].forEach(id=>{const el=document.getElementById(prefix+id);if(el)el.onclick=()=>{
-    document.getElementById(prefix+'df').value='';document.getElementById(prefix+'dt').value='';
-    if(id!=='All'){const lat=dates[dates.length-1];const fd=new Date(lat);fd.setDate(fd.getDate()-(id==='7d'?6:2));document.getElementById(prefix+'df').value=fd.toISOString().slice(0,10);document.getElementById(prefix+'dt').value=lat;}
-    ['All','7d','3d'].forEach(x=>{const b=document.getElementById(prefix+x);if(b)b.classList.remove('on');});
-    document.getElementById(prefix+id).classList.add('on');fn();
-  };});
-  const dfc=document.getElementById(prefix+'df');if(dfc)dfc.onchange=fn;
-  const dtc=document.getElementById(prefix+'dt');if(dtc)dtc.onchange=fn;
-}
-function catFilter(catId,selId,fn){
-  const el=document.getElementById(catId);if(!el)return;
-  el.onchange=()=>{
-    const cat=el.value,sel=document.getElementById(selId);
-    Array.from(sel.options).forEach(o=>{
-      const og=o.parentElement.tagName==='OPTGROUP'?o.parentElement.label:'';
-      o.hidden=(cat!=='all'&&og!==cat&&o.value!=='all');
-    });
-    if(cat!=='all'){const fv=Array.from(sel.options).find(o=>!o.hidden&&o.value!=='all');if(fv)sel.value=fv.value;}
-    else sel.value='all';
-    fn();
-  };
-}
-
-function renderSW(){
-  const sel=document.getElementById('swsel').value;
-  const cat=document.getElementById('swcat')?document.getElementById('swcat').value:'all';
-  const pool=cat==='all'?SW:SW.filter(p=>p.tag===cat);
-  let gFull,uFull,color='#f5a623',title,note;
-  if(sel==='all'){
-    gFull=SW_L.map((_,i)=>pool.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    uFull=SW_L.map((_,i)=>pool.reduce((a,p)=>a+(p.units[i]||0),0));
-    title='Daily GMV — '+(cat==='all'?'All Products':cat);note=cat==='all'?'All products':cat;
-    const byTag={};pool.forEach(p=>{byTag[p.tag]=(byTag[p.tag]||0)+p.gmv.reduce((a,b)=>a+b,0);});
-    const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
-    const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
-    donutChart('swP',tl,td,tl.map(t=>tc[t]||'#888'));
-    document.getElementById('swpt').textContent='GMV share';
-  }else{
-    const p=SW.find(x=>x.code==+sel);if(!p)return;
-    gFull=p.gmv;uFull=p.units;color=p.color;title=p.name;note=p.tag;
-    const thisT=p.gmv.reduce((a,b)=>a+b,0),catT=SW.filter(x=>x.tag===p.tag).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('swP',[p.name.slice(0,18),'Rest'],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('swpt').textContent='Share in '+p.tag;
-  }
-  const {g:gmvD,u:unitsD,l:lbl}=sliceD(gFull,uFull,SW_L,SW_DATES,'swdf','swdt');
-  const tot=gmvD.reduce((a,b)=>a+b,0),uTot=unitsD.reduce((a,b)=>a+b,0);
-  const bi=gmvD.indexOf(Math.max(...gmvD));
-  document.getElementById('swt').textContent=fmt(tot);
-  document.getElementById('swu').textContent=fu(uTot);
-  document.getElementById('swbd').textContent=lbl[bi]||'—';
-  document.getElementById('swbg').textContent=fmt(gmvD[bi]);
-  document.getElementById('swav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
-  document.getElementById('swgt').textContent=title;
-  document.getElementById('swnote').textContent=note;
-  barChart('swG',lbl,[{label:'GMV',data:gmvD,color}],{h:240});
-  barChart('swU',lbl,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
-}
-document.getElementById('swsel').addEventListener('change',renderSW);
-
-
-document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
-  document.querySelectorAll('.tp').forEach(x=>x.classList.remove('on'));
-  t.classList.add('on');
-  document.getElementById('tp-'+t.dataset.tab).classList.add('on');
-  setTimeout(()=>{renderOMS(filtered());if(t.dataset.tab==='sw')renderSW();if(t.dataset.tab==='zt')renderZT();if(t.dataset.tab==='bk')renderBK();},30);
-}));
-
-// ── BLINKIT PRODUCT DATA (April 2026) ────────────────────
-const BK_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
-const BK=[
-  {cat:"Ragi Chips",name:"Snackible Peri Peri Ragi Chips",color:"#f5a623",gmv:[276785,274590,287250,277755,269860,263130,280200,234575,244355,253345,299015,271765,0],units:[5535,5491,5744,5553,5397,5261,5603,4691,4886,5066,5980,5435,0]},
-  {cat:"Ragi Chips",name:"Snackible Desi Masala Ragi Chips",color:"#f5a623",gmv:[42050,43700,39100,36100,36200,34900,36900,31700,31700,32700,38350,33850,0],units:[841,874,782,722,724,698,738,634,634,654,767,677,0]},
-  {cat:"Ragi Chips",name:"Snackible Chatpata Crunch Ragi Chips",color:"#f5a623",gmv:[28500,29850,30450,33150,32350,28500,29400,23150,24150,23350,26350,27350,0],units:[570,597,609,663,647,570,588,463,483,467,527,547,0]},
-  {cat:"Ragi Chips",name:"Snackible Dipsters Piri Piri Ragi Chips with Chees",color:"#f5a623",gmv:[20250,21250,23950,20550,22550,17250,20700,20450,21400,20700,22400,21200,0],units:[405,425,479,411,451,345,414,409,428,414,448,424,0]},
-  {cat:"Dipsters",name:"Snackible Biscuit Sticks with Chocolatey Dip",color:"#f5a623",gmv:[23205,25935,23065,23310,24675,23275,23380,21840,20720,24290,40110,25060,0],units:[663,741,659,666,705,665,668,624,592,694,1146,716,0]},
-  {cat:"Dipsters",name:"Snackible Dipsters Vanilla Creme Dip with Biscuit ",color:"#f5a623",gmv:[5355,4830,4830,5040,5110,4235,4655,5565,3885,4165,5005,4585,0],units:[153,138,138,144,146,121,133,159,111,119,143,131,0]},
-  {cat:"Dipsters",name:"Snackible Pistachio Dipsters Biscuit Sticks",color:"#f5a623",gmv:[0,60,360,240,480,540,600,180,420,720,2820,660,0],units:[0,1,6,4,8,9,10,3,7,12,47,11,0]},
-  {cat:"Others",name:"Snackible Cheese Dosa Khakhra",color:"#f5a623",gmv:[62640,62620,59640,54920,57460,56400,68740,47740,52200,52400,51840,52180,0],units:[522,522,497,458,479,470,573,398,435,438,432,435,0]},
-  {cat:"Others",name:"Snackible Baked Pizza Sticks with Jalapeno Dip",color:"#f5a623",gmv:[19180,20720,19880,18480,19040,15190,21210,16170,19670,15820,18410,17010,0],units:[274,296,284,264,272,217,303,231,281,226,263,243,0]},
-  {cat:"Others",name:"Snackible Salted Banana Chips",color:"#f5a623",gmv:[6060,4680,4800,4320,5820,6480,4860,6060,6000,5880,4980,4200,0],units:[101,78,80,72,97,108,81,101,100,98,83,70,0]},
-  {cat:"Others",name:"Snackible Munchies Gift Pack",color:"#f5a623",gmv:[0,799,0,799,799,0,799,799,799,1598,1598,799,0],units:[0,1,0,1,1,0,1,1,1,2,2,1,0]},
-];
-
-function renderBK(){{
-  const sel=document.getElementById('bksel').value;
-  const cat=document.getElementById('bkcat')?document.getElementById('bkcat').value:'all';
-  const pool=cat==='all'?BK:BK.filter(p=>p.cat===cat);
-  let gFull,uFull,color='#f5a623',title,note;
-  if(sel==='all'){{
-    gFull=BK_L.map((_,i)=>pool.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    uFull=BK_L.map((_,i)=>pool.reduce((a,p)=>a+(p.units[i]||0),0));
-    title='Daily GMV — '+(cat==='all'?'All':cat)+' (Blinkit)';note=cat==='all'?'All products':cat;
-    const byTag={{}};pool.forEach(p=>{{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);}});
-    const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
-    const tc={{'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Others':'#95a5a6'}};
-    donutChart('bkP',tl,td,tl.map(t=>tc[t]||'#888'));
-    document.getElementById('bkpt').textContent='GMV share';
-  }}else{{
-    const p=BK.find(x=>x.name===sel);if(!p)return;
-    gFull=p.gmv;uFull=p.units;color='#e8732a';title=p.name+' (Blinkit)';note=p.cat;
-    const thisT=p.gmv.reduce((a,b)=>a+b,0),catT=BK.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('bkP',[p.name.slice(0,18),'Rest'],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('bkpt').textContent='Share in '+p.cat;
-  }}
-  const {{g:gmvD,u:unitsD,l:lbl}}=sliceD(gFull,uFull,BK_L,BK_DATES,'bkdf','bkdt');
-  const tot=gmvD.reduce((a,b)=>a+b,0),uTot=unitsD.reduce((a,b)=>a+b,0);
-  const bi=gmvD.indexOf(Math.max(...gmvD));
-  document.getElementById('bkt').textContent=fmt(tot);
-  document.getElementById('bku').textContent=fu(uTot);
-  document.getElementById('bkbd').textContent=lbl[bi]||'—';
-  document.getElementById('bkbg').textContent=fmt(gmvD[bi]);
-  document.getElementById('bkav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
-  document.getElementById('bkgt').textContent=title;
-  document.getElementById('bknote').textContent=note;
-  barChart('bkG',lbl,[{{label:'GMV',data:gmvD,color}}],{{h:240}});
-  barChart('bkU',lbl,[{{label:'Units',data:unitsD,color:color+'99'}}],{{h:210,yFmt:fu,valFmt:fu}});
-}}
-document.getElementById('bksel').addEventListener('change',renderBK);
-
-
-// ── ZEPTO PRODUCT DATA (April 2026) ──────────────────────
-const ZT_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
-const ZT=[
-  {cat:"Ragi Chips",name:"RC Peri Peri",color:"#e8732a",gmv:[98950,101800,94650,91050,72300,67000,64750,44700,43050,0,0,0,0],units:[1979,2036,1893,1821,1446,1340,1295,894,861,0,0,0,0]},
-  {cat:"Ragi Chips",name:"RC Cheesy Jalapeno Dip",color:"#e8732a",gmv:[11750,11200,11950,10550,10800,10950,13350,9050,9400,0,0,0,0],units:[235,224,239,211,216,219,267,181,188,0,0,0,0]},
-  {cat:"Ragi Chips",name:"RC desi masala",color:"#e8732a",gmv:[20000,19050,17300,19350,17050,24500,25450,19500,17450,0,0,0,0],units:[400,381,346,387,341,490,509,390,349,0,0,0,0]},
-  {cat:"Ragi Chips",name:"Snackible Chatpata Crunch Ragi Chips- No",color:"#e8732a",gmv:[5700,6250,5100,5850,5500,6150,5600,6100,3350,0,0,0,0],units:[114,125,102,117,110,123,112,122,67,0,0,0,0]},
-  {cat:"Ragi Chips",name:"RC jalapeno",color:"#e8732a",gmv:[4500,4100,4450,4450,5450,4650,5400,4800,3100,0,0,0,0],units:[90,82,89,89,109,93,108,96,62,0,0,0,0]},
-  {cat:"Dipsters",name:"dip choco BS",color:"#9b59b6",gmv:[10360,10465,10850,11515,10010,8575,9380,8575,6965,0,0,0,0],units:[296,299,310,329,286,245,268,245,199,0,0,0,0]},
-  {cat:"Puffs",name:"puff nacho jowar",color:"#1abc9c",gmv:[5680,4960,5240,4960,4660,4780,3680,4400,3680,0,0,0,0],units:[142,124,131,124,116,119,92,110,92,0,0,0,0]},
-  {cat:"Puffs",name:"Puff sriracha quinoa",color:"#1abc9c",gmv:[180,600,120,420,360,240,180,60,0,0,0,0,0],units:[3,10,2,7,6,4,3,1,0,0,0,0,0]},
-  {cat:"Others",name:"holi box",color:"#95a5a6",gmv:[0,1398,31954,156974,76690,33152,2396,6889,2596,0,0,0,0],units:[0,2,46,226,110,48,4,11,4,0,0,0,0]},
-  {cat:"Others",name:"other dosa khakra",color:"#95a5a6",gmv:[26880,28420,26020,25320,20560,24720,21580,23280,16800,0,0,0,0],units:[224,237,217,211,172,206,180,194,140,0,0,0,0]},
-  {cat:"Others",name:"Snackible Kunafa Chocolate Bites 1.0 PIE",color:"#95a5a6",gmv:[6700,8040,6700,7370,56615,21440,12060,9715,8375,0,0,0,0],units:[20,24,20,22,169,64,36,29,25,0,0,0,0]},
-  {cat:"Others",name:"dip baked pizza",color:"#95a5a6",gmv:[10010,10710,11690,9730,7630,7630,7350,6720,4830,0,0,0,0],units:[143,153,167,139,109,109,105,96,69,0,0,0,0]},
-  {cat:"Others",name:"other salted banana",color:"#95a5a6",gmv:[4440,4680,3720,4800,3060,4440,5280,3600,3360,0,0,0,0],units:[74,78,62,80,51,74,88,60,56,0,0,0,0]},
-  {cat:"Others",name:"Other Millet Bhujia",color:"#95a5a6",gmv:[1080,1440,2160,2880,1440,960,1800,720,1080,0,0,0,0],units:[9,12,18,24,12,8,15,6,9,0,0,0,0]},
-  {cat:"Others",name:"fSnackible Peanuts | Roasted - High Prot",color:"#95a5a6",gmv:[4305,1575,1470,2205,945,525,1890,525,525,0,0,0,0],units:[41,15,14,21,9,5,18,5,5,0,0,0,0]},
-  {cat:"Others",name:"Other Tomato DK",color:"#95a5a6",gmv:[0,120,240,0,240,0,240,240,120,0,0,0,0],units:[0,1,2,0,2,0,2,2,1,0,0,0,0]},
-];
-
-function renderZT(){{
-  const sel=document.getElementById('ztsel').value;
-  const cat=document.getElementById('ztcat')?document.getElementById('ztcat').value:'all';
-  const pool=cat==='all'?ZT:ZT.filter(p=>p.cat===cat);
-  let gFull,uFull,color='#4f9cf9',title,note;
-  if(sel==='all'){{
-    gFull=ZT_L.map((_,i)=>pool.reduce((a,p)=>a+(p.gmv[i]||0),0));
-    uFull=ZT_L.map((_,i)=>pool.reduce((a,p)=>a+(p.units[i]||0),0));
-    title='Daily GMV — '+(cat==='all'?'All':cat)+' (Zepto)';note=cat==='all'?'All products':cat;
-    const byTag={{}};pool.forEach(p=>{{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);}});
-    const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
-    const tc={{'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'}};
-    donutChart('ztP',tl,td,tl.map(t=>tc[t]||'#888'));
-    document.getElementById('ztpt').textContent='GMV share';
-  }}else{{
-    const p=ZT.find(x=>x.name===sel);if(!p)return;
-    gFull=p.gmv;uFull=p.units;color=p.color;title=p.name+' (Zepto)';note=p.cat;
-    const thisT=p.gmv.reduce((a,b)=>a+b,0),catT=ZT.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
-    donutChart('ztP',[p.name.slice(0,18),'Rest'],[thisT,catT-thisT],[color,'#333']);
-    document.getElementById('ztpt').textContent='Share in '+p.cat;
-  }}
-  const {{g:gmvD,u:unitsD,l:lbl}}=sliceD(gFull,uFull,ZT_L,ZT_DATES,'ztdf','ztdt');
-  const tot=gmvD.reduce((a,b)=>a+b,0),uTot=unitsD.reduce((a,b)=>a+b,0);
-  const bi=gmvD.indexOf(Math.max(...gmvD));
-  document.getElementById('ztt').textContent=fmt(tot);
-  document.getElementById('ztu').textContent=fu(uTot);
-  document.getElementById('ztbd').textContent=lbl[bi]||'—';
-  document.getElementById('ztbg').textContent=fmt(gmvD[bi]);
-  document.getElementById('ztav').textContent=fmt(Math.round(tot/Math.max(1,gmvD.filter(v=>v>0).length)));
-  document.getElementById('ztgt').textContent=title;
-  document.getElementById('ztnote').textContent=note;
-  barChart('ztG',lbl,[{{label:'GMV',data:gmvD,color}}],{{h:240}});
-  barChart('ztU',lbl,[{{label:'Units',data:unitsD,color:color+'99'}}],{{h:210,yFmt:fu,valFmt:fu}});
-}}
-document.getElementById('ztsel').addEventListener('change',renderZT);
-
-
-// ── Wire product tab controls ────────────────────────────
-setupQb('sw',SW_DATES,renderSW);
-setupQb('zt',ZT_DATES,renderZT);
-setupQb('bk',BK_DATES,renderBK);
-catFilter('swcat','swsel',renderSW);
-catFilter('ztcat','ztsel',renderZT);
-catFilter('bkcat','bksel',renderBK);
-
-// ── Start ─────────────────────────────────────────────────
-// Use requestAnimationFrame to ensure DOM is fully painted before rendering
-function bootRender(){
+// ═══════════════════════════════════════════════════════════
+// BOOT — render immediately
+// ═══════════════════════════════════════════════════════════
+window.addEventListener('load',function(){
   go();
   renderSW();
   renderZT();
   renderBK();
-}
-if(document.readyState==='complete'){
-  requestAnimationFrame(()=>requestAnimationFrame(bootRender));
-} else {
-  window.addEventListener('load',()=>requestAnimationFrame(()=>requestAnimationFrame(bootRender)));
-}
 
-// Background live fetch
-(async()=>{
-  try{
-    const ctrl=new AbortController();
-    setTimeout(()=>ctrl.abort(),10000);
-    const res=await fetch(APPS_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
-    if(!res.ok)throw new Error('bad');
-    const raw=JSON.parse(await res.text());
-    if(!Array.isArray(raw))throw new Error('not array');
-    let hi=-1;
-    for(let i=0;i<raw.length;i++){const r=raw[i].map(c=>String(c||'').toLowerCase());if(r.includes('date')&&r.includes('sales')){hi=i;break;}}
-    if(hi<0)throw new Error('no header');
-    const rows=[];
-    for(let i=hi+1;i<raw.length;i++){
-      const r=raw[i];if(!r[0])continue;
-      let d=r[0],ds='';
-      if(typeof d==='string'&&d.match(/\d{4}-\d{2}-\d{2}/))ds=d.slice(0,10);
-      else if(typeof d==='string'){const p=d.split(/[\/-]/);ds=p.length===3?`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`:d.slice(0,10);}
-      else ds=String(d).slice(0,10);
-      if(!(+r[3]||0)&&!(+r[10]||0)&&!(+r[17]||0))continue;
-      const dt=new Date(ds);
-      const label=isNaN(dt)?ds:dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
-      rows.push({date:ds,label,day:String(r[1]||'').slice(0,3),
-        z:{s:+r[3]||0,sp:+r[4]||0,roas:+r[5]||0,u:+r[6]||0},
-        b:{s:+r[10]||0,sp:+r[11]||0,roas:+r[12]||0,u:+r[13]||0},
-        i:{s:+r[17]||0,sp:+r[18]||0,roas:+r[19]||0,u:+r[20]||0},
-        bb:{s:+r[24]||0,sp:+r[25]||0,roas:+r[26]||0,u:+r[27]||0}});
-    }
-    if(rows.length>0){liveOMS=rows;document.getElementById('stxt').textContent='live · google sheets';go();}
-  }catch(e){document.getElementById('stxt').textContent='cached data';}
-})();
-// Background Zepto live fetch
-(async()=>{
-  try{
-    const ctrl=new AbortController();
-    setTimeout(()=>ctrl.abort(),10000);
-    const res=await fetch(ZEPTO_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
-    if(!res.ok)throw new Error('bad');
-    const raw=JSON.parse(await res.text());
-    if(!Array.isArray(raw))throw new Error('not array');
-
-    // Find header row with PRODUCT NAMES and day numbers
-    let dayRow=-1, headerRow=-1;
-    for(let i=0;i<raw.length;i++){
-      const r=raw[i];
-      if(r.some(c=>String(c||'').includes('PRODUCT NAMES'))) headerRow=i;
-      if(r.some(c=>c===1||c===1.0) && r.some(c=>c===2||c===2.0)) {dayRow=i;break;}
-    }
-    if(dayRow<0)throw new Error('no day row');
-
-    // Build day->col map (each day has UNIT, GMV, Promo = 3 cols)
-    const dayRowData=raw[dayRow];
-    const dayCols={};
-    dayRowData.forEach((v,i)=>{
-      if(typeof v==='number'&&v>=1&&v<=31&&Number.isInteger(v)) dayCols[v]=i;
-    });
-
-    // Get start date from row 0
-    const startCell=raw[0][2];
-    let month=4,year=2026;
-    if(startCell instanceof Date||(typeof startCell==='string'&&startCell.includes('-'))){
-      const d=new Date(startCell);
-      if(!isNaN(d)){month=d.getMonth()+1;year=d.getFullYear();}
-    }
-
-    // Parse product rows (skip category headers and Total)
-    const catHeaders=new Set(['Total','Ragi Chips','Dipsters','Puffs','Others']);
-    const newProducts=[];
-    let currentCat='Others';
-    const dataStart=Math.max(dayRow,headerRow)+1;
-
-    for(let i=dataStart;i<raw.length;i++){
-      const r=raw[i];
-      const name=String(r[1]||'').trim();
-      if(!name)continue;
-      if(catHeaders.has(name)){if(name!=='Total')currentCat=name;continue;}
-      const shortName=String(r[2]||name).trim();
-      if(shortName==='#REF!'||shortName==='0'||shortName==='New Ref'||!shortName)continue;
-
-      const gmvArr=[], unitsArr=[];
-      let hasData=false;
-      for(let day=1;day<=13;day++){
-        const col=dayCols[day];
-        const units=col!==undefined&&typeof r[col]==='number'?r[col]:0;
-        const gmv=col!==undefined&&typeof r[col+1]==='number'?r[col+1]:0;
-        gmvArr.push(gmv||0);
-        unitsArr.push(units||0);
-        if(gmv>0)hasData=true;
+  // Background live fetch OMS
+  (async()=>{
+    try{
+      const ctrl=new AbortController();setTimeout(()=>ctrl.abort(),10000);
+      const res=await fetch(APPS_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+      if(!res.ok)throw new Error('bad');
+      const raw=JSON.parse(await res.text());
+      if(!Array.isArray(raw))throw new Error('not array');
+      let hi=-1;
+      for(let i=0;i<raw.length;i++){const r=raw[i].map(c=>String(c||'').toLowerCase());if(r.includes('date')&&r.includes('sales')){hi=i;break;}}
+      if(hi<0)throw new Error('no header');
+      const rows=[];
+      for(let i=hi+1;i<raw.length;i++){
+        const r=raw[i];if(!r[0])continue;
+        let d=r[0],ds='';
+        if(typeof d==='string'&&d.match(/\d{4}-\d{2}-\d{2}/))ds=d.slice(0,10);
+        else if(typeof d==='string'){const p=d.split(/[\/-]/);ds=p.length===3?`${p[2]}-${p[1].padStart(2,'0')}-${p[0].padStart(2,'0')}`:d.slice(0,10);}
+        else ds=String(d).slice(0,10);
+        if(!(+r[3]||0)&&!(+r[10]||0)&&!(+r[17]||0))continue;
+        const dt=new Date(ds);
+        const label=isNaN(dt)?ds:dt.toLocaleDateString('en-GB',{day:'2-digit',month:'short'});
+        rows.push({date:ds,label,z:{s:+r[3]||0,sp:+r[4]||0,roas:+r[5]||0,u:+r[6]||0},b:{s:+r[10]||0,sp:+r[11]||0,roas:+r[12]||0,u:+r[13]||0},i:{s:+r[17]||0,sp:+r[18]||0,roas:+r[19]||0,u:+r[20]||0},bb:{s:0,sp:0,roas:0,u:0}});
       }
-      if(!hasData)continue;
+      if(rows.length>0){liveOMS=rows;document.getElementById('stxt').textContent='live · google sheets';go();}
+    }catch(e){document.getElementById('stxt').textContent='cached data';}
+  })();
 
-      // Update matching product in ZT array
-      const existing=ZT.find(p=>p.name===shortName||p.name===name.slice(0,40));
-      if(existing){
-        existing.gmv=gmvArr;
-        existing.units=unitsArr;
-      }
-    }
-
-    // Re-render if Zepto tab is active
-    if(document.getElementById('tp-zt').classList.contains('on')) renderZT();
-    console.log('Zepto live data loaded');
-  }catch(e){
-    console.warn('Zepto live fetch skipped:',e.message);
-  }
-})();
-
-// Background Blinkit live fetch
-(async()=>{
-  try{
-    const ctrl=new AbortController();
-    setTimeout(()=>ctrl.abort(),10000);
-    const res=await fetch(BLINKIT_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
-    if(!res.ok)throw new Error('bad');
-    const raw=JSON.parse(await res.text());
-    if(!Array.isArray(raw))throw new Error('not array');
-
-    // Find day row (row 4) - contains day numbers 1,2,3...
-    let dayRow=-1;
-    for(let i=0;i<raw.length;i++){
-      const r=raw[i];
-      const nums=r.filter(v=>typeof v==='number'&&v>=1&&v<=13&&Number.isInteger(v));
-      if(nums.length>=5){dayRow=i;break;}
-    }
-    if(dayRow<0)throw new Error('no day row');
-
-    const dayRowData=raw[dayRow];
-    const dayCols={};
-    dayRowData.forEach((v,i)=>{
-      if(typeof v==='number'&&v>=1&&v<=31&&Number.isInteger(v)) dayCols[v]=i;
-    });
-
-    // Parse products from row 7 onwards (index 6)
-    const skipNames=new Set(['TOTALS','GRAND TOTAL',' TOTALS','']);
-    for(let i=6;i<raw.length;i++){
-      const r=raw[i];
-      const name=String(r[1]||'').trim();
-      if(!name||skipNames.has(name))continue;
-
-      const gmvArr=[], unitsArr=[];
-      let hasData=false;
-      for(let day=1;day<=13;day++){
-        const col=dayCols[day];
-        const units=col!==undefined&&typeof r[col]==='number'?r[col]:0;
-        const gmv=col!==undefined&&typeof r[col+1]==='number'?r[col+1]:0;
-        gmvArr.push(gmv||0);
-        unitsArr.push(units||0);
-        if(gmv>0)hasData=true;
-      }
-      if(!hasData)continue;
-
-      const existing=BK.find(p=>p.name===name||p.name.slice(0,40)===name.slice(0,40));
-      if(existing){existing.gmv=gmvArr;existing.units=unitsArr;}
-    }
-
-    if(document.getElementById('tp-bk').classList.contains('on'))renderBK();
-    console.log('Blinkit live data loaded');
-  }catch(e){
-    console.warn('Blinkit live fetch skipped:',e.message);
-  }
-})();
-
-setInterval(go,5*60*1000);
-// Re-render charts on resize
-let resizeTimer;
-window.addEventListener('resize',()=>{clearTimeout(resizeTimer);resizeTimer=setTimeout(()=>{go();},200);});
+  setInterval(go,5*60*1000);
+});
 </script>
 </body>
 </html>
