@@ -92,6 +92,7 @@ select.di{min-width:220px;cursor:pointer;}
     <div class="tab on" data-tab="ov">Overview</div>
     <div class="tab" data-tab="pf">Platform View</div>
     <div class="tab" data-tab="sw">Swiggy / Product</div>
+    <div class="tab" data-tab="zt">Zepto / Product</div>
   </div>
 
   <!-- OVERVIEW -->
@@ -161,6 +162,54 @@ select.di{min-width:220px;cursor:pointer;}
     </div>
   </div>
 </div>
+  <!-- ZEPTO PRODUCT TAB -->
+  <div class="tp" id="tp-zt">
+    <div class="sw-ctrl">
+      <div class="df">
+        <span class="fl">Product</span>
+        <select class="di" id="ztsel">
+          <option value="all">All Products</option>
+          <optgroup label="Ragi Chips">
+            <option value="RC Peri Peri">RC Peri Peri ⭐</option>
+            <option value="RC Cheesy Jalapeno Dip">RC Cheesy Jalapeno Dip</option>
+            <option value="RC desi masala">RC desi masala</option>
+            <option value="Snackible Chatpata Crunch Ragi Chips- No">Chatpata Crunch Ragi Chips</option>
+            <option value="RC jalapeno">RC jalapeno</option>
+          </optgroup>
+          <optgroup label="Dipsters">
+            <option value="dip choco BS">Biscuit Sticks Chocolatey</option>
+          </optgroup>
+          <optgroup label="Puffs">
+            <option value="puff nacho jowar">Nacho Cheese Jowar Puffs ⭐</option>
+            <option value="Puff sriracha quinoa">Sriracha Quinoa Puffs</option>
+          </optgroup>
+          <optgroup label="Others">
+            <option value="holi box">Holi Box ⭐</option>
+            <option value="other dosa khakra">Dosa Khakra</option>
+            <option value="Snackible Kunafa Chocolate Bites 1.0 PIE">Kunafa Chocolate Bites</option>
+            <option value="dip baked pizza">Baked Pizza Sticks</option>
+            <option value="other salted banana">Salted Banana Chips</option>
+            <option value="Other Millet Bhujia">Millet Bhujia</option>
+            <option value="fSnackible Peanuts | Roasted - High Prot">Roasted Peanuts</option>
+          </optgroup>
+        </select>
+      </div>
+      <div style="font-size:11px;color:var(--m);padding:9px 13px;background:var(--s);border:1px solid var(--b);border-radius:10px;">April 2026 · Zepto · <span id="ztnote" style="color:var(--ac)">All products</span></div>
+    </div>
+    <div class="mg" style="grid-template-columns:repeat(4,1fr);">
+      <div class="mc a"><div class="ml">Total GMV</div><div class="mv" id="ztt">—</div><div class="ms">April 2026</div></div>
+      <div class="mc a"><div class="ml">Total Units</div><div class="mv" id="ztu">—</div><div class="ms">units sold</div></div>
+      <div class="mc a"><div class="ml">Best Day</div><div class="mv" id="ztbd">—</div><div class="ms" id="ztbg">—</div></div>
+      <div class="mc a"><div class="ml">Daily Avg GMV</div><div class="mv" id="ztav">—</div><div class="ms">per day</div></div>
+    </div>
+    <div class="g1"><div class="cc"><div class="ch"><div class="ct" id="ztgt">Daily GMV — All Products (Zepto)</div></div><div class="chart-wrap" id="ztG"></div></div></div>
+    <div class="g2">
+      <div class="cc"><div class="ch"><div class="ct">Units sold daily</div></div><div class="chart-wrap" id="ztU"></div></div>
+      <div class="cc"><div class="ch"><div class="ct" id="ztpt">Product GMV share</div></div><div class="chart-wrap" id="ztP"></div></div>
+    </div>
+  </div>
+</div>
+
 <div class="bar-tip" id="tip"></div>
 
 <script>
@@ -190,6 +239,7 @@ const SW=[
 ];
 const SW_L=["01 Mar","02 Mar","03 Mar","04 Mar","05 Mar","06 Mar","07 Mar","08 Mar","09 Mar","10 Mar","11 Mar","12 Mar","13 Mar","14 Mar","15 Mar","16 Mar","17 Mar","18 Mar","19 Mar","20 Mar","21 Mar","22 Mar","23 Mar","24 Mar","25 Mar","26 Mar","27 Mar","28 Mar","29 Mar","30 Mar","31 Mar"];
 const APPS_URL='https://script.google.com/macros/s/AKfycbzpab6rVhrAtfbI-Ys0gKGIisk04WnMDhTrL_J7Dl6IyUoIgwRUIFU0wZW06r6ZrzbY_A/exec';
+const ZEPTO_URL='https://script.google.com/macros/s/AKfycbyc8epyNuC8NIIeJ_tjtAavI9sLxYeE3XNLZ1zDg7G5461JgAJtABLD8Bvc5DhAx4sb/exec';
 let liveOMS=[...OMS];
 
 // ── Helpers ───────────────────────────────────────────────
@@ -464,12 +514,71 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   document.querySelectorAll('.tp').forEach(x=>x.classList.remove('on'));
   t.classList.add('on');
   document.getElementById('tp-'+t.dataset.tab).classList.add('on');
-  setTimeout(()=>{renderOMS(filtered());if(t.dataset.tab==='sw')renderSW();},30);
+  setTimeout(()=>{renderOMS(filtered());if(t.dataset.tab==='sw')renderSW();if(t.dataset.tab==='zt')renderZT();},30);
 }));
+
+// ── ZEPTO PRODUCT DATA (April 2026) ──────────────────────
+const ZT_L=["01 Apr","02 Apr","03 Apr","04 Apr","05 Apr","06 Apr","07 Apr","08 Apr","09 Apr","10 Apr","11 Apr","12 Apr","13 Apr"];
+const ZT=[
+  {cat:"Ragi Chips",name:"RC Peri Peri",color:"#e8732a",gmv:[98950,101800,94650,91050,72300,67000,64750,44700,43050,0,0,0,0],units:[1979,2036,1893,1821,1446,1340,1295,894,861,0,0,0,0]},
+  {cat:"Ragi Chips",name:"RC Cheesy Jalapeno Dip",color:"#e8732a",gmv:[11750,11200,11950,10550,10800,10950,13350,9050,9400,0,0,0,0],units:[235,224,239,211,216,219,267,181,188,0,0,0,0]},
+  {cat:"Ragi Chips",name:"RC desi masala",color:"#e8732a",gmv:[20000,19050,17300,19350,17050,24500,25450,19500,17450,0,0,0,0],units:[400,381,346,387,341,490,509,390,349,0,0,0,0]},
+  {cat:"Ragi Chips",name:"Snackible Chatpata Crunch Ragi Chips- No",color:"#e8732a",gmv:[5700,6250,5100,5850,5500,6150,5600,6100,3350,0,0,0,0],units:[114,125,102,117,110,123,112,122,67,0,0,0,0]},
+  {cat:"Ragi Chips",name:"RC jalapeno",color:"#e8732a",gmv:[4500,4100,4450,4450,5450,4650,5400,4800,3100,0,0,0,0],units:[90,82,89,89,109,93,108,96,62,0,0,0,0]},
+  {cat:"Dipsters",name:"dip choco BS",color:"#9b59b6",gmv:[10360,10465,10850,11515,10010,8575,9380,8575,6965,0,0,0,0],units:[296,299,310,329,286,245,268,245,199,0,0,0,0]},
+  {cat:"Puffs",name:"puff nacho jowar",color:"#1abc9c",gmv:[5680,4960,5240,4960,4660,4780,3680,4400,3680,0,0,0,0],units:[142,124,131,124,116,119,92,110,92,0,0,0,0]},
+  {cat:"Puffs",name:"Puff sriracha quinoa",color:"#1abc9c",gmv:[180,600,120,420,360,240,180,60,0,0,0,0,0],units:[3,10,2,7,6,4,3,1,0,0,0,0,0]},
+  {cat:"Others",name:"holi box",color:"#95a5a6",gmv:[0,1398,31954,156974,76690,33152,2396,6889,2596,0,0,0,0],units:[0,2,46,226,110,48,4,11,4,0,0,0,0]},
+  {cat:"Others",name:"other dosa khakra",color:"#95a5a6",gmv:[26880,28420,26020,25320,20560,24720,21580,23280,16800,0,0,0,0],units:[224,237,217,211,172,206,180,194,140,0,0,0,0]},
+  {cat:"Others",name:"Snackible Kunafa Chocolate Bites 1.0 PIE",color:"#95a5a6",gmv:[6700,8040,6700,7370,56615,21440,12060,9715,8375,0,0,0,0],units:[20,24,20,22,169,64,36,29,25,0,0,0,0]},
+  {cat:"Others",name:"dip baked pizza",color:"#95a5a6",gmv:[10010,10710,11690,9730,7630,7630,7350,6720,4830,0,0,0,0],units:[143,153,167,139,109,109,105,96,69,0,0,0,0]},
+  {cat:"Others",name:"other salted banana",color:"#95a5a6",gmv:[4440,4680,3720,4800,3060,4440,5280,3600,3360,0,0,0,0],units:[74,78,62,80,51,74,88,60,56,0,0,0,0]},
+  {cat:"Others",name:"Other Millet Bhujia",color:"#95a5a6",gmv:[1080,1440,2160,2880,1440,960,1800,720,1080,0,0,0,0],units:[9,12,18,24,12,8,15,6,9,0,0,0,0]},
+  {cat:"Others",name:"fSnackible Peanuts | Roasted - High Prot",color:"#95a5a6",gmv:[4305,1575,1470,2205,945,525,1890,525,525,0,0,0,0],units:[41,15,14,21,9,5,18,5,5,0,0,0,0]},
+  {cat:"Others",name:"Other Tomato DK",color:"#95a5a6",gmv:[0,120,240,0,240,0,240,240,120,0,0,0,0],units:[0,1,2,0,2,0,2,2,1,0,0,0,0]},
+];
+
+function renderZT(){
+  const sel=document.getElementById('ztsel').value;
+  let gmvD,unitsD,color,title,note;
+  if(sel==='all'){
+    gmvD=ZT_L.map((_,i)=>ZT.reduce((a,p)=>a+(p.gmv[i]||0),0));
+    unitsD=ZT_L.map((_,i)=>ZT.reduce((a,p)=>a+(p.units[i]||0),0));
+    color='#4f9cf9';title='Daily GMV — All Products (Zepto April 2026)';note='All products';
+    const byTag={};ZT.forEach(p=>{byTag[p.cat]=(byTag[p.cat]||0)+p.gmv.reduce((a,b)=>a+b,0);});
+    const tl=Object.keys(byTag),td=tl.map(t=>byTag[t]);
+    const tc={'Ragi Chips':'#e8732a','Dipsters':'#9b59b6','Puffs':'#1abc9c','Others':'#95a5a6'};
+    donutChart('ztP',tl,td,tl.map(t=>tc[t]||'#888'));
+    document.getElementById('ztpt').textContent='GMV share by category';
+  }else{
+    const p=ZT.find(x=>x.name===sel);
+    if(!p)return;
+    gmvD=p.gmv;unitsD=p.units;color=p.color;
+    title=p.name+' — daily GMV (Zepto)';note=p.cat+' · '+p.name;
+    const thisT=p.gmv.reduce((a,b)=>a+b,0);
+    const catT=ZT.filter(x=>x.cat===p.cat).reduce((a,x)=>a+x.gmv.reduce((b,c)=>b+c,0),0);
+    donutChart('ztP',[p.name,'Rest of '+p.cat],[thisT,catT-thisT],[color,'#333']);
+    document.getElementById('ztpt').textContent='Share within '+p.cat;
+  }
+  const tot=gmvD.reduce((a,b)=>a+b,0);
+  const uTot=unitsD.reduce((a,b)=>a+b,0);
+  const bi=gmvD.indexOf(Math.max(...gmvD));
+  document.getElementById('ztt').textContent=fmt(tot);
+  document.getElementById('ztu').textContent=fu(uTot);
+  document.getElementById('ztbd').textContent=ZT_L[bi]||'—';
+  document.getElementById('ztbg').textContent=fmt(gmvD[bi]);
+  document.getElementById('ztav').textContent=fmt(Math.round(tot/gmvD.filter(v=>v>0).length));
+  document.getElementById('ztgt').textContent=title;
+  document.getElementById('ztnote').textContent=note;
+  barChart('ztG',ZT_L,[{label:'GMV',data:gmvD,color:color}],{h:240});
+  barChart('ztU',ZT_L,[{label:'Units',data:unitsD,color:color+'99'}],{h:210,yFmt:fu,valFmt:fu});
+}
+document.getElementById('ztsel').addEventListener('change',renderZT);
 
 // ── Start ─────────────────────────────────────────────────
 go();
 renderSW();
+renderZT();
 
 // Background live fetch
 (async()=>{
@@ -502,6 +611,82 @@ renderSW();
     if(rows.length>0){liveOMS=rows;document.getElementById('stxt').textContent='live · google sheets';go();}
   }catch(e){document.getElementById('stxt').textContent='cached data';}
 })();
+// Background Zepto live fetch
+(async()=>{
+  try{
+    const ctrl=new AbortController();
+    setTimeout(()=>ctrl.abort(),10000);
+    const res=await fetch(ZEPTO_URL+'?t='+Date.now(),{cache:'no-store',signal:ctrl.signal});
+    if(!res.ok)throw new Error('bad');
+    const raw=JSON.parse(await res.text());
+    if(!Array.isArray(raw))throw new Error('not array');
+
+    // Find header row with PRODUCT NAMES and day numbers
+    let dayRow=-1, headerRow=-1;
+    for(let i=0;i<raw.length;i++){
+      const r=raw[i];
+      if(r.some(c=>String(c||'').includes('PRODUCT NAMES'))) headerRow=i;
+      if(r.some(c=>c===1||c===1.0) && r.some(c=>c===2||c===2.0)) {dayRow=i;break;}
+    }
+    if(dayRow<0)throw new Error('no day row');
+
+    // Build day->col map (each day has UNIT, GMV, Promo = 3 cols)
+    const dayRowData=raw[dayRow];
+    const dayCols={};
+    dayRowData.forEach((v,i)=>{
+      if(typeof v==='number'&&v>=1&&v<=31&&Number.isInteger(v)) dayCols[v]=i;
+    });
+
+    // Get start date from row 0
+    const startCell=raw[0][2];
+    let month=4,year=2026;
+    if(startCell instanceof Date||(typeof startCell==='string'&&startCell.includes('-'))){
+      const d=new Date(startCell);
+      if(!isNaN(d)){month=d.getMonth()+1;year=d.getFullYear();}
+    }
+
+    // Parse product rows (skip category headers and Total)
+    const catHeaders=new Set(['Total','Ragi Chips','Dipsters','Puffs','Others']);
+    const newProducts=[];
+    let currentCat='Others';
+    const dataStart=Math.max(dayRow,headerRow)+1;
+
+    for(let i=dataStart;i<raw.length;i++){
+      const r=raw[i];
+      const name=String(r[1]||'').trim();
+      if(!name)continue;
+      if(catHeaders.has(name)){if(name!=='Total')currentCat=name;continue;}
+      const shortName=String(r[2]||name).trim();
+      if(shortName==='#REF!'||shortName==='0'||shortName==='New Ref'||!shortName)continue;
+
+      const gmvArr=[], unitsArr=[];
+      let hasData=false;
+      for(let day=1;day<=13;day++){
+        const col=dayCols[day];
+        const units=col!==undefined&&typeof r[col]==='number'?r[col]:0;
+        const gmv=col!==undefined&&typeof r[col+1]==='number'?r[col+1]:0;
+        gmvArr.push(gmv||0);
+        unitsArr.push(units||0);
+        if(gmv>0)hasData=true;
+      }
+      if(!hasData)continue;
+
+      // Update matching product in ZT array
+      const existing=ZT.find(p=>p.name===shortName||p.name===name.slice(0,40));
+      if(existing){
+        existing.gmv=gmvArr;
+        existing.units=unitsArr;
+      }
+    }
+
+    // Re-render if Zepto tab is active
+    if(document.getElementById('tp-zt').classList.contains('on')) renderZT();
+    console.log('Zepto live data loaded');
+  }catch(e){
+    console.warn('Zepto live fetch skipped:',e.message);
+  }
+})();
+
 setInterval(go,5*60*1000);
 </script>
 </body>
