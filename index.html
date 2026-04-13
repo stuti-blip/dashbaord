@@ -532,6 +532,50 @@ function renderOMS(rows){
   });
 }
 
+// ── OMS Filter & render ───────────────────────────────────
+function filtered(){
+  const f=document.getElementById('df').value,t=document.getElementById('dt').value;
+  let r=liveOMS;
+  if(f)r=r.filter(x=>x.date>=f);
+  if(t)r=r.filter(x=>x.date<=t);
+  return r.length?r:liveOMS;
+}
+function go(){
+  const r=filtered();
+  document.getElementById('fi').textContent=r.length+' day'+(r.length===1?'':'s');
+  document.getElementById('lu').textContent='Updated '+new Date().toLocaleTimeString();
+  renderOMS(r);
+}
+
+document.querySelectorAll('.qb:not([id])').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.qb:not([id])').forEach(x=>x.classList.remove('on'));
+  b.classList.add('on');
+  const rv=b.dataset.r;
+  if(rv==='all'){document.getElementById('df').value='';document.getElementById('dt').value='';}
+  else{
+    const sorted=[...liveOMS].sort((a,b2)=>b2.date.localeCompare(a.date));
+    const latest=sorted[0]?.date;
+    if(latest){const fd=new Date(latest);fd.setDate(fd.getDate()-(+rv-1));document.getElementById('df').value=fd.toISOString().slice(0,10);document.getElementById('dt').value=latest;}
+  }
+  go();
+}));
+document.getElementById('df').addEventListener('change',()=>{document.querySelectorAll('.qb:not([id])').forEach(x=>x.classList.remove('on'));go();});
+document.getElementById('dt').addEventListener('change',()=>{document.querySelectorAll('.qb:not([id])').forEach(x=>x.classList.remove('on'));go();});
+
+document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));
+  document.querySelectorAll('.tp').forEach(x=>x.classList.remove('on'));
+  t.classList.add('on');
+  document.getElementById('tp-'+t.dataset.tab).classList.add('on');
+  setTimeout(()=>{
+    go();
+    if(t.dataset.tab==='sw')renderSW();
+    if(t.dataset.tab==='zt')renderZT();
+    if(t.dataset.tab==='bk')renderBK();
+  },30);
+}));
+
+
 // ── Render Swiggy ─────────────────────────────────────────
 // ── Date/cat helpers ─────────────────────────────────────
 const SW_DATES=["2026-03-01","2026-03-02","2026-03-03","2026-03-04","2026-03-05","2026-03-06","2026-03-07","2026-03-08","2026-03-09","2026-03-10","2026-03-11","2026-03-12","2026-03-13","2026-03-14","2026-03-15","2026-03-16","2026-03-17","2026-03-18","2026-03-19","2026-03-20","2026-03-21","2026-03-22","2026-03-23","2026-03-24","2026-03-25","2026-03-26","2026-03-27","2026-03-28","2026-03-29","2026-03-30","2026-03-31"];
