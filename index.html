@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>OMS Tracker — FY26-27</title>
-<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
 <style>
 :root{--bg:#0d0d0d;--s:#161616;--s2:#1e1e1e;--b:rgba(255,255,255,.08);--t:#f0ede8;--m:#666;--z:#4f9cf9;--bl:#f5a623;--in:#2ecc71;--bb:#e05c5c;--ac:#f5a623;}
 *{box-sizing:border-box;margin:0;padding:0;}
@@ -386,9 +386,26 @@ document.querySelectorAll('.tab').forEach(t=>t.addEventListener('click',()=>{
   },30);
 }));
 
-// ── Boot — render immediately, fetch in background ────────
-go();
-renderSW();
+// ── Boot — wait for Chart.js then render ─────────────────
+function boot(){
+  try{
+    go();
+    renderSW();
+  }catch(e){
+    console.error('Boot error:',e);
+    setTimeout(boot, 500);
+  }
+}
+
+// Check every 100ms until Chart.js is ready
+const waitForChart = setInterval(()=>{
+  if(typeof Chart !== 'undefined'){
+    clearInterval(waitForChart);
+    boot();
+  }
+}, 100);
+// Fallback timeout after 5s
+setTimeout(()=>{ clearInterval(waitForChart); if(typeof Chart!=='undefined') boot(); }, 5000);
 
 // Background live fetch with 10s timeout
 (async()=>{
